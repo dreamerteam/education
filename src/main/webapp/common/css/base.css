@@ -1,0 +1,35 @@
+@CHARSET "UTF-8";
+
+body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.navbar-form {
+	margin-bottom: 0;
+}
+
+.mb10 {
+	margin-bottom: 10px;
+}
+
+.mw380 {
+	max-width: 380px;
+	margin: 0 auto;
+}
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+.inline{
+	display: inline;
+}
+
+#颜色
+
+.red{
+	color: red;
+}

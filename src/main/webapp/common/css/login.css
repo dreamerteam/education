@@ -1,0 +1,36 @@
+@CHARSET "UTF-8";
+
+body{
+	background-color: #d9edf7;
+}
+
+.login-bg {
+	padding: 30px 0;
+	margin-bottom: 30px;
+	font-size: 21px;
+	font-weight: 200;
+	/* line-height: 2.1428571435; */
+	color: inherit;
+	background-color: blue;
+	behavior: url(/edu/common/PIE.htc);
+	 background:  -moz-linear-gradient(19% 75% 90deg,#4E0085, #963AD6);
+    background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#963AD6), to(#4E0085));
+     -moz-box-shadow:0px -5px 300px #270644;
+    -webkit-box-shadow:0px -5px 300px #270644;
+    border: 1px solid #270644;
+}
+
+.container .login-bg {
+	border-radius: 6px;
+}
+
+@media screen and (min-width: 768px) {
+	.login-bg {
+		padding-top: 48px;
+		padding-bottom: 48px;
+	}
+	.container .login-bg {
+		/* padding-right: 60px;
+		padding-left: 60px; */
+	}
+}
