@@ -28,11 +28,21 @@
                     "alertText2": " 时间范围"
                 },
                 "minSize": {
+                	"regex": "none",
+                	"alertText": "* 最少 ",
+                	"alertText2": " 个字符"
+                },
+                "maxSize": {
+                	"regex": "none",
+                	"alertText": "* 最多 ",
+                	"alertText2": " 个字符"
+                },
+                "minSize3": {
                     "regex": "none",
                     "alertText": "* 最少 ",
                     "alertText2": " 个字符"
                 },
-                "maxSize": {
+                "maxSize3": {
                     "regex": "none",
                     "alertText": "* 最多 ",
                     "alertText2": " 个字符"

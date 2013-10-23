@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Service;
 
+import com.dreamer.education.bean.co.AutoComplete;
 import com.dreamer.education.bean.po.TCourseType;
 import com.dreamer.education.dao.base.BaseDao;
 
@@ -23,38 +24,32 @@ public class TCourseTypeDao extends BaseDao<TCourseType> {
      * @return
      * @author broken_xie
      */
-    public List<Map<String, Object>> findForAutoComplete() {
-        String sql = "select uuid as value, cname as label from t_course_type";
-        return getJdbcTemplate().queryForList(sql, new HashMap<String, Object>());
+    public List<AutoComplete> findForAutoComplete() {
+        String sql = "select uuid as value, cname as label, ilevel from t_course_type";
+        return getJdbcTemplate().query(sql, new BeanPropertyRowMapper<AutoComplete>(AutoComplete.class));
     }
-    
-    /**
-     * 保存
-     * @param courseType 课程类型
-     * @return
-     * @author broken_xie
-     *//*
-    public int save(TCourseType courseType) {
-        String sql = "insert into t_course_type (uuid,cname,dcreate,dupdate,ilevel,uparentid,uuserid) values (:uuid,:cname,:dcreate,:dupdate,:ilevel,:uparentid,:uuserid)";
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("uuid", courseType.getUuid());
-        map.put("cname", courseType.getCname());
-        map.put("dcreate", courseType.getDcreate());
-        map.put("dupdate", courseType.getDupdate());
-        map.put("ilevel", courseType.getIlevel());
-        map.put("uparentid", courseType.getUparentid());
-        map.put("uuserid", courseType.getUuserid());
-        return getJdbcTemplate().update(sql, map);
-    }*/
     
     /**
      * 查找所有的课程类型列表
      * @return
      * @author broken_xie
      */
-    public List<TCourseType> findAll(){
+    public List<TCourseType> findAll() {
         String sql = "select * from t_course_type";
         return getJdbcTemplate().query(sql, new BeanPropertyRowMapper<TCourseType>(TCourseType.class));
+    }
+    
+    /**
+     * 根据课程类型名称查找课程类型
+     * @param cname 课程类型名称
+     * @return
+     * @author broken_xie
+     */
+    public List<TCourseType> findByCname(String cname) {
+        String sql = "select * from t_course_type where cname = :cname";
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("cname", cname);
+        return getJdbcTemplate().query(sql, map, new BeanPropertyRowMapper<TCourseType>(TCourseType.class));
     }
     
 }

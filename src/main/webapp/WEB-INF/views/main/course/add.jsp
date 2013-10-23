@@ -15,23 +15,24 @@
 <body>
 <div class="well">
 	<form action="${contextPath }/courseType/add" method="post" class="form-horizontal" id="addForm">
-		<input type="hidden" name="ilevel" value="1" />
-		<input type="hidden" name="uparentid" value="" />
+		<input type="hidden" name="ilevel" id="ilevel" value="0" />
+		<input type="hidden" name="uparentid" id="uparentid" />
 		<div class="control-group">
 			<label class="control-label"><div class="inline" style="color: red;"> * </div>课程类型名称：</label>
 			<div class="controls">
-				<input type="text" name="cname" id="cname" placeholder="课程类型名称" class="validate[required,maxSize[36]]" />
+				<input type="text" name="cname" id="cname" placeholder="课程类型名称" class="validate[required,maxSize3[36]]" />
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">上级课程类型：</label>
 			<div class="controls">
-				<input type="text" name="parenttype" id="parenttype" placeholder="上级课程类型" />
+				<input type="text" name="parenttype" id="parenttype" placeholder="上级课程类型"/>
+				<span style="color: red;">&nbsp;&nbsp;顶级课程类型不需要选课程类型</span>
 			</div>
 		</div>
 		<div class="control-group">
 			<div class="controls">
-				<button type="submit" class="btn btn-primary">添 加</button>
+				<button type="submit" id="submitBtn" class="btn btn-primary">添 加</button>
 			</div>
 		</div>
 	</form>
@@ -40,18 +41,19 @@
 <script type="text/javascript" src="${contextPath }/common/jquery/jquery.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/jquery/jquery-ui/jquery.ui.core.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/jquery/jquery-ui/jquery.ui.widget.js" ></script>
+<script type="text/javascript" src="${contextPath }/common/jquery/jquery-ui/jquery.ui.position.js" ></script>
+<script type="text/javascript" src="${contextPath }/common/jquery/jquery-ui/jquery.ui.menu.js" ></script>
+<script type="text/javascript" src="${contextPath }/common/jquery/jquery-ui/jquery.ui.autocomplete.js" ></script>
+<script type="text/javascript" src="${contextPath }/common/js/autocomplete.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/jquery/jquery.validationEngine.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/jquery/jquery.validationEngine-zh_CN.js" ></script>
-<script type="text/javascript" src="${contextPath }/common/jquery/jquery-ui/jquery-ui.custom.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/bootstrap/js/bootstrap.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/bootstrap/js/html5shiv.js" ></script>
-<script type="text/javascript" src="${contextPath }/common/js/common.js" ></script>
+<script type="text/javascript" src="${contextPath}/autoComplete/courseType" ></script>
 <script type="text/javascript">
 var contextPath = "${contextPath}";
 $(function(){
-	$("#parenttype").autocomplete({
-		source : "${contextPath}/autoComplete/courseType"
-	});
+	autoComplete(true, $("#parenttype"), courseType, $("#uparentid"));
 	
 	$("#addForm").validationEngine({
 		promptPosition : 'bottomRight',
@@ -59,16 +61,14 @@ $(function(){
 		ajaxFormMethod : 'POST',
 		ajaxFormValidationURL : contextPath + '/courseType/validate',
 		onBeforeAjaxFormValidation: function(form, options) {
-			/* submitBtn.removeClass().addClass('operateBtnPre').attr("disabled", "disabled"); // 禁用保存按钮，防止重复提交表单
-			backBtn.removeClass().addClass('operateBtnPre').attr('disabled', 'disabled'); */
+			$("#submitBtn").attr("disabled", "disabled").removeClass("btn-primary").addClass("btn-inverse"); // 禁用保存按钮，防止重复提交表单
 		},
 		onAjaxFormComplete: function(status, form, json, options) {
-			/* if (status) {
+			if (status) {
 				form.validationEngine('detach').submit();
 			} else {
-				submitBtn.removeClass().addClass('operateBtn').removeAttr("disabled");
-				backBtn.removeClass().addClass('operateBtn').removeAttr("disabled");
-			} */
+				$("#submitBtn").removeAttr("disabled").removeClass("btn-inverse").addClass("btn-primary");
+			}
 		}
 	}); 
 });

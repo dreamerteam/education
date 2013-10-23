@@ -1,8 +1,14 @@
-function autoComplete(click, obj, items, nextObj, nextType){
-	if (nextObj)
-		obj = advance(obj, items, nextObj, nextType);
-	else
-		obj = standard(obj, items); 
+/**
+ * 数据下拉
+ * @param click 鼠标点击是否触发【true：触发；false：不触发】
+ * @param obj 数据下拉对象
+ * @param items 数据
+ * @param valueObj 存值对象
+ * @param ilevelObj 等级对象
+ * @author broken_xie
+ **/
+function autoComplete(click, obj, items, valueObj, ilevelObj){
+	obj = standard(obj, items, valueObj, ilevelObj); 
 	if (click) {
 		obj.data("autocomplete").element.unbind("focus.autocomplete")
 		.bind("focus.autocomplete click", function(event) {
@@ -18,7 +24,7 @@ function autoComplete(click, obj, items, nextObj, nextType){
 	}
 }
 
-function standard(obj, items) {
+function standard(obj, items, valueObj, ilevelObj) {
 	return obj.autocomplete({
 		minLength : 0,
 		source : function(request, response) {
@@ -26,39 +32,37 @@ function standard(obj, items) {
 			response($.grep(items, function(value) {
 				return matcher.test(value.value) || (value.pinyin && matcher.test(value.pinyin));
 			}));
-		}
-	});
-}
-
-function advance(obj, items, nextObj, nextType) {
-	return obj.autocomplete({
-		minLength : 0,
-		source : function(request, response) {
-			var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
-			response($.grep(plat, function(value) {
-				return matcher.test(value.value) || (value.pinyin && matcher.test(value.pinyin));
-			}));
 		},
 		select : function(event, ui) {
-			$(this).val(ui.item.value);
-			$.get(contextPath + "/autocomplete?type="+nextType+"&isjson=1&param=" + encodeURIComponent(ui.item.value), function(source){
-				nextObj.data("autocomplete").options.source = eval("("+source+")");
-				nextObj.data("autocomplete")._initSource();
-			});
+			$(this).val(ui.item.label);
+			valueObj.val(ui.item.value);
+			if(null != item.ilevel){
+				ilevelObj.val(ui.item.ilevel + 1);
+			}
 			return false;
 		}
 	});
 }
 
-$.widget("info.autocomplete", $.ui.autocomplete, {
+$.widget("dreamer.autocomplete", $.ui.autocomplete, {
 	__response : function(content) {
 		if (!this.options.disabled && content && content.length) {
 			content = this._normalize(content);
 			this._suggest(content);
 			this._trigger("open");
 		} else {
-			this.element.val(''); // 强制匹配
+			this.element.val(''); //
 			this.close();
 		}
+	},
+	
+	_renderItem: function( ul, item ) {
+		var space = 0;
+		if(null != item.ilevel){
+			space = item.ilevel;
+		}
+		return $( "<li>" )
+			.append( $( "<a style='padding-left:"+space+"em'>" ).text( item.label ) )
+			.appendTo( ul );
 	}
 });

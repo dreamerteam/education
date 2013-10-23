@@ -3,9 +3,11 @@ package com.dreamer.education.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dreamer.education.bean.po.TCourseType;
 import com.dreamer.education.service.TCourseTypeService;
+import com.google.gson.Gson;
 
 /**
  * 课程类型控制器
@@ -28,24 +30,25 @@ public class CourseTypeController extends BaseController {
      */
     @RequestMapping("/add")
     public String add(TCourseType courseType) {
-        // courseTypeService.add(courseType);
-        return null;
+        courseTypeService.add(courseType);
+        return SUCCESS;
     }
-    //
-    // /**
-    // * 校验课程类型
-    // * @param courseType 课程类型
-    // * @return
-    // * @author broken_xie
-    // */
-    // @RequestMapping("/validate")
-    // public String validate(TCourseType courseType) {
-    // /* 校验课程类型名称是否已经存在 */
-    // Object[][] result = new Object[1][3];
-    // result[0][0] = "cname";
-    // boolean isCnameExist = courseTypeService.isCnameExist(courseType.getCname());
-    // result[0][1] = !isCnameExist;
-    // result[0][2] = "* 课程类型名称已存在，请重新填写！";
-    // return new Gson().toJson(result);
-    // }
+    
+    /**
+     * 校验课程类型
+     * @param courseType 课程类型
+     * @return
+     * @author broken_xie
+     */
+    @RequestMapping("/validate")
+    @ResponseBody
+    public String validate(TCourseType courseType) {
+        /* 校验课程类型名称是否已经存在 */
+        Object[][] result = new Object[1][3];
+        result[0][0] = "cname";
+        boolean isCnameExist = courseTypeService.isCnameExist(courseType.getCname());
+        result[0][1] = !isCnameExist;
+        if (isCnameExist) result[0][2] = "* 课程类型名称已存在，请重新填写！";
+        return new Gson().toJson(result);
+    }
 }
