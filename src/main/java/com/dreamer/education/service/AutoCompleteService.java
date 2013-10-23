@@ -37,4 +37,19 @@ public class AutoCompleteService {
         }
         return data;
     }
+    
+    /**
+     * 设置等级
+     * @param label 标签值
+     * @param ilevel 等级
+     * @return
+     * @author broken_xie
+     */
+    public String addSpace(int ilevel) {
+        StringBuilder space = new StringBuilder();
+        for (int i = 0; i < ilevel; i++) {
+            space.append("  ");
+        }
+        return space.toString();
+    }
 }

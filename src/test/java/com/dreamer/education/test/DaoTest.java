@@ -25,22 +25,26 @@ public class DaoTest extends BaseTest {
     
     @Test
     public void test() {
+        List<TCourseType> courseTypes = courseTypeDao.findByCname("语文2");
+        for (TCourseType courseType : courseTypes) {
+            System.out.println(courseType.getUuid()+"\t"+courseType.getCname());
+        }
 //        List<TCourseType> courseTypes = courseTypeDao.findAll();
 //        for (TCourseType courseType : courseTypes) {
 //            System.out.println(courseType.getCname()+"\t"+courseType.getUuid());
 //        }
-        TCourseType courseType = new TCourseType();
-        courseType.setUuid(UUID.randomUUID().toString());
-        courseType.setCname("英文");
-        courseType.setDcreate(new Date());
-        courseType.setDupdate(courseType.getDcreate());
-        courseType.setIlevel(0);
-        courseType.setUuserid(UUID.randomUUID().toString());
-        courseTypeDao.save(courseType);
-        List<Map<String, Object>> list = courseTypeDao.findForAutoComplete();
-        for (Map<String, Object> map : list) {
-            System.out.println(map.get("label") + "\t" + map.get("value"));
-        }
+//        TCourseType courseType = new TCourseType();
+//        courseType.setUuid(UUID.randomUUID().toString());
+//        courseType.setCname("英文");
+//        courseType.setDcreate(new Date());
+//        courseType.setDupdate(courseType.getDcreate());
+//        courseType.setIlevel(0);
+//        courseType.setUuserid(UUID.randomUUID().toString());
+//        courseTypeDao.save(courseType);
+//        List<Map<String, Object>> list = courseTypeDao.findForAutoComplete();
+//        for (Map<String, Object> map : list) {
+//            System.out.println(map.get("label") + "\t" + map.get("value"));
+//        }
 //        
 //         Map<String, Object> map = courseTypeDao.getJdbcTemplate().queryForMap(sql, new HashMap<String, Object>());
 //         for (Object o : map.keySet()) {

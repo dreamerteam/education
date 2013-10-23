@@ -3,6 +3,7 @@ package com.dreamer.education.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -15,6 +16,9 @@ public class BaseController {
     
     /** 日志 */
     protected Logger logger = Logger.getLogger(this.getClass());
+    
+    /** 跳转成功页面 */
+    public static final String SUCCESS = "common/success";
     
     /**
      * 返回main目录下的jsp页面
@@ -43,4 +47,5 @@ public class BaseController {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         return request.getRequestURI().substring(request.getContextPath().length() + 1);
     }
+    
 }

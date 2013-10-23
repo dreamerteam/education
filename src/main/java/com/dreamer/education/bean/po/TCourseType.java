@@ -19,6 +19,9 @@ public class TCourseType implements Serializable {
     /** 名称 */
     private String cname;
     
+    /** 代码 */
+    private String ccode;
+    
     /** 创建时间 */
     private Date dcreate;
     
@@ -147,6 +150,22 @@ public class TCourseType implements Serializable {
      */
     public void setUuserid(String uuserid) {
         this.uuserid = uuserid;
+    }
+    
+    /**
+     * 获取 代码
+     * @return ccode
+     */
+    public String getCcode() {
+        return ccode;
+    }
+    
+    /**
+     * 设置 代码
+     * @param ccode 代码
+     */
+    public void setCcode(String ccode) {
+        this.ccode = ccode;
     }
     
 }

@@ -25,7 +25,8 @@
 <script type="text/javascript" src="${contextPath }/common/jquery/jquery-ui/jquery-ui.custom.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/bootstrap/js/bootstrap.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/bootstrap/js/html5shiv.js" ></script>
-<script type="text/javascript" src="${contextPath }/common/js/common.js" ></script>
+<script type="text/javascript" src="${contextPath }/common/js/date.handler.js" ></script>
+<script type="text/javascript" src="${contextPath }/common/js/function.js" ></script>
 <script type="text/javascript">
 var contextPath = "${contextPath}";
 var li = $(".nav li");

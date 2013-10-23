@@ -5,12 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>errorPage</title>
+<title>successPage</title>
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/bootstrap/css/bootstrap.css" />
 </head>
 <body>
 <div class="well">
-	<h1>${exception.error }</h1>
+	<h1>操作成功！</h1>
 </div>
 </body>
 </html>

@@ -17,21 +17,3 @@ $(function(){
 function setTime(){
 	$("#time").text(new Date().format("yyyy年MM月dd日 hh:mm:ss"));
 }
-
-/**
- * 重新加载左侧页面
- * @param page 左侧页面名称
- * @author broken_xie
- **/
-function reloadLeft(page){
-	left.load(contextPath + '/page/main/'+page);
-}
-
-/**
- * 重新加载主页面
- * @param url 地址
- * @author broken_xie
- **/
-function reloadMain(url){
-	main.load(url);
-}

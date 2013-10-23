@@ -1,0 +1,1 @@
+ALTER TABLE t_course_type ADD ccode VARCHAR(500) NOT NULL; -- 课程类型代码

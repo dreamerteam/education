@@ -1,8 +1,5 @@
 @CHARSET "UTF-8";
 /* index.css 包含top页面和left页面的样式 */
-.ib {
-	display: inline-block;
-}
 
 .top {
 	height: 120px;

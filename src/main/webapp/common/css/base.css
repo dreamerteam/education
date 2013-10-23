@@ -7,6 +7,10 @@ body {
 	height: 100%;
 }
 
+.ib {
+	display: inline-block;
+}
+
 .navbar-form {
 	margin-bottom: 0;
 }
@@ -32,4 +36,9 @@ body {
 
 .red{
 	color: red;
+}
+
+#滚动条
+.of-auto{
+	overflow: auto;
 }

@@ -20,7 +20,6 @@
 </div>
 </body>
 <script type="text/javascript" src="${contextPath }/common/jquery/jquery.js" ></script>
-<script type="text/javascript" src="${contextPath }/common/js/common.js" ></script>
 <script type="text/javascript">
 $(function() {
 	$( "#accordion" ).accordion({

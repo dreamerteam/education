@@ -11,8 +11,8 @@
 		<p>课程类型管理</p>
 		<div style="padding: 5px 3px; overflow: hidden;">
 			<ul class="nav nav-list">
-				<li class="pagination-centered active"><a href="javascript:reloadMain('${pageContext.request.contextPath}/page/main/course/add')">列表</a></li>
-				<li class="pagination-centered "><a href="#">新增</a></li>
+				<li class="pagination-centered active"><a href="javascript:reloadMain('${pageContext.request.contextPath}/page/main/course/list')">列表</a></li>
+				<li class="pagination-centered "><a href="javascript:reloadMain('${pageContext.request.contextPath}/page/main/course/add')">新增</a></li>
 			</ul>
 		</div>
 		<p>课程管理</p>
@@ -26,7 +26,6 @@
 </div>
 </body>
 <script type="text/javascript" src="${contextPath }/common/jquery/jquery.js" ></script>
-<script type="text/javascript" src="${contextPath }/common/js/common.js" ></script>
 <script type="text/javascript">
 $(function() {
 	$( "#accordion" ).accordion({
