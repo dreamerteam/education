@@ -1,10 +1,10 @@
 /**
  * 重新加载左侧页面
- * @param page 左侧页面名称
+ * @param url 地址
  * @author broken_xie
  **/
-function reloadLeft(page){
-	left.load(contextPath + '/page/main/'+page);
+function reloadLeft(url){
+	$(window.parent.document).find("#leftFrame").attr("src", url);
 }
 
 /**
@@ -13,17 +13,7 @@ function reloadLeft(page){
  * @author broken_xie
  **/
 function reloadMain(url){
-	main.load(url);
-}
-
-/**
- * 重新加载页面
- * @param url 对象
- * @param url 地址
- * @author broken_xie
- **/
-function reloadPage(obj, url){
-	obj.load(url);
+	$(window.parent.document).find("#mainFrame").attr("src", url);
 }
 
 /**

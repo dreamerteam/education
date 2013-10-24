@@ -8,30 +8,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>梦想家</title>
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/bootstrap/css/bootstrap.css" />
-<link rel="stylesheet" type="text/css" href="${contextPath }/common/jquery/jquery-ui/themes/jquery.ui.all.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/css/index.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/css/base.css" />
 </head>
 <body style="width: 1280px;overflow: hidden;">
-<div class="top">
-	<jsp:include page="/WEB-INF/views/include/top.jsp"></jsp:include>
+<div class="topPage">
+	<iframe name="topFrame" id="topFrame" src="${contextPath }/page/include/top" frameborder="0" width="100%" height="120px" scrolling="no"></iframe>
 </div>
-<div class="left pull-left"></div>
-<div class="main pull-left"></div>
+<div class="leftPage pull-left mt10">
+	<iframe name="leftFrame" id="leftFrame" src="${contextPath }/page/main/left_home" frameborder="0" width="100%" scrolling="no"></iframe>
+</div>
+<div class="mainPage pull-left mt10">
+	<iframe name="mainFrame" id="mainFrame" src="" frameborder="0" width="100%" scrolling="auto"></iframe>
+</div>
 </body>
 <script type="text/javascript" src="${contextPath }/common/jquery/jquery.js" ></script>
-<script type="text/javascript" src="${contextPath }/common/jquery/jquery-ui/jquery.ui.core.js" ></script>
-<script type="text/javascript" src="${contextPath }/common/jquery/jquery-ui/jquery.ui.widget.js" ></script>
-<script type="text/javascript" src="${contextPath }/common/jquery/jquery-ui/jquery-ui.custom.js" ></script>
-<script type="text/javascript" src="${contextPath }/common/bootstrap/js/bootstrap.js" ></script>
-<script type="text/javascript" src="${contextPath }/common/bootstrap/js/html5shiv.js" ></script>
-<script type="text/javascript" src="${contextPath }/common/js/date.handler.js" ></script>
-<script type="text/javascript" src="${contextPath }/common/js/function.js" ></script>
-<script type="text/javascript">
-var contextPath = "${contextPath}";
-var li = $(".nav li");
-var left = $(".left");
-var main = $(".main");
-</script>
 <script type="text/javascript" src="${contextPath }/main/js/index.js" ></script>
 </html>
