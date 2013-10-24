@@ -1,19 +1,23 @@
-// 获取上下文
-contextPath = typeof (contextPath) == "undefined" ? "" : contextPath;
+var width = document.body.scrollWidth;
+var height = document.body.scrollHeight;
+var topHeight = $("#topFrame").attr("height");
 
 $(function(){
-	setInterval(setTime, 1000);
-	li.click(function(){
-		li.removeClass("active");
-		$(this).addClass("active");
+	topHeight = topHeight.substring(0, topHeight.length-2);
+	setHeight(height, topHeight);
+	$(window).resize(function(){
+		setHeight(height, topHeight);
 	});
-	reloadLeft("left_home");
 });
 
 /**
- * 设置时间
+ * 设置高度
+ * @param height 浏览器全文高度
+ * @param topHeight topFrame高度
  * @author broken_xie
  **/
-function setTime(){
-	$("#time").text(new Date().format("yyyy年MM月dd日 hh:mm:ss"));
+function setHeight(height, topHeight){
+	var h = (height - topHeight) + "px";
+	$("#leftFrame").attr("height", h);
+	$("#mainFrame").attr("height", h);
 }
