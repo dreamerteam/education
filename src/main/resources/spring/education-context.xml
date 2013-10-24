@@ -54,7 +54,7 @@
 	<!-- url请求拦截器 -->
 	<bean id="handlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
 		<property name="interceptors">
-			<bean class="com.dreamer.education.handler.DreamerHandler" />
+			<bean class="com.dreamer.education.handler.DreamerHandler"/>
 		</property>
 	</bean>
   	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
