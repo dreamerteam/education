@@ -14,9 +14,9 @@
 </head>
 <body id="page">
 <div class="well">
-	<form action="${contextPath }/courseType/add" method="post" class="form-horizontal" id="addForm">
-		<input type="hidden" name="ilevel" id="ilevel" value="0" />
-		<input type="hidden" name="uparentid" id="uparentid" />
+	<form action="${contextPath }/courseType/update" method="post" class="form-horizontal" id="addForm">
+		<input type="hidden" name="ilevel" id="ilevel" value="${courseType.ilevel }" />
+		<input type="hidden" name="uparentid" id="uparentid" value="${empty courseType.uparentid ? '' : courseType.uparentid }" />
 		<input type="hidden" name="cparentcode" id="cparentcode" />
 		<div class="control-group">
 			<label class="control-label"><div class="inline" style="color: red;"> * </div>课程类型名称：</label>

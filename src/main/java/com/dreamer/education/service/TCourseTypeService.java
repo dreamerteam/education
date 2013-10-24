@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.dreamer.education.bean.po.TCourseType;
 import com.dreamer.education.dao.TCourseTypeDao;
+import com.dreamer.education.utils.Page;
 
 /**
  * 课程类型业务访问接口
@@ -29,6 +30,7 @@ public class TCourseTypeService {
      */
     public void add(TCourseType courseType) {
         courseType.setUuid(getUUID());
+        courseType.setCstatus("1");
         courseType.setDcreate(new Date());
         courseType.setDupdate(courseType.getDcreate());
         courseType.setUuserid(getUUID());
@@ -53,5 +55,27 @@ public class TCourseTypeService {
      */
     public boolean isCcodeExist(String ccode) {
         return 0 == courseTyperDao.findByCcode(ccode).size() ? false : true;
+    }
+    
+    /**
+     * 分页查询课程类型集合
+     * @param cname 课程类型名称
+     * @param currentPage 当前页码
+     * @return
+     * @author broken_xie
+     */
+    public Page<TCourseType> findPageByQuery(String cname, int currentPage) {
+        Page<TCourseType> page = new Page<TCourseType>(currentPage);
+        return courseTyperDao.findPageByQuery(cname, page);
+    }
+    
+    /**
+     * 根据课程类型uuid查找课程类型
+     * @param uuid 课程类型uuid
+     * @return
+     * @author broken_xie
+     */
+    public TCourseType findByUuid(String uuid) {
+        return courseTyperDao.findByUuid(uuid);
     }
 }

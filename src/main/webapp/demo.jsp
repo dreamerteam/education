@@ -13,8 +13,9 @@
 </head>
 <body>
 <input id="tags"/>
+<input type="checkbox" value="sssssss" id="check" checked="checked" />
 </body>
-<script type="text/javascript" src="${contextPath }/common/jquery/jquery.js" ></script>
+<script type="text/javascript" src="${contextPath }/common/jquery.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/jquery/jquery-ui/jquery.ui.core.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/jquery/jquery-ui/jquery.ui.widget.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/jquery/jquery-ui/jquery.ui.position.js" ></script>
@@ -24,10 +25,12 @@
 
 <script type="text/javascript" src="${contextPath }/common/bootstrap/js/bootstrap.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/bootstrap/js/html5shiv.js" ></script>
-<script type="text/javascript" src="${contextPath }/common/js/common.js" ></script>
 <script type="text/javascript" src="${contextPath}/autoComplete/courseType" ></script>
 <script type="text/javascript">
 $(function() {
+	$("#check").removeAttr("checked");
+	$("#check").attr("checked","checked");
+	
 	var availableTags = [
 	                     "ActionScript",
 	                     "AppleScript",

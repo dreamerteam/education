@@ -22,6 +22,9 @@ public class TCourseType implements Serializable {
     /** 代码 */
     private String ccode;
     
+    /** 状态【0：删除；1：启用】 */
+    private String cstatus;
+    
     /** 创建时间 */
     private Date dcreate;
     
@@ -29,7 +32,7 @@ public class TCourseType implements Serializable {
     private Date dupdate;
     
     /** 等级【0最高等级】 */
-    private int ilevel;
+    private Integer ilevel;
     
     /** 父级ID */
     private String uparentid;
@@ -39,22 +42,6 @@ public class TCourseType implements Serializable {
     
     /** 主键ID */
     private String uuid;
-    
-    /**
-     * 获取 主键ID
-     * @return uuid
-     */
-    public String getUuid() {
-        return uuid;
-    }
-    
-    /**
-     * 设置 主键ID
-     * @param uuid 主键ID
-     */
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
     
     /**
      * 获取 名称
@@ -70,6 +57,38 @@ public class TCourseType implements Serializable {
      */
     public void setCname(String cname) {
         this.cname = cname;
+    }
+    
+    /**
+     * 获取 代码
+     * @return ccode
+     */
+    public String getCcode() {
+        return ccode;
+    }
+    
+    /**
+     * 设置 代码
+     * @param ccode 代码
+     */
+    public void setCcode(String ccode) {
+        this.ccode = ccode;
+    }
+    
+    /**
+     * 获取 状态【0：删除；1：启用】
+     * @return cstatus
+     */
+    public String getCstatus() {
+        return cstatus;
+    }
+    
+    /**
+     * 设置 状态【0：删除；1：启用】
+     * @param cstatus 状态【0：删除；1：启用】
+     */
+    public void setCstatus(String cstatus) {
+        this.cstatus = cstatus;
     }
     
     /**
@@ -108,7 +127,7 @@ public class TCourseType implements Serializable {
      * 获取 等级【0最高等级】
      * @return ilevel
      */
-    public int getIlevel() {
+    public Integer getIlevel() {
         return ilevel;
     }
     
@@ -116,7 +135,7 @@ public class TCourseType implements Serializable {
      * 设置 等级【0最高等级】
      * @param ilevel 等级【0最高等级】
      */
-    public void setIlevel(int ilevel) {
+    public void setIlevel(Integer ilevel) {
         this.ilevel = ilevel;
     }
     
@@ -153,19 +172,19 @@ public class TCourseType implements Serializable {
     }
     
     /**
-     * 获取 代码
-     * @return ccode
+     * 获取 主键ID
+     * @return uuid
      */
-    public String getCcode() {
-        return ccode;
+    public String getUuid() {
+        return uuid;
     }
     
     /**
-     * 设置 代码
-     * @param ccode 代码
+     * 设置 主键ID
+     * @param uuid 主键ID
      */
-    public void setCcode(String ccode) {
-        this.ccode = ccode;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
     
 }

@@ -14,7 +14,9 @@ function autoComplete(click, obj, items, valueObj, ilevelObj, parentcodeObj){
 		obj.data("autocomplete").element.unbind("focus.autocomplete")
 		.bind("focus.autocomplete click", function(event) {
 			var self = $(this).data("autocomplete");
-			if (event.type == 'click') self.element.val('');
+			if (event.type == 'click') {
+				self.element.val('');
+			}
 			if ( self.options.disabled ) return;
 			self.previous = self.element.val();
 			if ( self.element.val() == '' ) {
@@ -28,6 +30,9 @@ function autoComplete(click, obj, items, valueObj, ilevelObj, parentcodeObj){
 function standard(obj, items, valueObj, ilevelObj, parentcodeObj) {
 	return obj.autocomplete({
 		minLength : 0,
+		valueObj : valueObj, // 存值对象
+		ilevelObj : ilevelObj, // 等级对象
+		parentcodeObj : parentcodeObj, // 父级代码对象
 		source : function(request, response) {
 			var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
 			response($.grep(items, function(value) {
@@ -36,14 +41,15 @@ function standard(obj, items, valueObj, ilevelObj, parentcodeObj) {
 		},
 		select : function(event, ui) {
 			$(this).val(ui.item.label);
-			valueObj.val(ui.item.value);
-			if(null != ui.item.ilevel){
-				ilevelObj.val(ui.item.ilevel + 1);
-			}
-			if(null != ui.item.ccode){
-				parentcodeObj.val(ui.item.ccode);
-			}
+			if(typeof valueObj != "undefined") valueObj.val(ui.item.value);
+			if(null != ui.item.ilevel && typeof ilevelObj != "undefined") ilevelObj.val(ui.item.ilevel + 1);
+			if(null != ui.item.ccode && typeof parentcodeObj != "undefined") parentcodeObj.val(ui.item.ccode);
 			return false;
+		},
+		clear : function(event){
+			if(typeof valueObj != "undefined") valueObj.val('');
+			if(typeof ilevelObj != "undefined") ilevelObj.val(0);
+			if(typeof parentcodeObj != "undefined") parentcodeObj.val('');
 		}
 	});
 }
@@ -68,5 +74,14 @@ $.widget("dreamer.autocomplete", $.ui.autocomplete, {
 		return $( "<li>" )
 			.append( $( "<a style='padding-left:"+space+"em'>" ).text( item.label ) )
 			.appendTo( ul );
+	},
+	
+	_change: function( event ) {
+		if("" == this._value()){
+			this._trigger( "clear", event);
+		}
+		if ( this.previous !== this._value() ) {
+			this._trigger( "change", event, { item: this.selectedItem } );
+		}
 	}
 });

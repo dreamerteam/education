@@ -6,6 +6,8 @@ $(function(){
 	topHeight = topHeight.substring(0, topHeight.length-2);
 	setHeight(height, topHeight);
 	$(window).resize(function(){
+		width = document.body.scrollWidth;
+		height = document.body.scrollHeight;
 		setHeight(height, topHeight);
 	});
 });

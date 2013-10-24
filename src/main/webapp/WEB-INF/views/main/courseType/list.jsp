@@ -15,39 +15,47 @@
 <div id="page">
 	<div class="well">
 		<form action="${contextPath }/courseType/list" class="form-search" id="searchForm">
-			<label>课程类型名称：</label><input type="text" name="cname" class="input-medium search-query">
+			<label>课程类型名称：</label><input type="text" name="cname" id="cname" class="input-medium search-query">
 			<button type="submit" class="btn btn-primary">查 找</button>
 		</form>
 	</div>
 	<div class="well">
-	
+		<div class="btn-group mb10">
+			<button class="btn btn-primary" onclick="edit()">修 改</button>
+			<button class="btn btn-primary">Middle</button>
+			<button class="btn btn-primary">Right</button>
+		</div>
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th></th>
+				 	<th>序号</th>
+				 	<th>名称</th>
+				 </tr>
+			</thead>
+			<tbody>
+				 <c:forEach items="${page.resultRows }" var="courseType" varStatus="st">
+				 	<tr>
+				 		<td><input type="checkbox" name="check" value="<c:out value="${courseType.uuid }"/>" /></td>
+				 		<td>${st.index + 1 }</td>
+				 		<td><c:out value="${courseType.cname }"/></td>
+				 	</tr>
+				 </c:forEach>
+			</tbody>
+		</table>
+		<%@ include file="/WEB-INF/views/include/page.jsp" %>
 	</div>
 </div>
 </body>
-<script type="text/javascript" src="${contextPath }/common/jquery/jquery.js" ></script>
-<script type="text/javascript" src="${contextPath }/common/jquery/jquery-ui/jquery.ui.core.js" ></script>
-<script type="text/javascript" src="${contextPath }/common/jquery/jquery-ui/jquery.ui.widget.js" ></script>
-<script type="text/javascript" src="${contextPath }/common/jquery/jquery-ui/jquery.ui.position.js" ></script>
-<script type="text/javascript" src="${contextPath }/common/jquery/jquery-ui/jquery.ui.menu.js" ></script>
-<script type="text/javascript" src="${contextPath }/common/jquery/jquery-ui/jquery.ui.autocomplete.js" ></script>
-<script type="text/javascript" src="${contextPath }/common/js/autocomplete.js" ></script>
+<script type="text/javascript" src="${contextPath }/common/jquery/jquery-1.8.3.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/bootstrap/js/bootstrap.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/bootstrap/js/html5shiv.js" ></script>
-<script type="text/javascript" src="${contextPath}/autoComplete/courseType" ></script>
+<script type="text/javascript" src="${contextPath }/common/js/check.js" ></script>
 <script type="text/javascript">
 var contextPath = "${contextPath}";
+var check;
 $(function(){
-	autoComplete(true, $("#cname"), courseType);
-	
-	$("#searchForm").validationEngine({
-		onAjaxFormComplete: function(status, form, json, options) {
-			if (status) {
-				reloadMain(contextPath + '/page/common/success');
-			} else {
-				$("#submitBtn").removeAttr("disabled").removeClass("btn-inverse").addClass("btn-primary");
-			}
-		}
-	}); 
+	check = new InitCheck({lineSelected: false});
 });
 </script>
 <script type="text/javascript" src="${contextPath }/main/js/coursetype.js" ></script>

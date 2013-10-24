@@ -13,7 +13,7 @@
 </head>
 <body style="width: 1280px;overflow: hidden;">
 <div class="topPage">
-	<iframe name="topFrame" id="topFrame" src="${contextPath }/page/include/top" frameborder="0" width="100%" height="120px" scrolling="no"></iframe>
+	<iframe name="topFrame" id="topFrame" src="${contextPath }/page/include/top" frameborder="0" width="1000px" height="120px" scrolling="no"></iframe>
 </div>
 <div class="leftPage pull-left mt10">
 	<iframe name="leftFrame" id="leftFrame" src="${contextPath }/page/main/left_home" frameborder="0" width="100%" scrolling="no"></iframe>
