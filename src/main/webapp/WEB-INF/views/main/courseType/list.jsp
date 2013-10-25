@@ -22,8 +22,8 @@
 	<div class="well">
 		<div class="btn-group mb10">
 			<button class="btn btn-primary" onclick="edit()">修 改</button>
-			<button class="btn btn-primary">Middle</button>
-			<button class="btn btn-primary">Right</button>
+			<button class="btn btn-primary" onclick="view()">查看</button>
+			<button class="btn btn-primary" onclick="del()">删除</button>
 		</div>
 		<table class="table table-bordered table-hover">
 			<thead>
@@ -36,7 +36,7 @@
 			<tbody>
 				 <c:forEach items="${page.resultRows }" var="courseType" varStatus="st">
 				 	<tr>
-				 		<td><input type="checkbox" name="check" value="<c:out value="${courseType.uuid }"/>" /></td>
+				 		<td><input type="checkbox" name="check" value="<c:out value="${courseType.uuid },${courseType.ccode }"/>" /></td>
 				 		<td>${st.index + 1 }</td>
 				 		<td><c:out value="${courseType.cname }"/></td>
 				 	</tr>
@@ -55,7 +55,7 @@
 var contextPath = "${contextPath}";
 var check;
 $(function(){
-	check = new InitCheck({lineSelected: false});
+	check = new InitCheck({lineSelected: false, multipleValue:["uuid", "ccode"]});
 });
 </script>
 <script type="text/javascript" src="${contextPath }/main/js/coursetype.js" ></script>

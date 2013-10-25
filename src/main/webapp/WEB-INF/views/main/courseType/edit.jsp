@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>课程类型添加</title>
+<title>课程类型编辑</title>
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/bootstrap/css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/jquery/jquery-ui/themes/jquery.ui.all.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/jquery/validationEngine.jquery.css" />
@@ -14,33 +14,37 @@
 </head>
 <body id="page">
 <div class="well">
-	<form action="${contextPath }/courseType/update" method="post" class="form-horizontal" id="addForm">
-		<input type="hidden" name="ilevel" id="ilevel" value="${courseType.ilevel }" />
-		<input type="hidden" name="uparentid" id="uparentid" value="${empty courseType.uparentid ? '' : courseType.uparentid }" />
-		<input type="hidden" name="cparentcode" id="cparentcode" />
+	<form action="${contextPath }/courseType/update" method="post" class="form-horizontal" id="editForm">
+		<input type="hidden" name="coperate" id="coperate" value="update" />
+		<input type="hidden" name="coldname" id="coldname" value="<c:out value="${courseTypeResponse.cname }"/>" />
+		<input type="hidden" name="coldcode" id="coldcode" value="<c:out value="${courseTypeResponse.ccode }"/>" />
+		<input type="hidden" name="uuid" id="uuid" value="<c:out value="${courseTypeResponse.uuid }"/>" />
+		<input type="hidden" name="ilevel" id="ilevel" value="<c:out value="${courseTypeResponse.ilevel }"/>" />
+		<input type="hidden" name="uparentid" id="uparentid" value="<c:out value="${empty courseTypeResponse.uparentid ? '' : courseTypeResponse.uparentid }"/>" />
+		<input type="hidden" name="cparentcode" id="cparentcode" value="<c:out value="${empty courseTypeResponse.cparentcode ? '' : courseTypeResponse.cparentcode }"/>" />
 		<div class="control-group">
 			<label class="control-label"><div class="inline" style="color: red;"> * </div>课程类型名称：</label>
 			<div class="controls">
-				<input type="text" name="cname" id="cname" placeholder="课程类型名称" class="validate[required,maxSize3[36]]" />
+				<input type="text" name="cname" id="cname" placeholder="课程类型名称" class="validate[required,maxSize3[36]]" value="<c:out value="${courseTypeResponse.cname }"/>"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label"><div class="inline" style="color: red;"> * </div>课程类型代码：</label>
 			<div class="controls">
-				<input type="text" name="ccode" id="ccode" placeholder="课程类型代码" class="validate[required,maxSize3[20]]" />
+				<input type="text" name="ccode" id="ccode" placeholder="课程类型代码" class="validate[required,maxSize3[20]]" value="<c:out value="${courseTypeResponse.ccode }"/>"/>
 				<span style="color: red;">&nbsp;&nbsp;建议使用课程类型名称拼音首字母</span>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">上级课程类型：</label>
 			<div class="controls">
-				<input type="text" name="parenttype" id="parenttype" placeholder="上级课程类型"/>
+				<input type="text" name="parenttype" id="parenttype" placeholder="上级课程类型" value="<c:out value="${courseTypeResponse.cparentname }"/>"/>
 				<span style="color: red;">&nbsp;&nbsp;顶级课程类型不需要选课程类型</span>
 			</div>
 		</div>
 		<div class="control-group">
 			<div class="controls">
-				<button type="submit" id="submitBtn" class="btn btn-primary">添 加</button>
+				<button type="submit" id="submitBtn" class="btn btn-primary">保 存</button>
 			</div>
 		</div>
 	</form>
@@ -65,7 +69,7 @@ var page = $("#page");
 $(function(){
 	autoComplete(true, $("#parenttype"), courseType, $("#uparentid"), $("#ilevel"), $("#cparentcode"));
 	
-	$("#addForm").validationEngine({
+	$("#editForm").validationEngine({
 		promptPosition : 'bottomRight',
 		ajaxFormValidation : true,
 		ajaxFormMethod : 'POST',

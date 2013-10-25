@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dreamer.education.bean.po.TCourseType;
+import com.dreamer.education.bean.ro.CourseTypeResponse;
 import com.dreamer.education.dao.TCourseTypeDao;
 import com.dreamer.education.utils.Page;
 
@@ -35,6 +36,31 @@ public class TCourseTypeService {
         courseType.setDupdate(courseType.getDcreate());
         courseType.setUuserid(getUUID());
         courseTyperDao.save(courseType);
+    }
+    
+    /**
+     * 更新课程类型
+     * @param courseType 课程类型
+     * @author broken_xie
+     */
+    public void update(TCourseType courseType) {
+        TCourseType ct = courseTyperDao.findByUuid(courseType.getUuid());
+        ct.setCcode(courseType.getCcode());
+        ct.setCname(courseType.getCname());
+        ct.setIlevel(courseType.getIlevel());
+        ct.setUparentid(courseType.getUparentid());
+        ct.setDupdate(new Date());
+        ct.setUuserid(getUUID());
+        courseTyperDao.update(ct);
+    }
+    
+    /**
+     * 删除课程类型
+     * @param uuid 课程类型uuid
+     * @author broken_xie
+     */
+    public void delete(String ccode) {
+        courseTyperDao.delete(ccode);
     }
     
     /**
@@ -70,12 +96,15 @@ public class TCourseTypeService {
     }
     
     /**
-     * 根据课程类型uuid查找课程类型
+     * 根据课程类型uuid查找课程类型【编辑、查看】
      * @param uuid 课程类型uuid
      * @return
      * @author broken_xie
      */
-    public TCourseType findByUuid(String uuid) {
-        return courseTyperDao.findByUuid(uuid);
+    public CourseTypeResponse findForView(String uuid) {
+        CourseTypeResponse response = courseTyperDao.findForView(uuid);
+        String[] codes = response.getCcode().split("\\|");
+        response.setCcode(codes[codes.length - 1]);
+        return response;
     }
 }

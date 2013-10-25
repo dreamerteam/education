@@ -38,7 +38,10 @@ public class BaseDao<T> {
     /** 更新操作 */
     private static final String UPDATE = "update";
     
-    /** 删除操作 */
+    /** 物理删除操作 */
+    private static final String PHYSICAL_DELETE = "physical_delete";
+    
+    /** 逻辑删除操作 */
     private static final String DELETE = "delete";
     
     /** 序列化版本UID */
@@ -65,10 +68,58 @@ public class BaseDao<T> {
         return jdbcTemplate;
     }
     
+    /**
+     * 保存
+     * @param entity 实体类
+     * @return
+     * @author broken_xie
+     */
     public int save(T entity) {
         String sql = generateSql(entity, INSERT);
         Map<String, Object> paramMap = setParam(entity, INSERT);
         return jdbcTemplate.update(sql, paramMap);
+    }
+    
+    /**
+     * 更新
+     * @param entity 实体类
+     * @return
+     * @author broken_xie
+     */
+    public int update(T entity) {
+        String sql = generateSql(entity, UPDATE);
+        Map<String, Object> paramMap = setParam(entity, UPDATE);
+        return jdbcTemplate.update(sql, paramMap);
+    }
+    
+    /**
+     * 删除
+     * @param entity 实体类
+     * @param isPhysicalDel 是否物理删除【true：物理删除；false：逻辑删除】
+     * @return
+     * @author broken_xie
+     */
+    public int delete(T entity, boolean isPhysicalDel) {
+        String sql = "";
+        Map<String, Object> paramMap = new HashMap<String, Object>();
+        if (isPhysicalDel) {
+            sql = generateSql(entity, PHYSICAL_DELETE);
+            paramMap = setParam(entity, PHYSICAL_DELETE);
+        } else {
+            sql = generateSql(entity, DELETE);
+            paramMap = setParam(entity, DELETE);
+        }
+        return jdbcTemplate.update(sql, paramMap);
+    }
+    
+    /**
+     * 逻辑删除
+     * @param entity 实体类
+     * @return
+     * @author broken_xie
+     */
+    public int delete(T entity) {
+        return delete(entity, false);
     }
     
     /**
@@ -117,16 +168,19 @@ public class BaseDao<T> {
                         if ("uuid".equals(field.getName())) {
                             continue;
                         }
-                        if (null == field.get(entity)) {
-                            continue;
-                        }
+                        /*
+                         * if (null == field.get(entity)) { continue; }
+                         */
                         sql.append(field.getName()).append("=").append(":").append(field.getName()).append(",");
                     }
                     sql = sql.deleteCharAt(sql.length() - 1);
                     sql.append(" WHERE uuid=:uuid");
                     break;
+                case PHYSICAL_DELETE:
+                    sql.append(" DELETE FROM " + tableName + " WHERE uuid = :uuid");
+                    break;
                 case DELETE:
-                    sql.append(" DELETE FROM " + tableName + " WHERE uuid=:uuid");
+                    sql.append(" UPDATE " + tableName + " SET cstatus = '0' WHERE uuid = :uuid");
                     break;
                 
                 default:
@@ -167,10 +221,19 @@ public class BaseDao<T> {
                         if (SERIALVERSIONUID.equals(field.getName())) {
                             continue;
                         }
-                        if (null == field.get(entity)) {
-                            continue;
-                        }
+                        /*
+                         * if (null == field.get(entity)) { continue; }
+                         */
                         paramMap.put(field.getName(), field.get(entity));
+                    }
+                    break;
+                case PHYSICAL_DELETE:
+                    for (Field field : fields) {
+                        field.setAccessible(true);
+                        if ("uuid".equals(field.getName())) {
+                            paramMap.put(field.getName(), field.get(entity));
+                            break;
+                        }
                     }
                     break;
                 case DELETE:

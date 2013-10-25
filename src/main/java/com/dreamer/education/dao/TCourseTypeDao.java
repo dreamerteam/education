@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.dreamer.education.bean.co.AutoComplete;
 import com.dreamer.education.bean.po.TCourseType;
+import com.dreamer.education.bean.ro.CourseTypeResponse;
 import com.dreamer.education.dao.base.BaseDao;
 import com.dreamer.education.utils.Page;
 
@@ -86,11 +87,55 @@ public class TCourseTypeDao extends BaseDao<TCourseType> {
         return getPage(sql, map, page, TCourseType.class);
     }
     
+    /**
+     * 根据课程类型uuid查找课程类型【编辑、查看】
+     * @param uuid 课程类型uuid
+     * @return
+     * @author broken_xie
+     */
+    public CourseTypeResponse findForView(String uuid) {
+        StringBuilder sql = new StringBuilder(" select DISTINCT tct1.uuid, tct1.cname, tct1.ccode, tct1.ilevel ");
+        sql.append(" , (CASE WHEN tct1.uparentid IS NOT NULL THEN tct2.cname ELSE NULL END) as cparentname ");
+        sql.append(" , (CASE WHEN tct1.uparentid IS NOT NULL THEN tct2.uuid ELSE NULL END) as uparentid ");
+        sql.append(" , (CASE WHEN tct1.uparentid IS NOT NULL THEN tct2.ccode ELSE NULL END) as cparentcode ");
+        sql.append(" from t_course_type tct1, t_course_type tct2 ");
+        sql.append(" where (CASE WHEN tct1.uparentid IS NOT NULL THEN tct1.uparentid = tct2.uuid else tct1.uparentid IS NULL END) ");
+        sql.append(" AND tct1.cstatus <> '0' ");
+        sql.append(" AND tct1.uuid = :uuid ");
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("uuid", uuid);
+        logger.info("SQL = " + sql);
+        logger.info("SQL_PARAM = " + map);
+        List<CourseTypeResponse> responses = getJdbcTemplate().query(sql.toString(), map, new BeanPropertyRowMapper<CourseTypeResponse>(CourseTypeResponse.class));
+        return responses.isEmpty() ? null : responses.get(0);
+    }
+    
+    /**
+     * 根据uuid查找课程类型
+     * @param uuid 课程类型uuid
+     * @return
+     * @author broken_xie
+     */
     public TCourseType findByUuid(String uuid) {
         String sql = "select * from t_course_type where uuid = :uuid";
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("uuid", uuid);
-        List<TCourseType> courseTypes = getJdbcTemplate().query(sql, new BeanPropertyRowMapper<TCourseType>(TCourseType.class));
+        logger.info("SQL = " + sql);
+        logger.info("SQL_PARAM = " + map);
+        List<TCourseType> courseTypes = getJdbcTemplate().query(sql.toString(), map, new BeanPropertyRowMapper<TCourseType>(TCourseType.class));
         return courseTypes.isEmpty() ? null : courseTypes.get(0);
+    }
+    
+    /**
+     * 逻辑删除课程类型代码【删除上级课程类型会自动删除下级课程类型】
+     * @param ccode 课程类型代码
+     * @return
+     * @author broken_xie
+     */
+    public int delete(String ccode) {
+        String sql = "update t_course_type set cstatus = '0' where ccode like :ccode";
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("ccode", ccode + "%");
+        return getJdbcTemplate().update(sql, map);
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dreamer.education.bean.po.TCourseType;
+import com.dreamer.education.bean.qo.CourseTypeVlidate;
 import com.dreamer.education.service.TCourseTypeService;
 import com.google.gson.Gson;
 
@@ -54,18 +55,45 @@ public class CourseTypeController extends BaseController {
      */
     @RequestMapping("/validate")
     @ResponseBody
-    public String validate(TCourseType courseType) {
+    public String validate(CourseTypeVlidate validate) {
         /* 校验课程类型名称是否已经存在 */
         Object[][] result = new Object[2][3];
         result[0][0] = "cname";
-        boolean isCnameExist = courseTypeService.isCnameExist(courseType.getCname());
-        result[0][1] = !isCnameExist;
-        if (isCnameExist) result[0][2] = "* 课程类型名称已存在，请重新填写！";
-        if (isEmpty(courseType.getUparentid())) { // 顶级课程类型需要判断代码唯一性，其他不需要判断
-            result[1][0] = "ccode";
-            boolean isCcodeExist = courseTypeService.isCcodeExist((courseType.getCcode() + "|").toUpperCase());
-            result[1][1] = !isCcodeExist;
-            if (isCcodeExist) result[1][2] = "* 课程类型代码已存在，请重新填写！";
+        switch (validate.getCoperate()) {
+            case "add":
+                result[0][0] = "cname";
+                boolean isCnameExist = courseTypeService.isCnameExist(validate.getCname());
+                result[0][1] = !isCnameExist;
+                if (isCnameExist) result[0][2] = "* 课程类型名称已存在，请重新填写！";
+                if (isEmpty(validate.getUparentid())) { // 顶级课程类型需要判断代码唯一性，其他不需要判断
+                    result[1][0] = "ccode";
+                    boolean isCcodeExist = courseTypeService.isCcodeExist((validate.getCcode() + "|").toUpperCase());
+                    result[1][1] = !isCcodeExist;
+                    if (isCcodeExist) result[1][2] = "* 课程类型代码已存在，请重新填写！";
+                }
+                break;
+            case "update":
+                result[0][0] = "cname";
+                if (validate.getColdname().equals(validate.getCname())) {
+                    result[0][1] = true;
+                } else {
+                    isCnameExist = courseTypeService.isCnameExist(validate.getCname());
+                    result[0][1] = !isCnameExist;
+                    if (isCnameExist) result[0][2] = "* 课程类型名称已存在，请重新填写！";
+                }
+                if (isEmpty(validate.getUparentid())) { // 顶级课程类型需要判断代码唯一性，其他不需要判断
+                    if (validate.getColdcode().equals(validate.getCcode())) {
+                        result[1][1] = true;
+                    } else {
+                        result[1][0] = "ccode";
+                        boolean isCcodeExist = courseTypeService.isCcodeExist((validate.getCcode() + "|").toUpperCase());
+                        result[1][1] = !isCcodeExist;
+                        if (isCcodeExist) result[1][2] = "* 课程类型代码已存在，请重新填写！";
+                    }
+                }
+                break;
+            default:
+                break;
         }
         return new Gson().toJson(result);
     }
@@ -81,7 +109,7 @@ public class CourseTypeController extends BaseController {
     @RequestMapping("/list")
     public String list(String cname, @RequestParam(defaultValue = "1") int currentPage, Model model) {
         model.addAttribute("page", courseTypeService.findPageByQuery(cname, currentPage));
-        return mainPage();
+        return "main/courseType/list";
     }
     
     /**
@@ -91,9 +119,54 @@ public class CourseTypeController extends BaseController {
      * @return
      * @author broken_xie
      */
+    @RequestMapping("/edit")
     public String edit(String uuid, Model model) {
-        model.addAttribute("courseType", courseTypeService.findByUuid(uuid));
+        model.addAttribute("courseTypeResponse", courseTypeService.findForView(uuid));
         return mainPage();
+    }
+    
+    /**
+     * 查看
+     * @param uuid 课程类型uuid
+     * @param model
+     * @return
+     * @author broken_xie
+     */
+    @RequestMapping("/view")
+    public String view(String uuid, Model model) {
+        return edit(uuid, model);
+    }
+    
+    /**
+     * 删除
+     * @param uuid 课程类型uuid
+     * @param model
+     * @return
+     * @author broken_xie
+     */
+    @RequestMapping("/del")
+    public String del(String ccode, Model model) {
+        courseTypeService.delete(ccode);
+        return list(null, 1, model);
+    }
+    
+    /**
+     * 更新课程类型
+     * @param courseType 课程类型
+     * @param cparentcode 父级课程类型代码
+     * @return
+     * @author broken_xie
+     */
+    @RequestMapping("/update")
+    public String update(TCourseType courseType, String cparentcode) {
+        if (!isUUID(courseType.getUparentid())) {
+            courseType.setUparentid(null);
+            courseType.setCcode((courseType.getCcode() + "|").toUpperCase());
+        } else {
+            courseType.setCcode((cparentcode + courseType.getCcode() + "|").toUpperCase());
+        }
+        courseTypeService.update(courseType);
+        return SUCCESS;
     }
     
 }

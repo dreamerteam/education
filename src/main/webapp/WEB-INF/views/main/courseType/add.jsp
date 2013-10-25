@@ -15,6 +15,7 @@
 <body id="page">
 <div class="well">
 	<form action="${contextPath }/courseType/add" method="post" class="form-horizontal" id="addForm">
+		<input type="hidden" name="coperate" id="coperate" value="add" />
 		<input type="hidden" name="ilevel" id="ilevel" value="0" />
 		<input type="hidden" name="uparentid" id="uparentid" />
 		<input type="hidden" name="cparentcode" id="cparentcode" />

@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.dreamer.education.bean.po.TCourseType;
+import com.dreamer.education.bean.ro.CourseTypeResponse;
 import com.dreamer.education.dao.TCourseTypeDao;
 import com.dreamer.education.test.base.BaseTest;
 
@@ -23,10 +24,12 @@ public class DaoTest extends BaseTest {
     @Test
     public void test() {
 //        List<TCourseType> courseTypes = courseTypeDao.findByCname("语文2");
-        List<TCourseType> courseTypes = courseTypeDao.findByCcode("");
-        for (TCourseType courseType : courseTypes) {
-            System.out.println(courseType.getUuid() + "\t" + courseType.getCname());
-        }
+//        List<TCourseType> courseTypes = courseTypeDao.findByCcode("");
+        CourseTypeResponse response = courseTypeDao.findForView("0af12869-6ccd-45be-9ecb-c67c55955ef8");
+        System.out.println(response.getUuid() + "\t" + response.getCname());
+//        for (TCourseType courseType : courseTypes) {
+//            System.out.println(courseType.getUuid() + "\t" + courseType.getCname());
+//        }
         // List<TCourseType> courseTypes = courseTypeDao.findAll();
         // for (TCourseType courseType : courseTypes) {
         // System.out.println(courseType.getCname()+"\t"+courseType.getUuid());

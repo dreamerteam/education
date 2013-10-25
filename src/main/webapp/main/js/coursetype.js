@@ -7,6 +7,27 @@ contextPath = typeof (contextPath) == "undefined" ? "" : contextPath;
  **/
 function edit(){
 	if(check.verifyCheck()){
-		$.post(contextPath +'/courseType/edit', {"uuid" : check.getCheckValue()});
+		window.location.href = contextPath + '/courseType/edit?uuid=' + check.getCheckValue().uuid;
+	}
+}
+
+/**
+ * 查看
+ * @author broken_xie
+ **/
+function view(){
+	if(check.verifyCheck()){
+		window.location.href = contextPath + '/courseType/view?uuid=' + check.getCheckValue().uuid;
+	}
+}
+
+/**
+ * 删除
+ * @author broken_xie
+ **/
+function del(){
+	if(check.verifyCheck()){
+		alert(contextPath + '/courseType/del?ccode=');
+		window.location.href = contextPath + '/courseType/del?ccode=' + check.getCheckValue().ccode;
 	}
 }
