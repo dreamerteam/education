@@ -37,6 +37,7 @@ public class CourseTypeController extends BaseController {
      */
     @RequestMapping("/add")
     public String add(TCourseType courseType, String cparentcode) {
+    	System.out.println("asfaasfasdaasf==="+cparentcode);
         if (!isUUID(courseType.getUparentid())) {
             courseType.setUparentid(null);
             courseType.setCcode((courseType.getCcode() + "|").toUpperCase());

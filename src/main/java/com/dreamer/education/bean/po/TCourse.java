@@ -5,11 +5,10 @@ import java.util.Date;
 
 import com.dreamer.education.annotation.TableMapper;
 
-/**
- * 实体类【课程】
- * @since 2013-10-20 下午12:15:26
- * @author broken_xie
- */
+/*
+* @author Owen
+* @version 创建时间：2013年10月28日 下午2:44:49 
+*/ 
 @TableMapper(name = "t_course")
 public class TCourse implements Serializable {
     
