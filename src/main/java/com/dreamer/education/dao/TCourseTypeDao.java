@@ -30,7 +30,7 @@ public class TCourseTypeDao extends BaseDao<TCourseType> {
      * @author broken_xie
      */
     public List<AutoComplete> findForAutoComplete() {
-        String sql = "select uuid as value, cname as label, ilevel, ccode from t_course_type where cstatus <> '0' order by ccode";
+        String sql = "select uuid as value, cname as label, ilevel, ccode, cpinyin as pinyin from t_course_type where cstatus <> '0' order by ccode";
         return getJdbcTemplate().query(sql, new BeanPropertyRowMapper<AutoComplete>(AutoComplete.class));
     }
     

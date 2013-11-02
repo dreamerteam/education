@@ -22,6 +22,6 @@
 	<iframe name="mainFrame" id="mainFrame" src="" frameborder="0" width="100%" scrolling="auto"></iframe>
 </div>
 </body>
-<script type="text/javascript" src="${contextPath }/common/jquery/jquery.js" ></script>
+<script type="text/javascript" src="${contextPath }/common/jquery/jquery-1.8.3.js" ></script>
 <script type="text/javascript" src="${contextPath }/main/js/index.js" ></script>
 </html>

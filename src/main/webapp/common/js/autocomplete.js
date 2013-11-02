@@ -36,7 +36,7 @@ function standard(obj, items, valueObj, ilevelObj, parentcodeObj) {
 		source : function(request, response) {
 			var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
 			response($.grep(items, function(value) {
-				return matcher.test(value.value) || (value.pinyin && matcher.test(value.pinyin));
+				return matcher.test(value.label) || (value.pinyin && matcher.test(value.pinyin));
 			}));
 		},
 		select : function(event, ui) {
@@ -77,6 +77,7 @@ $.widget("dreamer.autocomplete", $.ui.autocomplete, {
 	},
 	
 	_change: function( event ) {
+		console.log(this._value());
 		if("" == this._value()){
 			this._trigger( "clear", event);
 		}

@@ -1,5 +1,6 @@
 package com.dreamer.education.service;
 
+import static com.dreamer.education.utils.PinyinUtils.getPinYin;
 import static com.dreamer.education.utils.StringUtils.getUUID;
 
 import java.util.Date;
@@ -32,6 +33,7 @@ public class TCourseTypeService {
     public void add(TCourseType courseType) {
         courseType.setUuid(getUUID());
         courseType.setCstatus("1");
+        courseType.setCpinyin(getPinYin(courseType.getCname()));
         courseType.setDcreate(new Date());
         courseType.setDupdate(courseType.getDcreate());
         courseType.setUuserid(getUUID());
@@ -47,6 +49,7 @@ public class TCourseTypeService {
         TCourseType ct = courseTyperDao.findByUuid(courseType.getUuid());
         ct.setCcode(courseType.getCcode());
         ct.setCname(courseType.getCname());
+        courseType.setCpinyin(getPinYin(courseType.getCname()));
         ct.setIlevel(courseType.getIlevel());
         ct.setUparentid(courseType.getUparentid());
         ct.setDupdate(new Date());

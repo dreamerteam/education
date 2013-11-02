@@ -91,7 +91,7 @@ $.widget( "ui.autocomplete", {
 				suppressKeyPressRepeat = false;
 				var keyCode = $.ui.keyCode;
 				switch( event.keyCode ) {
-				case keyCode.PAGE_UP:
+				/*case keyCode.PAGE_UP:
 					suppressKeyPress = true;
 					this._move( "previousPage", event );
 					break;
@@ -106,7 +106,7 @@ $.widget( "ui.autocomplete", {
 				case keyCode.DOWN:
 					suppressKeyPress = true;
 					this._keyEvent( "next", event );
-					break;
+					break;*/
 				case keyCode.ENTER:
 				case keyCode.NUMPAD_ENTER:
 					// when menu is open and has focus

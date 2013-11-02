@@ -23,6 +23,9 @@ public class AutoComplete implements Serializable {
     /** 代码 */
     private String ccode;
     
+    /** 拼音 */
+    private String pinyin;
+    
     /**
      * 获取 标签值
      * @return label
@@ -85,6 +88,22 @@ public class AutoComplete implements Serializable {
      */
     public void setCcode(String ccode) {
         this.ccode = ccode;
+    }
+    
+    /**
+     * 获取 拼音
+     * @return pinyin
+     */
+    public String getPinyin() {
+        return pinyin;
+    }
+    
+    /**
+     * 设置 拼音
+     * @param pinyin 拼音
+     */
+    public void setPinyin(String pinyin) {
+        this.pinyin = pinyin;
     }
     
 }

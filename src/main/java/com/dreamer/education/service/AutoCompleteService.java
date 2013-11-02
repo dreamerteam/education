@@ -29,7 +29,7 @@ public class AutoCompleteService {
         String data = "";
         switch (type) {
             case "courseType": // 获取课程类型
-                data = "var " + type + " = " + gson.toJson(courseTypeDao.findForAutoComplete()) + ";";
+                data = gson.toJson(courseTypeDao.findForAutoComplete());
                 break;
             
             default:

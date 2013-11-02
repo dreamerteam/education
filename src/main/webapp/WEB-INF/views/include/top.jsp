@@ -12,7 +12,10 @@
 <body>
 <div class="top_info">
 	<p class="lead">
-		<label class="ib">梦想家</label> <label class="ib pull-right">当前时间：<span id="time"></span></label>
+		<label class="ib">梦想家</label>
+		<label class="ib pull-right">当前时间：<span id="time"></span><br>
+			<a href="${contextPath }/logout"> 退出 </a>
+		</label>
 	</p>
 </div>
 <div class="navbar navbar-static-top">
@@ -30,7 +33,7 @@
 	</div>
 </div>
 </body>
-<script type="text/javascript" src="${contextPath }/common/jquery/jquery.js" ></script>
+<script type="text/javascript" src="${contextPath }/common/jquery/jquery-1.8.3.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/bootstrap/js/html5shiv.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/js/date.handler.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/js/function.js" ></script>

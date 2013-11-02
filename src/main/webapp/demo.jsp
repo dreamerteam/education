@@ -15,7 +15,7 @@
 <input id="tags"/>
 <input type="checkbox" value="sssssss" id="check" checked="checked" />
 </body>
-<script type="text/javascript" src="${contextPath }/common/jquery.js" ></script>
+<script type="text/javascript" src="${contextPath }/common/jquery/jquery-1.8.3.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/jquery/jquery-ui/jquery.ui.core.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/jquery/jquery-ui/jquery.ui.widget.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/jquery/jquery-ui/jquery.ui.position.js" ></script>
@@ -28,6 +28,10 @@
 <script type="text/javascript" src="${contextPath}/autoComplete/courseType" ></script>
 <script type="text/javascript">
 $(function() {
+	$.post("${contextPath}/demo/test2",function(data){
+		console.log(data);
+		alert(data.clogin);
+	});
 	$("#check").removeAttr("checked");
 	$("#check").attr("checked","checked");
 	

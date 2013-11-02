@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -40,12 +39,12 @@ public class CaptchaController extends BaseController {
      * @throws IOException
      * @author broken_xie
      */
-    @RequestMapping("/captcha/{time}")
+    @RequestMapping("/captcha")
     @ResponseBody
-    public String captcha(@PathVariable(value = "time") String time, HttpServletResponse response, HttpSession session) throws IOException {
+    public String captcha(HttpServletResponse response, HttpSession session) throws IOException {
         Properties properties = new Properties();
-        properties.setProperty(Constants.KAPTCHA_IMAGE_WIDTH, "100");
-        properties.setProperty(Constants.KAPTCHA_IMAGE_HEIGHT, "40");
+        properties.setProperty(Constants.KAPTCHA_IMAGE_WIDTH, "150");
+        properties.setProperty(Constants.KAPTCHA_IMAGE_HEIGHT, "35");
         properties.setProperty(Constants.KAPTCHA_BORDER, "no");
         properties.setProperty(Constants.KAPTCHA_BORDER_COLOR, "105,179,90");
         properties.setProperty(Constants.KAPTCHA_TEXTPRODUCER_FONT_COLOR, "red");
@@ -57,7 +56,7 @@ public class CaptchaController extends BaseController {
         BufferedImage bi = captchaProducer.createImage(captcha);
         ServletOutputStream os = response.getOutputStream();
         ImageIO.write(bi, "jpg", os);
-        session.setAttribute(time, captcha);
+        session.setAttribute(Constants.KAPTCHA_SESSION_KEY, captcha);
         os.flush();
         os.close();
         response.flushBuffer();

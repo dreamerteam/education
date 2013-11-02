@@ -3,11 +3,14 @@ package com.dreamer.education.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dreamer.education.bean.po.TCourseType;
+import com.dreamer.education.bean.po.TUser;
+import com.dreamer.education.dao.TUserDao;
 import com.google.gson.Gson;
 
 /**
@@ -18,6 +21,15 @@ import com.google.gson.Gson;
 @Controller
 @RequestMapping("/demo")
 public class DemoController {
+    
+    @Autowired
+    private TUserDao userDao;
+    
+    @RequestMapping("/test2")
+    @ResponseBody
+    public TUser test2(){
+        return userDao.findByClogin("manager");
+    }
     
     @RequestMapping("/test")
     @ResponseBody

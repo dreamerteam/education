@@ -30,6 +30,6 @@ public class AutoCompleteController extends BaseController {
     @RequestMapping("/{type}")
     @ResponseBody
     public String getData(@PathVariable("type") String type) {
-        return autoCompleteService.getData(type);
+        return "var " + type + " = " + autoCompleteService.getData(type) + ";";
     }
 }

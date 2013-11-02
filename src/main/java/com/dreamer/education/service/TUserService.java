@@ -1,6 +1,10 @@
 package com.dreamer.education.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.dreamer.education.bean.po.TUser;
+import com.dreamer.education.dao.TUserDao;
 
 /**
  * 用户业务访问接口
@@ -9,18 +13,18 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TUserService {
-    //
-    // /** 用户数据访问接口 */
-    // @Autowired
-    // private TUserRep userRep;
-    //
-    // /**
-    // * 根据登录名获取用户信息
-    // * @param clogin 登录名
-    // * @return
-    // * @author broken_xie
-    // */
-    // public TUser findByClogin(String clogin) {
-    // return userRep.findByClogin(clogin);
-    // }
+    
+    /** 用户数据访问接口 */
+    @Autowired
+    private TUserDao userDao;
+    
+    /**
+     * 根据登录名获取用户信息
+     * @param clogin 登录名
+     * @return
+     * @author broken_xie
+     */
+    public TUser findByClogin(String clogin) {
+        return userDao.findByClogin(clogin);
+    }
 }

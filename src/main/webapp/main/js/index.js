@@ -19,7 +19,7 @@ $(function(){
  * @author broken_xie
  **/
 function setHeight(height, topHeight){
-	var h = (height - topHeight) + "px";
+	var h = (height - topHeight - 50) + "px";
 	$("#leftFrame").attr("height", h);
 	$("#mainFrame").attr("height", h);
 }

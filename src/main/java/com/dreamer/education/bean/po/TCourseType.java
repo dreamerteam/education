@@ -43,6 +43,9 @@ public class TCourseType implements Serializable {
     /** 主键ID */
     private String uuid;
     
+    /** 拼音 */
+    private String cpinyin;
+    
     /**
      * 获取 名称
      * @return cname
@@ -185,6 +188,22 @@ public class TCourseType implements Serializable {
      */
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+    
+    /**
+     * 获取 拼音
+     * @return cpinyin
+     */
+    public String getCpinyin() {
+        return cpinyin;
+    }
+    
+    /**
+     * 设置 拼音
+     * @param cpinyin 拼音
+     */
+    public void setCpinyin(String cpinyin) {
+        this.cpinyin = cpinyin;
     }
     
 }
