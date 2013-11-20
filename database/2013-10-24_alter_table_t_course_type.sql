@@ -3,3 +3,17 @@ ALTER TABLE t_course_type ADD cstatus VARCHAR(1) NOT NULL; -- 状态【0：删�
 
 -- 2013-10-28
 ALTER TABLE t_course_type ADD cpinyin VARCHAR(100) NULL; -- 拼音
+
+-- 2013-11-4
+ALTER TABLE t_course MODIFY COLUMN cdescription VARCHAR(500)
+
+-- 2013-11-4
+ALTER TABLE t_student MODIFY COLUMN cname VARCHAR(36) NULL;
+ALTER TABLE t_student MODIFY COLUMN csex VARCHAR(2) NULL;
+
+-- 2013-11-18
+ALTER TABLE t_resource ADD cfree VARCHAR(1) NOT NULL; -- 免费【0:不免费；1：免费】
+
+-- 2013-11-19
+ALTER TABLE t_lession CHANGE dlesson dlession datetime NOT NULL;
+ALTER TABLE t_course ADD copen VARCHAR(1) NULL; -- 是否开课【0：待开课；1：开课】

@@ -49,6 +49,25 @@ public class TResource implements Serializable {
     /** 操作用户ID */
     private String uuserid;
     
+    /** 免费【0:不免费；1：免费】 */
+    private String cfree;
+    
+    /**
+     * 获取 免费【0:不免费；1：免费】
+     * @return cfree
+     */
+    public String getCfree() {
+        return cfree;
+    }
+    
+    /**
+     * 设置 免费【0:不免费；1：免费】
+     * @param cfree 免费【0:不免费；1：免费】
+     */
+    public void setCfree(String cfree) {
+        this.cfree = cfree;
+    }
+    
     /**
      * 获取 主键ID
      * @return uuid

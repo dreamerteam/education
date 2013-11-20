@@ -26,8 +26,20 @@
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 	
+	<!-- url请求拦截器 -->
+  <!-- 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
+	<bean id="handlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+		<property name="interceptors">
+			<bean class="com.dreamer.education.handler.DreamerHandler" />
+		</property>
+	</bean> -->
+	
+	<mvc:interceptors>  
+        <bean class="com.dreamer.education.handler.DreamerHandler" />  
+    </mvc:interceptors>   
+	
 	<!-- 扫描spring注解组件 -->
-	<context:component-scan base-package="com.dreamer.education"/>
+	<context:component-scan base-package="com.dreamer.education" />
 	
 	<!-- 视图控制器 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
@@ -39,7 +51,9 @@
 	<!-- 静态资源映射 -->
 	<mvc:resources mapping="/favicon.ico" location="/common/images/favicon.ico" cache-period="0"/>
 	<mvc:resources mapping="/common/**" location="/common/" cache-period="0"/>
+	<mvc:resources mapping="/file/**" location="/file/" cache-period="0"/>
 	<mvc:resources mapping="/main/**" location="/main/" cache-period="0"/>
+	<mvc:resources mapping="/web/**" location="/web/" cache-period="0"/>
 	
 	<!-- 异常处理器 -->
 	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
@@ -51,14 +65,6 @@
 		</property>
 	</bean>
 	
-	<!-- url请求拦截器 -->
-	<bean id="handlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
-		<property name="interceptors">
-			<bean class="com.dreamer.education.handler.DreamerHandler"/>
-		</property>
-	</bean>
-  	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
-
 	<!-- 分页处理器 -->
 	<!-- <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="customArgumentResolvers">
@@ -69,7 +75,7 @@
 	</bean> -->
 	
 	<!-- 事务驱动 -->
-	<tx:annotation-driven/>
+	<!-- <tx:annotation-driven proxy-target-class="true"/> -->
 
 	<!-- 文件上传控制器 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >

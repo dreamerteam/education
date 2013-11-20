@@ -40,7 +40,9 @@ public class CommonTest {
 //        System.out.println(chs);  
 //        System.out.println(getPinYin(chs));  
 //        System.out.println(Encryption.MD5("1"));
-        System.out.println(StringUtils.getUUID());
+//        System.out.println(StringUtils.getUUID());
+        System.out.println("/manage/".matches("/manage/.*"));
+        System.out.println("/page/manage/".matches("/page/manage/.*"));
     }  
     
 }

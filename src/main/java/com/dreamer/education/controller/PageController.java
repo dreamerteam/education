@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author broken_xie
  */
 @Controller
-@RequestMapping("/page")
 public class PageController extends BaseController {
     
     /**
@@ -19,7 +18,7 @@ public class PageController extends BaseController {
      * @return
      * @author broken_xie
      */
-    @RequestMapping("/{page}")
+    @RequestMapping("/page/{page}")
     public String pageOne(@PathVariable("page") String page) {
         return page;
     }
@@ -31,7 +30,7 @@ public class PageController extends BaseController {
      * @return
      * @author broken_xie
      */
-    @RequestMapping("/{dir}/{page}")
+    @RequestMapping("/page/{dir}/{page}")
     public String pageTwo(@PathVariable("dir") String dir, @PathVariable("page") String page) {
         return dir + "/" + page;
     }
@@ -44,8 +43,22 @@ public class PageController extends BaseController {
      * @return
      * @author broken_xie
      */
-    @RequestMapping("/{dir1}/{dir2}/{page}")
+    @RequestMapping("/page/{dir1}/{dir2}/{page}")
     public String pageThree(@PathVariable("dir1") String dir1, @PathVariable("dir2") String dir2, @PathVariable("page") String page) {
         return dir1 + "/" + dir2 + "/" + page;
+    }
+    
+    /**
+     * 跳转到指定的页面
+     * @param dir1 文件夹
+     * @param dir2 文件夹
+     * @param dir3 文件夹
+     * @param page 页面路径
+     * @return
+     * @author broken_xie
+     */
+    @RequestMapping("/page/{dir1}/{dir2}/{dir3}/{page}")
+    public String pageFour(@PathVariable("dir1") String dir1, @PathVariable("dir2") String dir2, @PathVariable("dir3") String dir3, @PathVariable("page") String page) {
+        return dir1 + "/" + dir2 + "/" + dir3 + "/" + page;
     }
 }

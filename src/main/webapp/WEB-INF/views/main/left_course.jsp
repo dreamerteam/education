@@ -15,15 +15,20 @@
 		<p>课程类型管理</p>
 		<div style="padding: 5px 3px; overflow: hidden;">
 			<ul class="nav nav-list">
-				<li class="pagination-centered active"><a href="javascript:reloadMain('${contextPath}/courseType/list')">列表</a></li>
-				<li class="pagination-centered "><a href="javascript:reloadMain('${contextPath}/page/main/courseType/add')">新增</a></li>
+				<li class="pagination-centered"><a href="javascript:reloadMain('${contextPath}/courseType/list')">列表</a></li>
+				<li class="pagination-centered"><a href="javascript:reloadMain('${contextPath}/page/main/courseType/add')">新增</a></li>
 			</ul>
 		</div>
 		<p>课程管理</p>
 		<div style="padding: 5px 3px; overflow: hidden;">
 			<ul class="nav nav-list">
-				<li class="pagination-centered active"><a href="#">列表</a></li>
-				<li class="pagination-centered "><a href="#">新增</a></li>
+				<li class="pagination-centered"><a href="javascript:reloadMain('${contextPath}/course/list')">课程列表</a></li>
+				<li class="pagination-centered"><a href="javascript:reloadMain('${contextPath}/course/lessionList')">开课列表</a></li>
+				<li class="pagination-centered"><a href="javascript:reloadMain('${contextPath}/course/list?caudit=0')">未审核</a></li>
+				<li class="pagination-centered"><a href="javascript:reloadMain('${contextPath}/course/list?caudit=10')">待审核</a></li>
+				<li class="pagination-centered"><a href="javascript:reloadMain('${contextPath}/course/list?caudit=20')">通过审核</a></li>
+				<li class="pagination-centered"><a href="javascript:reloadMain('${contextPath}/course/list?caudit=30')">未通过审核</a></li>
+				<li class="pagination-centered"><a href="javascript:reloadMain('${contextPath}/page/main/course/add')">新增</a></li>
 			</ul>
 		</div>
 	</div>

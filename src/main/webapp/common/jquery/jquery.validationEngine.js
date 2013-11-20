@@ -14,7 +14,11 @@
 
 	"use strict";
 
-	var methods = {
+	var methods = /**
+	 * @author Administrator
+	 *
+	 */
+	{
 
 		/**
 		* Kind of the constructor, called before any action
@@ -609,6 +613,12 @@
 					case "maxSize":
 						errorMsg = methods._getErrorMessage(form, field, rules[i], rules, i, options, methods._maxSize);
 						break;
+					case "minSize3":
+						errorMsg = methods._getErrorMessage(form, field, rules[i], rules, i, options, methods._minSize3);
+						break;
+					case "maxSize3":
+						errorMsg = methods._getErrorMessage(form, field, rules[i], rules, i, options, methods._maxSize3);
+						break;
 					case "min":
 						errorMsg = methods._getErrorMessage(form, field, rules[i], rules, i, options, methods._min);
 						break;
@@ -1059,6 +1069,44 @@
 				return options.allrules.equals.alertText;
 		},
 		/**
+		 * Check the maximum size (in characters)
+		 *
+		 * @param {jqObject} field
+		 * @param {Array[String]} rules
+		 * @param {int} i rules index
+		 * @param {Map}
+		 *            user options
+		 * @return an error string if validation failed
+		 */
+		_maxSize: function(field, rules, i, options) {
+			var max = rules[i + 1];
+			var len = field.val().length;
+			
+			if (len > max) {
+				var rule = options.allrules.maxSize;
+				return rule.alertText + max + rule.alertText2;
+			}
+		},
+		/**
+		 * Check the minimum size (in characters)
+		 *
+		 * @param {jqObject} field
+		 * @param {Array[String]} rules
+		 * @param {int} i rules index
+		 * @param {Map}
+		 *            user options
+		 * @return an error string if validation failed
+		 */
+		_minSize: function(field, rules, i, options) {
+			var min = rules[i + 1];
+			var len = field.val().length;
+			
+			if (len < min) {
+				var rule = options.allrules.minSize;
+				return rule.alertText + min + rule.alertText2;
+			}
+		},
+		/**
 		* Check the maximum size (in characters)
 		*
 		* @param {jqObject} field
@@ -1068,14 +1116,21 @@
 		*            user options
 		* @return an error string if validation failed
 		*/
-		_maxSize: function(field, rules, i, options) {
+		_maxSize3: function(field, rules, i, options) {
 			var max = rules[i + 1];
-			var len = field.val().length;
+			var len = methods._bytesLength3(field.val());
 
 			if (len > max) {
-				var rule = options.allrules.maxSize;
+				var rule = options.allrules.maxSize3;
 				return rule.alertText + max + rule.alertText2;
 			}
+		},
+		/**
+		 * 字节长度【兼容oracle】
+		 */
+		_bytesLength3: function(val) {
+			var reg = /[^\x00-\xff]/g;
+			return val.replace(reg, "***").length;
 		},
 		/**
 		* Check the minimum size (in characters)
@@ -1087,12 +1142,12 @@
 		*            user options
 		* @return an error string if validation failed
 		*/
-		_minSize: function(field, rules, i, options) {
+		_minSize3: function(field, rules, i, options) {
 			var min = rules[i + 1];
-			var len = field.val().length;
+			var len = methods._bytesLength3(field.val());
 
 			if (len < min) {
-				var rule = options.allrules.minSize;
+				var rule = options.allrules.minSize3;
 				return rule.alertText + min + rule.alertText2;
 			}
 		},

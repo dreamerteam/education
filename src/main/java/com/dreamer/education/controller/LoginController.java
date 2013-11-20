@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.dreamer.education.bean.co.SessionContainer;
 import com.dreamer.education.bean.po.TUser;
 import com.dreamer.education.bean.ro.LoginRequest;
-import com.dreamer.education.exception.DreamerException;
 import com.dreamer.education.service.TManagerService;
 import com.dreamer.education.service.TStudentService;
 import com.dreamer.education.service.TTeacherService;
@@ -31,6 +30,7 @@ import com.google.code.kaptcha.Constants;
 import com.google.gson.Gson;
 
 @Controller
+@RequestMapping("/manage")
 public class LoginController extends BaseController {
     
     /** 用户业务访问接口 */
@@ -59,7 +59,9 @@ public class LoginController extends BaseController {
      * @author broken_xie
      */
     @RequestMapping("/login")
-    public String login(LoginRequest loginReq, HttpSession session, Model model, HttpServletResponse response) {
+    @ResponseBody
+    public Map<String, Object> login(LoginRequest loginReq, HttpSession session, Model model, HttpServletResponse response) {
+        Map<String, Object> map = new HashMap<String, Object>();
         try {
             SessionContainer sessionContainer = new SessionContainer();
             TUser user = userService.findByClogin(loginReq.getClogin());
@@ -100,10 +102,24 @@ public class LoginController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
             logger.error(e);
-            model.addAttribute(new DreamerException("登录失败，请稍后再试！"));
-            return "common/error";
+            map.put("result", "failure");
+            map.put("error", "登录失败，请稍后再试！");
+            return map;
         }
-        return "main/index";
+        map.put("result", "success");
+        return map;
+    }
+    
+    /**
+     * 退出登录
+     * @return
+     * @author broken_xie
+     */
+    @RequestMapping("/logout")
+    @ResponseBody
+    public String logout() {
+        getSession().invalidate();
+        return null;
     }
     
     /**
@@ -112,7 +128,7 @@ public class LoginController extends BaseController {
      * @return
      * @author broken_xie
      */
-    @RequestMapping(value = "/login/getCookies")
+    @RequestMapping("/login/getCookies")
     @ResponseBody
     public Map<String, Object> getCookies(HttpServletRequest request) {
         Map<String, Object> map = new HashMap<String, Object>();

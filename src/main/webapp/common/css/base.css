@@ -50,3 +50,24 @@ body {
 .of-auto{
 	overflow: auto;
 }
+.of-hidden{
+	overflow: hidden;
+}
+
+.display-none{
+	display: none;
+}
+
+#文字
+.ti2{
+	text-indent: 2em;
+}
+
+#高度
+.h100{
+	height: 100px;
+}
+
+.h180{
+	height: 180px;
+}

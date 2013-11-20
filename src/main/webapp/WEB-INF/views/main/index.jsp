@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>梦想家</title>
+<title>万花</title>
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/bootstrap/css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/css/index.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/css/base.css" />

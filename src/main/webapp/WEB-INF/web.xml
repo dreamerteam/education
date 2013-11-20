@@ -47,4 +47,11 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+
+	<jsp-config>
+		<taglib>
+			<taglib-uri>http://localhost/education</taglib-uri>
+			<taglib-location>/WEB-INF/education.tld</taglib-location>
+		</taglib>
+	</jsp-config>
 </web-app>

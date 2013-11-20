@@ -52,6 +52,25 @@ public class TCourse implements Serializable {
     /** 操作用户ID */
     private String uuserid;
     
+    /** 是否开课【0：待开课；1：开课】 */
+    private String copen;
+    
+    /**
+     * 获取 是否开课【0：待开课；1：开课】
+     * @return copen
+     */
+    public String getCopen() {
+        return copen;
+    }
+    
+    /**
+     * 设置 是否开课【0：待开课；1：开课】
+     * @param copen 是否开课【0：待开课；1：开课】
+     */
+    public void setCopen(String copen) {
+        this.copen = copen;
+    }
+    
     /**
      * 获取 主键ID
      * @return uuid

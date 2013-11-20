@@ -49,7 +49,7 @@ public class CourseTypeController extends BaseController {
     
     /**
      * 校验课程类型
-     * @param courseType 课程类型
+     * @param validate 课程类型校验类
      * @return
      * @author broken_xie
      */
@@ -58,11 +58,11 @@ public class CourseTypeController extends BaseController {
     public String validate(CourseTypeVlidate validate) {
         /* 校验课程类型名称是否已经存在 */
         Object[][] result = new Object[2][3];
-        result[0][0] = "cname";
+        boolean isCnameExist = true;
         switch (validate.getCoperate()) {
             case "add":
                 result[0][0] = "cname";
-                boolean isCnameExist = courseTypeService.isCnameExist(validate.getCname());
+                isCnameExist = courseTypeService.isCnameExist(validate.getCname());
                 result[0][1] = !isCnameExist;
                 if (isCnameExist) result[0][2] = "* 课程类型名称已存在，请重新填写！";
                 if (isEmpty(validate.getUparentid())) { // 顶级课程类型需要判断代码唯一性，其他不需要判断

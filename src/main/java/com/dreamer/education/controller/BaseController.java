@@ -1,10 +1,18 @@
 package com.dreamer.education.controller;
 
+import static com.dreamer.education.utils.DateUtils.dateTimeString;
+import static com.dreamer.education.utils.DateUtils.toDateTime;
+
+import java.beans.PropertyEditorSupport;
+import java.util.Date;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -93,6 +101,36 @@ public class BaseController {
      */
     protected SessionContainer getSessionContainer() {
         return (SessionContainer) getSession().getAttribute(SESSION_CONTAINER_KEY);
+    }
+    
+    /**
+     * 重定向到指定的地址
+     * @param url 地址
+     * @return
+     * @author broken_xie
+     */
+    protected String redirect(String url) {
+        return "redirect:" + url;
+    }
+    
+    /**
+     * 日期解析
+     * @param binder
+     * @author broken_xie
+     */
+    @InitBinder
+    public void binder(WebDataBinder binder) {
+        binder.registerCustomEditor(Date.class, new PropertyEditorSupport() {
+            
+            public void setAsText(String value) {
+                setValue(toDateTime(value));
+            }
+            
+            public String getAsText() {
+                return dateTimeString((Date) getValue());
+            }
+            
+        });
     }
     
 }

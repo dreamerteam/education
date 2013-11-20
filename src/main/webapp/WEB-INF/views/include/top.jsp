@@ -12,23 +12,27 @@
 <body>
 <div class="top_info">
 	<p class="lead">
-		<label class="ib">梦想家</label>
+		<label class="ib">万花</label>
 		<label class="ib pull-right">当前时间：<span id="time"></span><br>
-			<a href="${contextPath }/logout"> 退出 </a>
+			<a href="javascript:logout()">【退出】 </a>
 		</label>
 	</p>
 </div>
 <div class="navbar navbar-static-top">
 	<div class="navbar-inner">
-		<a class="brand" href="javascript:void(0)">梦想家</a>
+		<a class="brand" href="javascript:void(0)">万花</a>
 		<ul class="nav">
 			<li class="active"><a href="javascript:reloadLeft('${contextPath }/page/main/left_home')">首页</a></li>
+			<li class="divider-vertical"></li>
+			<li><a href="javascript:reloadLeft('${contextPath }/page/main/left_personal')">个人中心</a></li>
 			<li class="divider-vertical"></li>
 			<li><a href="javascript:reloadLeft('${contextPath }/page/main/left_course')">课程管理</a></li>
 			<li class="divider-vertical"></li>
 			<li><a href="javascript:reloadLeft('${contextPath }/page/main/left_teacher')">教师管理</a></li>
 			<li class="divider-vertical"></li>
 			<li><a href="javascript:reloadLeft('${contextPath }/page/main/left_student')">学生管理</a></li>
+			<li class="divider-vertical"></li>
+			<li><a href="javascript:reloadLeft('${contextPath }/page/main/left_resource')">资源管理</a></li>
 		</ul>
 	</div>
 </div>
@@ -40,6 +44,11 @@
 <script type="text/javascript">
 var contextPath = "${contextPath}";
 var li = $(".nav li");
+function logout(){
+	$.post(contextPath + "/manage/logout",function(){
+		parent.document.location.href=contextPath+"/manage";
+	});
+}
 </script>
 <script type="text/javascript" src="${contextPath }/main/js/top.js" ></script>
 </html>

@@ -23,7 +23,7 @@ public class TCourseTypeService {
     
     /** 课程类型数据访问接口 */
     @Autowired
-    private TCourseTypeDao courseTyperDao;
+    private TCourseTypeDao courseTypeDao;
     
     /**
      * 新增课程类型
@@ -37,7 +37,7 @@ public class TCourseTypeService {
         courseType.setDcreate(new Date());
         courseType.setDupdate(courseType.getDcreate());
         courseType.setUuserid(getUUID());
-        courseTyperDao.save(courseType);
+        courseTypeDao.save(courseType);
     }
     
     /**
@@ -46,7 +46,7 @@ public class TCourseTypeService {
      * @author broken_xie
      */
     public void update(TCourseType courseType) {
-        TCourseType ct = courseTyperDao.findByUuid(courseType.getUuid());
+        TCourseType ct = courseTypeDao.findByUuid(courseType.getUuid());
         ct.setCcode(courseType.getCcode());
         ct.setCname(courseType.getCname());
         courseType.setCpinyin(getPinYin(courseType.getCname()));
@@ -54,7 +54,7 @@ public class TCourseTypeService {
         ct.setUparentid(courseType.getUparentid());
         ct.setDupdate(new Date());
         ct.setUuserid(getUUID());
-        courseTyperDao.update(ct);
+        courseTypeDao.update(ct);
     }
     
     /**
@@ -63,7 +63,7 @@ public class TCourseTypeService {
      * @author broken_xie
      */
     public void delete(String ccode) {
-        courseTyperDao.delete(ccode);
+        courseTypeDao.delete(ccode);
     }
     
     /**
@@ -73,7 +73,7 @@ public class TCourseTypeService {
      * @author broken_xie
      */
     public boolean isCnameExist(String cname) {
-        return 0 == courseTyperDao.findByCname(cname).size() ? false : true;
+        return 0 == courseTypeDao.findByCname(cname).size() ? false : true;
     }
     
     /**
@@ -83,7 +83,7 @@ public class TCourseTypeService {
      * @author broken_xie
      */
     public boolean isCcodeExist(String ccode) {
-        return 0 == courseTyperDao.findByCcode(ccode).size() ? false : true;
+        return 0 == courseTypeDao.findByCcode(ccode).size() ? false : true;
     }
     
     /**
@@ -95,7 +95,7 @@ public class TCourseTypeService {
      */
     public Page<TCourseType> findPageByQuery(String cname, int currentPage) {
         Page<TCourseType> page = new Page<TCourseType>(currentPage);
-        return courseTyperDao.findPageByQuery(cname, page);
+        return courseTypeDao.findPageByQuery(cname, page);
     }
     
     /**
@@ -105,7 +105,7 @@ public class TCourseTypeService {
      * @author broken_xie
      */
     public CourseTypeResponse findForView(String uuid) {
-        CourseTypeResponse response = courseTyperDao.findForView(uuid);
+        CourseTypeResponse response = courseTypeDao.findForView(uuid);
         String[] codes = response.getCcode().split("\\|");
         response.setCcode(codes[codes.length - 1]);
         return response;

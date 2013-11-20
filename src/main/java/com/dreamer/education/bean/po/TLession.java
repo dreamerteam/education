@@ -26,7 +26,7 @@ public class TLession implements Serializable {
     private Date dcreate;
     
     /** 上课时间 */
-    private Date dlesson;
+    private Date dlession;
     
     /** 更新时间 */
     private Date dupdate;
@@ -93,18 +93,18 @@ public class TLession implements Serializable {
     
     /**
      * 获取 上课时间
-     * @return dlesson
+     * @return dlession
      */
-    public Date getDlesson() {
-        return dlesson;
+    public Date getDlession() {
+        return dlession;
     }
     
     /**
      * 设置 上课时间
-     * @param dlesson 上课时间
+     * @param dlession 上课时间
      */
-    public void setDlesson(Date dlesson) {
-        this.dlesson = dlesson;
+    public void setDlession(Date dlession) {
+        this.dlession = dlession;
     }
     
     /**
