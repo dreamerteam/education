@@ -7,7 +7,7 @@ contextPath = typeof (contextPath) == "undefined" ? "" : contextPath;
  **/
 function view(){
 	if(check.verifyCheck()){
-		window.location.href = contextPath + '/resource/view?uuid=' + check.getCheckValue().uuid;
+		window.location.href = contextPath + '/manage/resource/view?uuid=' + check.getCheckValue().uuid;
 	}
 }
 
@@ -28,7 +28,7 @@ function free(f){
 			var params = {};
 			params["uuid"] = uuid;
 			params["free"] = f;
-			$.post(contextPath + '/resource/free', params, function(data){
+			$.post(contextPath + '/manage/resource/free', params, function(data){
 				if("success" == data.result){
 					window.location.reload();
 				} else {

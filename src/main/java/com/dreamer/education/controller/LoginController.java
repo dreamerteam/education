@@ -29,8 +29,12 @@ import com.dreamer.education.service.TUserService;
 import com.google.code.kaptcha.Constants;
 import com.google.gson.Gson;
 
+/**
+ * 登录控制器
+ * @since 2013-11-21 下午1:41:51
+ * @author broken_xie
+ */
 @Controller
-@RequestMapping("/manage")
 public class LoginController extends BaseController {
     
     /** 用户业务访问接口 */

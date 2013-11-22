@@ -12,7 +12,9 @@
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/css/base.css" />
 </head>
 <body>
-<div id="page">
+<div class="container">
+	<!-- 导航条 -->
+	<jsp:include page="/WEB-INF/views/include/webtop.jsp"></jsp:include>
 	<div class="well">
 		<%-- <form action="${contextPath }/course/list" class="form-search" id="searchForm">
 			<label>课程名称：</label><input type="text" name="cname" id="cname" class="input-medium search-query">
@@ -30,7 +32,10 @@
 						<div class="thumbnail">
 							<p align="center"><a href="#"><img src="${contextPath }/common/images/logo.png" class="img-rounded h100"></a></p>
 							<p align="center"><c:out value="${course.cname }"/></p>
-							<p class="ti2"><c:out value="${e:cut(course.cdescription, 20) }"/></p>
+							<p style="text-indent: 2em;"><c:out value="${e:cut(course.cdescription, 20) }"/></p>
+							<c:if test="${not empty sessionScope.SESSION_CONTAINER_KEY and sessionScope.SESSION_CONTAINER_KEY.authority eq 'student'}">
+								<p align="center"><button type="button" class="btn btn-primary" onclick="collect('${course.uuid}')">收 藏</button></p>
+							</c:if>
 						</div>
 					</li>
 				</c:forEach>
@@ -43,4 +48,9 @@
 <script type="text/javascript" src="${contextPath }/common/jquery/jquery-1.8.3.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/bootstrap/js/bootstrap.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/bootstrap/js/html5shiv.js" ></script>
+<script type="text/javascript">
+var contextPath = "${contextPath}";
+$(".container").css("width",document.body.scrollWidth - 3 + "px");
+</script>
+<script type="text/javascript" src="${contextPath }/web/js/course.js" ></script>
 </html>

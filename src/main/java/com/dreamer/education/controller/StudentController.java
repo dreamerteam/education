@@ -14,7 +14,7 @@ import com.dreamer.education.service.TStudentService;
  * @author broken_xie
  */
 @Controller
-@RequestMapping("/student")
+@RequestMapping("/manage/student")
 public class StudentController extends BaseController {
     
     /** 学生信息业务访问接口 */
@@ -44,6 +44,6 @@ public class StudentController extends BaseController {
     @RequestMapping("/view")
     public String view(String uuid, Model model) {
         model.addAttribute("student", studentService.findForView(uuid));
-        return mainPage();
+        return "main/student/view";
     }
 }

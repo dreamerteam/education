@@ -19,7 +19,7 @@ function confirmPassword(field, rules, i, options){
  **/
 function view(){
 	if(check.verifyCheck()){
-		window.location.href = contextPath + '/teacher/view?uuid=' + check.getCheckValue();
+		window.location.href = contextPath + '/manage/teacher/view?uuid=' + check.getCheckValue();
 	}
 }
 
@@ -29,6 +29,6 @@ function view(){
  **/
 function edit(){
 	if(check.verifyCheck()){
-		window.location.href = contextPath + '/teacher/edit?uuid=' + check.getCheckValue();
+		window.location.href = contextPath + '/manage/teacher/edit?uuid=' + check.getCheckValue();
 	}
 }

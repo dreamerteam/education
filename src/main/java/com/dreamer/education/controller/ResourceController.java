@@ -29,7 +29,7 @@ import com.google.gson.Gson;
  * @author broken_xie
  */
 @Controller
-@RequestMapping("/resource")
+@RequestMapping("/manage/resource")
 public class ResourceController extends BaseController {
     
     /** 资源业务访问接口 */
@@ -105,7 +105,7 @@ public class ResourceController extends BaseController {
     @RequestMapping("/view")
     public String view(String uuid, Model model) {
         model.addAttribute("resource", resourceService.findForView(uuid));
-        return mainPage();
+        return "main/resource/view";
     }
     
     /**

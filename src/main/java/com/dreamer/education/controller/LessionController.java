@@ -32,7 +32,7 @@ public class LessionController extends BaseController {
      */
     @RequestMapping("/list")
     public String list(LessionQuery query, @RequestParam(defaultValue = "1") int currentPage, Model model) {
-        model.addAttribute("page", lessionService.findPageByQuery(query, currentPage));
+        model.addAttribute("page", lessionService.findPageByQuery(query, currentPage, getSessionContainer()));
         return "main/lession/list";
     }
     
@@ -46,7 +46,7 @@ public class LessionController extends BaseController {
      */
     @RequestMapping("/listNOpen")
     public String listNOpen(LessionQuery query, @RequestParam(defaultValue = "1") int currentPage, Model model) {
-        model.addAttribute("page", lessionService.findPageByQuery(query, currentPage));
+        model.addAttribute("page", lessionService.findPageByQuery(query, currentPage, getSessionContainer()));
         return "main/lession/list";
     }
 }

@@ -6,12 +6,12 @@ import java.util.Date;
 import com.dreamer.education.annotation.TableMapper;
 
 /**
- * 实体类【选课】
+ * 实体类【课程收藏】
  * @since 2013-10-20 下午12:24:52
  * @author broken_xie
  */
-@TableMapper(name = "t_lession_select")
-public class TLessionSelect implements Serializable {
+@TableMapper(name = "t_course_favorite")
+public class TCourseFavorite implements Serializable {
     
     /**  */
     private static final long serialVersionUID = -1993074147136593198L;

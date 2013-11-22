@@ -14,7 +14,7 @@
 <body>
 <div id="page">
 	<div class="well">
-		<form action="${contextPath }/student/list" class="form-search" id="searchForm">
+		<form action="${contextPath }/manage/student/list" class="form-search" id="searchForm">
 			<!-- <label>课程名称：</label><input type="text" name="cname" id="cname" class="input-medium search-query">
 			<button type="submit" class="btn btn-primary">查 找</button> -->
 		</form>

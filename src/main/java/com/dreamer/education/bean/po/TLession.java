@@ -25,8 +25,14 @@ public class TLession implements Serializable {
     /** 创建时间 */
     private Date dcreate;
     
-    /** 上课时间 */
-    private Date dlession;
+    /** 开课起始时间 */
+    private Date dbgnlession;
+    
+    /** 开课结束时间 */
+    private Date dendlession;
+    
+    /** 开课间隔时间【每天、周末、周一....】 */
+    private String cperiod;
     
     /** 更新时间 */
     private Date dupdate;
@@ -92,19 +98,51 @@ public class TLession implements Serializable {
     }
     
     /**
-     * 获取 上课时间
-     * @return dlession
+     * 获取 开课起始时间
+     * @return dbgnlession
      */
-    public Date getDlession() {
-        return dlession;
+    public Date getDbgnlession() {
+        return dbgnlession;
     }
     
     /**
-     * 设置 上课时间
-     * @param dlession 上课时间
+     * 设置 开课起始时间
+     * @param dbgnlession 开课起始时间
      */
-    public void setDlession(Date dlession) {
-        this.dlession = dlession;
+    public void setDbgnlession(Date dbgnlession) {
+        this.dbgnlession = dbgnlession;
+    }
+    
+    /**
+     * 获取 开课结束时间
+     * @return dendlession
+     */
+    public Date getDendlession() {
+        return dendlession;
+    }
+    
+    /**
+     * 设置 开课结束时间
+     * @param dendlession 开课结束时间
+     */
+    public void setDendlession(Date dendlession) {
+        this.dendlession = dendlession;
+    }
+    
+    /**
+     * 获取 开课间隔时间【每天、周末、周一....】
+     * @return cperiod
+     */
+    public String getCperiod() {
+        return cperiod;
+    }
+    
+    /**
+     * 设置 开课间隔时间【每天、周末、周一....】
+     * @param cperiod 开课间隔时间【每天、周末、周一....】
+     */
+    public void setCperiod(String cperiod) {
+        this.cperiod = cperiod;
     }
     
     /**

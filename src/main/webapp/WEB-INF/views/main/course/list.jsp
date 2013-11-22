@@ -16,8 +16,9 @@
 <body>
 <div id="page">
 	<div class="well">
-		<form action="${contextPath }/course/list" class="form-search" id="searchForm">
-			<label>课程名称：</label><input type="text" name="cname" id="cname" class="input-medium search-query">
+		<form action="${contextPath }/manage/course/list" class="form-search" id="searchForm">
+			<input type="hidden" name="caudit" id="caudit" value="${param.caudit }" />
+			<label>课程名称：</label><input type="text" name="cname" id="cname" class="input-medium search-query" value="${param.cname }">
 			<button type="submit" class="btn btn-primary">查 找</button>
 		</form>
 	</div>
@@ -84,9 +85,18 @@
 		<form action="" method="post" class="form-horizontal" id="openCourseForm">
 			<input type="hidden" name="uuid" id="uuid" />
 			<div class="control-group" >
-				<label class="control-label">开课时间：</label>
+				<label class="control-label">开课起始时间：</label>
 				<div class="controls">
-					<input type="text" name="dlession" id="dlession" placeholder="开课时间" class="form-control validate[required]"/>
+					<select name="cperiod" id="cperiod">
+						<e:option option="period"/>
+					</select>
+					<input type="text" name="dbgnlession" id="dbgnlession" placeholder="开课起始时间" class="form-control validate[required]"/>
+				</div>
+			</div>
+			<div class="control-group" >
+				<label class="control-label">开课结束时间：</label>
+				<div class="controls">
+					<input type="text" name="dendlession" id="dendlession" placeholder="开课结束时间" class="form-control validate[required]"/>
 				</div>
 			</div>
 		</form>
@@ -112,11 +122,26 @@
 <script type="text/javascript">
 var contextPath = "${contextPath}";
 var check;
+var dbgnlession = $("#dbgnlession");
+var dendlession = $("#dendlession");
 $(function(){
 	check = new InitCheck({lineSelected: false, multipleValue:["uuid", "cstatus", "open"]});
-	$("#dlession").datetimepicker({
+	dbgnlession.datetimepicker({
 		dateFormat: 'yy-mm-dd',
-	    timeFormat: 'HH:mm'}).attr("readonly","readonly");
+	    timeFormat: 'HH:mm',
+	    addSliderAccess: true,
+		sliderAccessArgs: { touchonly: false },
+		onSelect: function (selectedDateTime){
+			dendlession.datetimepicker('option', 'minDate', dbgnlession.datetimepicker('getDate') );
+		}
+	}).attr("readonly","readonly");
+	dendlession.datetimepicker({
+		dateFormat: 'yy-mm-dd',
+		timeFormat: '',
+		onSelect: function (selectedDateTime){
+			dbgnlession.datetimepicker('option', 'maxDate', dendlession.datetimepicker('getDate') );
+		}
+	}).attr("readonly","readonly");
 	$("#openCourseForm").validationEngine({
 		promptPosition : 'bottomRight',
 		ajaxFormValidation : false

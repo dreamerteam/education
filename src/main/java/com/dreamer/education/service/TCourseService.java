@@ -1,5 +1,7 @@
 package com.dreamer.education.service;
 
+import static com.dreamer.education.utils.DateUtils.toDate;
+import static com.dreamer.education.utils.DateUtils.toDateTime;
 import static com.dreamer.education.utils.StringUtils.getUUID;
 
 import java.util.Date;
@@ -14,6 +16,7 @@ import com.dreamer.education.bean.po.TCourse;
 import com.dreamer.education.bean.po.TLession;
 import com.dreamer.education.bean.qo.CourseQuery;
 import com.dreamer.education.bean.ro.CourseResponse;
+import com.dreamer.education.bean.ro.OpenCourseRequest;
 import com.dreamer.education.dao.TCourseDao;
 import com.dreamer.education.dao.TLessionDao;
 import com.dreamer.education.utils.Page;
@@ -45,6 +48,7 @@ public class TCourseService {
         course.setUuserid(sessionContainer.getUser().getUuid());
         course.setIhot(0);
         course.setCaudit("0");
+        course.setCopen("0");
         course.setDcreate(new Date());
         course.setDupdate(course.getDcreate());
         courseDao.save(course);
@@ -141,21 +145,23 @@ public class TCourseService {
     /**
      * 开课
      * @param uuid 课程uuid
-     * @param dlession 开课时间
+     * @param dbgnlession 开课起始时间
      * @return
      * @author broken_xie
      */
-    @Transactional(rollbackFor=Exception.class)
-    public void open(String uuid, Date dlession, SessionContainer sessionContainer) {
-        TCourse course = courseDao.findByUuid(uuid);
+    @Transactional(rollbackFor = Exception.class)
+    public void open(OpenCourseRequest openCourse, SessionContainer sessionContainer) {
+        TCourse course = courseDao.findByUuid(openCourse.getUuid());
         course.setCopen("1");
         courseDao.update(course);
         TLession lession = new TLession();
         lession.setCobject("teacher");
         lession.setDcreate(new Date());
-        lession.setDlession(dlession);
+        lession.setDbgnlession(toDateTime(openCourse.getDbgnlession() + ":00"));
+        lession.setDendlession(toDate(openCourse.getDendlession()));
+        lession.setCperiod(openCourse.getCperiod());
         lession.setDupdate(lession.getDcreate());
-        lession.setUcourseid(uuid);
+        lession.setUcourseid(openCourse.getUuid());
         lession.setUteacherid(sessionContainer.getUser().getUuid());
         lession.setUuid(getUUID());
         lession.setUuserid(sessionContainer.getUser().getUuid());

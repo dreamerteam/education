@@ -7,7 +7,7 @@ contextPath = typeof (contextPath) == "undefined" ? "" : contextPath;
  **/
 function edit(){
 	if(check.verifyCheck()){
-		window.location.href = contextPath + '/course/edit?uuid=' + check.getCheckValue().uuid;
+		window.location.href = contextPath + '/manage/courseType/edit?uuid=' + check.getCheckValue().uuid;
 	}
 }
 
@@ -17,7 +17,7 @@ function edit(){
  **/
 function view(){
 	if(check.verifyCheck()){
-		window.location.href = contextPath + '/course/view?uuid=' + check.getCheckValue().uuid;
+		window.location.href = contextPath + '/manage/courseType/view?uuid=' + check.getCheckValue().uuid;
 	}
 }
 
@@ -27,6 +27,9 @@ function view(){
  **/
 function del(){
 	if(check.verifyCheck()){
-		window.location.href = contextPath + '/course/del?ccode=' + check.getCheckValue().ccode;
+		$.post(contextPath + "/manage/courseType/del", {"ccode" : check.getCheckValue().ccode}, function(data){
+			if("success" == data.result) window.location.reload();
+			else alert(data.error);
+		});
 	}
 }

@@ -7,7 +7,7 @@ contextPath = typeof (contextPath) == "undefined" ? "" : contextPath;
  **/
 function edit(){
 	if(check.verifyCheck()){
-		window.location.href = contextPath + '/course/edit?uuid=' + check.getCheckValue().uuid;
+		window.location.href = contextPath + '/manage/course/edit?uuid=' + check.getCheckValue().uuid;
 	}
 }
 
@@ -17,7 +17,7 @@ function edit(){
  **/
 function view(){
 	if(check.verifyCheck()){
-		window.location.href = contextPath + '/course/view?uuid=' + check.getCheckValue().uuid;
+		window.location.href = contextPath + '/manage/course/view?uuid=' + check.getCheckValue().uuid;
 	}
 }
 
@@ -33,7 +33,13 @@ function start(status){
 			if('1' == status) alert("该课程已启用");
 			else if('0' == status) alert("该课程已停用");
 		} else {
-			window.location.href = contextPath + '/course/start?uuid=' + o.uuid + '&cstatus=' + status;
+			var params = {};
+			params["uuid"] = o.uuid;
+			params["cstatus"] = status;
+			$.post(contextPath + "/manage/course/start", params, function(data){
+				if("success" == data.result) window.location.reload();
+				else alert(data.error);
+			});
 		}
 	}
 }
@@ -50,7 +56,7 @@ function audit(caudit){
 			alert("请先启用该课程再提交审核");
 			return;
 		}
-		window.location.href = contextPath + '/course/changeAudit?uuid=' + o.uuid + '&caudit=' + caudit;
+		window.location.href = contextPath + '/manage/course/changeAudit?uuid=' + o.uuid + '&caudit=' + caudit;
 	}
 }
 
@@ -60,7 +66,7 @@ function audit(caudit){
  **/
 function toAudit(){
 	if(check.verifyCheck()){
-		window.location.href = contextPath + '/course/view?uuid=' + check.getCheckValue().uuid + '&op=audit';
+		window.location.href = contextPath + '/manage/course/view?uuid=' + check.getCheckValue().uuid + '&op=audit';
 	}
 }
 
@@ -90,8 +96,11 @@ function opens(copen){
 function openCourse(){
 	var params = {};
 	params["uuid"] = $("#uuid").val();
-	params["dlession"] = $("#dlession").val();
-	$.post(contextPath + "/course/open", params, function(data){
+	params["dbgnlession"] = $("#dbgnlession").val();
+	params["dendlession"] = $("#dendlession").val();
+	params["cperiod"] = $("#cperiod").val();
+	console.log(params);
+	$.post(contextPath + "/manage/course/open", params, function(data){
 		if("success" == data.result){
 			window.location.reload();
 		} else {

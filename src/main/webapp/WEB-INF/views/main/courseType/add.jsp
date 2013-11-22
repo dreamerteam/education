@@ -14,7 +14,7 @@
 </head>
 <body id="page">
 <div class="well">
-	<form action="${contextPath }/courseType/add" method="post" class="form-horizontal" id="addForm">
+	<form action="${contextPath }/manage/courseType/add" method="post" class="form-horizontal" id="addForm">
 		<input type="hidden" name="coperate" id="coperate" value="add" />
 		<input type="hidden" name="ilevel" id="ilevel" value="0" />
 		<input type="hidden" name="uparentid" id="uparentid" />
@@ -70,7 +70,7 @@ $(function(){
 		promptPosition : 'bottomRight',
 		ajaxFormValidation : true,
 		ajaxFormMethod : 'POST',
-		ajaxFormValidationURL : contextPath + '/courseType/validate',
+		ajaxFormValidationURL : contextPath + '/manage/courseType/validate',
 		onBeforeAjaxFormValidation: function(form, options) {
 			$("#submitBtn").attr("disabled", "disabled").removeClass("btn-primary").addClass("btn-inverse"); // 禁用保存按钮，防止重复提交表单
 		},

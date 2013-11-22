@@ -1,7 +1,7 @@
 package com.dreamer.education.controller;
 
 import static com.dreamer.education.utils.DateUtils.dateTimeString;
-import static com.dreamer.education.utils.DateUtils.toDateTime;
+import static com.dreamer.education.utils.DateUtils.toDate;
 
 import java.beans.PropertyEditorSupport;
 import java.util.Date;
@@ -123,7 +123,7 @@ public class BaseController {
         binder.registerCustomEditor(Date.class, new PropertyEditorSupport() {
             
             public void setAsText(String value) {
-                setValue(toDateTime(value));
+                setValue(toDate(value));
             }
             
             public String getAsText() {

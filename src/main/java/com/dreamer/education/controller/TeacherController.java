@@ -16,7 +16,7 @@ import com.dreamer.education.service.TTeacherService;
  * @author broken_xie
  */
 @Controller
-@RequestMapping("/teacher")
+@RequestMapping("/manage/teacher")
 public class TeacherController extends BaseController {
     
     /** 教师业务访问接口 */
@@ -58,7 +58,8 @@ public class TeacherController extends BaseController {
      */
     @RequestMapping("/view")
     public String view(String uuid, Model model) {
-        return edit(uuid, model);
+        model.addAttribute("teacher", teacherService.findForView(uuid));
+        return "main/teacher/view";
     }
     
     /**
@@ -71,9 +72,9 @@ public class TeacherController extends BaseController {
     @RequestMapping("/edit")
     public String edit(String uuid, Model model) {
         model.addAttribute("teacher", teacherService.findForView(uuid));
-        return mainPage();
+        return "main/teacher/edit";
     }
-
+    
     /**
      * 更新教师信息
      * @param teacher 教师信息

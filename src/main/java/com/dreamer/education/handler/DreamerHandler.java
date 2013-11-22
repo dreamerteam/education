@@ -17,7 +17,7 @@ public class DreamerHandler extends HandlerInterceptorAdapter {
     
     /** url拦截正则表达式 */
     // private static final String URL_PATTERN = "/((?!index)|main/(?!login)).+";
-    private static final String URL_PATTERN = "(/manage(?!/login).*)|(/page/manage/.*)";
+    private static final String URL_PATTERN = "(/manage(?!/login).*)|(/page/main.*)|(/page/web/student.*)|(/web/student.*)";
     
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -27,7 +27,11 @@ public class DreamerHandler extends HandlerInterceptorAdapter {
         boolean matches = requestURI.matches(URL_PATTERN);
         SessionContainer sessionContainer = (SessionContainer) request.getSession().getAttribute(InitParam.getValue("sessionContainerKey"));
         if (matches && null == sessionContainer) {
-            request.getRequestDispatcher("/page/main/login").forward(request, response);
+            if(requestURI.matches("(/page/web/student.*)|(/web/student.*)")){
+                request.getRequestDispatcher("/").forward(request, response);
+            } else {
+                request.getRequestDispatcher("/manage/login").forward(request, response);
+            }
             return false;
         }
         return super.preHandle(request, response, handler);

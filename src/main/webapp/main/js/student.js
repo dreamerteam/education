@@ -7,6 +7,6 @@ contextPath = typeof (contextPath) == "undefined" ? "" : contextPath;
  **/
 function view(){
 	if(check.verifyCheck()){
-		window.location.href = contextPath + '/student/view?uuid=' + check.getCheckValue();
+		window.location.href = contextPath + '/manage/student/view?uuid=' + check.getCheckValue();
 	}
 }

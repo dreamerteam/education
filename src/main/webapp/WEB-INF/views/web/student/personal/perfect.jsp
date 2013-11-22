@@ -126,18 +126,6 @@ $(function(){
 	$("#perfectForm").validationEngine({
 		promptPosition : 'bottomRight',
 		ajaxFormValidation : false/* ,
-		ajaxFormMethod : 'POST',
-		ajaxFormValidationURL : contextPath + '/course/validate',
-		onBeforeAjaxFormValidation: function(form, options) {
-			$("#submitBtn").attr("disabled", "disabled").removeClass("btn-primary").addClass("btn-inverse"); // 禁用保存按钮，防止重复提交表单
-		},
-		onAjaxFormComplete: function(status, form, json, options) {
-			if (status) {
-				form.validationEngine('detach').submit();
-			} else {
-				$("#submitBtn").removeAttr("disabled").removeClass("btn-inverse").addClass("btn-primary");
-			}
-		} */
 	}); 
 });
 </script>

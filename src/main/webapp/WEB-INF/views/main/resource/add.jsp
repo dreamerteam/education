@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="well">
-	<form action="${contextPath }/resource/add" method="post" class="form-horizontal" id="addForm" enctype="multipart/form-data">
+	<form action="${contextPath }/manage/resource/add" method="post" class="form-horizontal" id="addForm" enctype="multipart/form-data">
 		<input type="hidden" name="coperate" id="coperate" value="add" />
 		<div class="control-group">
 			<label class="control-label"><div class="inline" style="color: red;"> * </div>视频名称：</label>
@@ -82,7 +82,7 @@ $(function(){
 		promptPosition : 'bottomRight',
 		ajaxFormValidation : true,
 		ajaxFormMethod : 'POST',
-		ajaxFormValidationURL : contextPath + '/resource/validate',
+		ajaxFormValidationURL : contextPath + '/manage/resource/validate',
 		onBeforeAjaxFormValidation: function(form, options) {
 			$("#submitBtn").attr("disabled", "disabled").removeClass("btn-primary").addClass("btn-inverse"); // 禁用保存按钮，防止重复提交表单
 		},

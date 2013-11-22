@@ -9,51 +9,46 @@
 <title>课程查看</title>
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/bootstrap/css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/css/base.css" />
+<style type="text/css">
+.table th {
+	width: 150px;
+}
+</style>
 </head>
 <body id="page">
 <div class="well">
-	<form class="form-horizontal">
-		<div class="control-group">
-			<label class="control-label">课程名称：</label>
-			<div class="controls">
-				<label style="padding-top: 5px;"><c:out value="${courseResponse.cname }"/></label>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">课程类型：</label>
-			<div class="controls">
-				<label style="padding-top: 5px;"><c:out value="${courseResponse.ctypename }"/></label>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">搜索关键字：</label>
-			<div class="controls">
-				<label style="padding-top: 5px;"><c:out value="${courseResponse.ckeyword }"/></label>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">课程热门度：</label>
-			<div class="controls">
-				<label style="padding-top: 5px;"><c:out value="${courseResponse.ihot }"/></label>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">课程审核状态：</label>
-			<div class="controls">
-				<label style="padding-top: 5px;"><c:out value="${e:convert('course_audit', courseResponse.caudit) }"/></label>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">课程启用状态：</label>
-			<div class="controls">
-				<label style="padding-top: 5px;"><c:out value="${e:convert('course_status', courseResponse.cstatus) }"/></label>
-			</div>
-		</div>
-	</form>
+	<table class="table table-bordered table-hover">
+		<tbody>
+			<tr>
+				<th>课程名称：</th>
+				<td><c:out value="${courseResponse.cname }"/></td>
+			</tr>
+			<tr>
+				<th>课程类型：</th>
+				<td><c:out value="${courseResponse.ctypename }"/></td>
+			</tr>
+			<tr>
+				<th>搜索关键字：</th>
+				<td><c:out value="${courseResponse.ckeyword }"/></td>
+			</tr>
+			<tr>
+				<th>课程热门度：</th>
+				<td><c:out value="${courseResponse.ihot }"/></td>
+			</tr>
+			<tr>
+				<th>课程审核状态：</th>
+				<td><c:out value="${e:convert('course_audit', courseResponse.caudit) }"/></td>
+			</tr>
+			<tr>
+				<th>课程启用状态：</th>
+				<td><c:out value="${e:convert('course_status', courseResponse.cstatus) }"/></td>
+			</tr>
+		</tbody>
+	</table>
 	<c:if test="${not empty param.op }">
 		<div align="center">
-			<button type="button" class="btn btn-primary" onclick="window.location.href='${contextPath}/course/changeAudit?uuid=${param.uuid }&caudit=20&preaudit=10'">通过审核</button>
-			<button type="button" class="btn btn-primary" onclick="window.location.href='${contextPath}/course/changeAudit?uuid=${param.uuid }&caudit=30&preaudit=10'">不通过审核</button>
+			<button type="button" class="btn btn-primary" onclick="window.location.href='${contextPath}/manage/course/changeAudit?uuid=${param.uuid }&caudit=20&preaudit=10'">通过审核</button>
+			<button type="button" class="btn btn-primary" onclick="window.location.href='${contextPath}/manage/course/changeAudit?uuid=${param.uuid }&caudit=30&preaudit=10'">不通过审核</button>
 		</div>
 	</c:if>
 </div>

@@ -42,6 +42,25 @@ public class CourseResponse implements Serializable {
     /** 是否开课【0：待开课；1：开课】 */
     private String copen;
     
+    /** 上课时间表uuid */
+    private String ulessionid;
+    
+    /**
+     * 获取 上课时间表uuid
+     * @return ulessionid
+     */
+    public String getUlessionid() {
+        return ulessionid;
+    }
+    
+    /**
+     * 设置 上课时间表uuid
+     * @param ulessionid 上课时间表uuid
+     */
+    public void setUlessionid(String ulessionid) {
+        this.ulessionid = ulessionid;
+    }
+    
     /**
      * 获取 是否开课【0：待开课；1：开课】
      * @return copen

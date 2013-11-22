@@ -1,5 +1,7 @@
 package com.dreamer.education.utils;
 
+import static com.dreamer.education.utils.ValidateUtils.isInteger;
+
 import java.util.Random;
 import java.util.UUID;
 
@@ -84,5 +86,16 @@ public class StringUtils {
             }
         }
         return buffer.toString();
+    }
+    
+    /**
+     * 字符串转整数
+     * @param str 需要转换的字符串
+     * @return
+     * @author broken_xie
+     */
+    public static int str2int(String str) {
+        if (isInteger(str)) return Integer.valueOf(str);
+        return 0;
     }
 }

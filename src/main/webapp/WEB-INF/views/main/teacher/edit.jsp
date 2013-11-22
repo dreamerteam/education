@@ -15,7 +15,7 @@
 <body>
 <div class="container" style="height: 100%">
 	<div class="well">
-		<form action="${contextPath }/teacher/update" method="post" id="editForm" class="form-horizontal">
+		<form action="${contextPath }/manage/teacher/update" method="post" id="editForm" class="form-horizontal">
 			<input type="hidden" name="uuid" id="uuid" value="<c:out value="${teacher.uuid }"/>" />
 			<div class="control-group">
 				<label class="control-label">姓名：</label>

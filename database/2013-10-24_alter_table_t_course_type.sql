@@ -17,3 +17,11 @@ ALTER TABLE t_resource ADD cfree VARCHAR(1) NOT NULL; -- 免费【0:不免费；
 -- 2013-11-19
 ALTER TABLE t_lession CHANGE dlesson dlession datetime NOT NULL;
 ALTER TABLE t_course ADD copen VARCHAR(1) NULL; -- 是否开课【0：待开课；1：开课】
+
+-- 2013-11-20
+ALTER TABLE t_lession CHANGE dlession dbgnlession datetime NOT NULL; -- 开课起始时间
+ALTER TABLE t_lession ADD dendlession datetime NOT null; -- 开课结束时间
+ALTER TABLE t_lession ADD cperiod VARCHAR(100) NOT NULL; -- 开课间隔时间【每天、周末、周一....】
+
+-- 2013-11-21
+ALTER TABLE t_lession_select RENAME TO t_course_favorite;

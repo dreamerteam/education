@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>视频观看</title>
+<title>课程查看</title>
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/bootstrap/css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/css/base.css" />
 </head>
@@ -14,17 +14,11 @@
 <div class="container">
 	<!-- 导航条 -->
 	<jsp:include page="/WEB-INF/views/include/webtop.jsp"></jsp:include>
-	<div class="thumbnails">
+	<div class="thumbnails" style="margin-top: 50px">
 		<div class="thumbnail">
-			<h3 align="center"><c:out value="${resource.cname }"/></h3>
-			<p style="text-indent: 2em;"><c:out value="${resource.cdescription}"/></p>
-			<p align="center">
-				<embed src="${resource.cpath }"
-					allowFullScreen="true" quality="high" width="480" height="400"
-					align="middle" allowScriptAccess="always"
-					type="application/x-shockwave-flash">
-				</embed>
-			</p>
+			<h3 align="center"><c:out value="${course.cname }"/></h3>
+			<p style="text-indent: 2em;"><c:out value="${course.cdescription}"/></p>
+			<p align="center"><a href="#"><img src="${contextPath }/common/images/logo.png" class="img-rounded h100"></a></p>
 		</div>
 	</div>
 </div>

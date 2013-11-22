@@ -1,6 +1,5 @@
 package com.dreamer.education.controller;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +14,7 @@ import com.dreamer.education.bean.po.TCourse;
 import com.dreamer.education.bean.qo.CourseQuery;
 import com.dreamer.education.bean.qo.CourseValidate;
 import com.dreamer.education.bean.qo.LessionQuery;
+import com.dreamer.education.bean.ro.OpenCourseRequest;
 import com.dreamer.education.service.TCourseService;
 import com.dreamer.education.service.TLessionService;
 import com.google.gson.Gson;
@@ -25,12 +25,13 @@ import com.google.gson.Gson;
  * @author broken_xie
  */
 @Controller
-@RequestMapping("/course")
+@RequestMapping("/manage/course")
 public class CourseController extends BaseController {
     
     /** 课程业务访问接口 */
     @Autowired
     private TCourseService courseService;
+    
     /** 选课业务访问接口 */
     @Autowired
     private TLessionService lessionService;
@@ -110,7 +111,7 @@ public class CourseController extends BaseController {
      */
     @RequestMapping("/lessionList")
     public String list(LessionQuery query, @RequestParam(defaultValue = "1") int currentPage, Model model) {
-        model.addAttribute("page", lessionService.findPageByQuery(query, currentPage));
+        model.addAttribute("page", lessionService.findPageByQuery(query, currentPage, getSessionContainer()));
         return "main/course/lessionList";
     }
     
@@ -124,7 +125,7 @@ public class CourseController extends BaseController {
     @RequestMapping("/edit")
     public String edit(String uuid, Model model) {
         model.addAttribute("courseResponse", courseService.findForView(uuid));
-        return mainPage();
+        return "/main/course/edit";
     }
     
     /**
@@ -136,7 +137,8 @@ public class CourseController extends BaseController {
      */
     @RequestMapping("/view")
     public String view(String uuid, Model model) {
-        return edit(uuid, model);
+        model.addAttribute("courseResponse", courseService.findForView(uuid));
+        return "/main/course/view";
     }
     
     /**
@@ -159,9 +161,19 @@ public class CourseController extends BaseController {
      * @author broken_xie
      */
     @RequestMapping("/start")
-    public String start(String uuid, String cstatus, Model model) {
-        courseService.start(uuid, cstatus, getSessionContainer());
-        return redirect("/course/list");
+    @ResponseBody
+    public Map<String, String> start(String uuid, String cstatus, Model model) {
+        Map<String, String> map = new HashMap<String, String>();
+        try {
+            courseService.start(uuid, cstatus, getSessionContainer());
+            map.put("result", "success");
+            return map;
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("result", "failure");
+            map.put("error", "操作失败，请稍后再试");
+            return map;
+        }
     }
     
     /**
@@ -174,22 +186,21 @@ public class CourseController extends BaseController {
     @RequestMapping("/changeAudit")
     public String changeAudit(String uuid, String caudit, String preaudit) {
         courseService.changeAudit(uuid, caudit);
-        return redirect("/course/list?caudit=" + preaudit);
+        return redirect("/manage/course/list?caudit=" + preaudit);
     }
     
     /**
      * 开课
-     * @param uuid 课程uuid
-     * @param dlession 开课时间
+     * @param openCourse 开课请求对象
      * @return
      * @author broken_xie
      */
     @RequestMapping("/open")
     @ResponseBody
-    public Map<String, String> open(String uuid, Date dlession) {
+    public Map<String, String> open(OpenCourseRequest openCourse) {
         Map<String, String> map = new HashMap<String, String>();
         try {
-            courseService.open(uuid, dlession, getSessionContainer());
+            courseService.open(openCourse, getSessionContainer());
             map.put("result", "success");
             return map;
         } catch (Exception e) {

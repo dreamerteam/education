@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>梦想家登录</title>
+<title>万花登录</title>
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/bootstrap/css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/css/validationEngine.jquery.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/css/base.css" />
@@ -61,7 +61,7 @@ $(function(){
 		});
 		captchaImg.show();
 	}
-	$.post(contextPath + "/manage/login/getCookies", function(map){
+	$.post(contextPath + "/login/getCookies", function(map){
 		if(null != map){
 			$("#clogin").val(map.clogin);
 			if("1" == map.remember){
@@ -76,22 +76,20 @@ $(function(){
 		promptPosition : 'bottomRight',
 		ajaxFormValidation : true,
 		ajaxFormMethod : 'POST',
-		ajaxFormValidationURL : contextPath + '/manage/login/validate',
+		ajaxFormValidationURL : contextPath + '/login/validate',
 		onBeforeAjaxFormValidation: function(form, options) {
 			$("#submitBtn").attr("disabled", "disabled").removeClass("btn-primary").addClass("btn-inverse"); // 禁用保存按钮，防止重复提交表单
 		},
 		onAjaxFormComplete: function(status, form, json, options) {
 			if (status) {
-				/* $("#remember").val($("#remember").is(":checked") ? "1" : "0");
-				form.validationEngine('detach').submit(); */
 				var params = {};
 				params["clogin"] = $("#clogin").val();
 				params["cpassword"] = $("#cpassword").val();
 				params["captcha"] = $("#captcha").val();
 				params["remember"] = $("#remember").is(":checked") ? "1" : "0";
-				$.post(contextPath + "/manage/login", params, function(data){
+				$.post(contextPath + "/login", params, function(data){
 					if("success" == data.result){
-						window.location.href = contextPath + "/page/main/index";
+						window.location.href = contextPath + "/manage";
 					} else {
 						$("#loginBtn").removeAttr("disabled").removeClass("btn-inverse").addClass("btn-primary");
 						alert(data.error);

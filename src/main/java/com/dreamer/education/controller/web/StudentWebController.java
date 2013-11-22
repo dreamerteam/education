@@ -17,13 +17,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dreamer.education.bean.co.SessionContainer;
 import com.dreamer.education.bean.po.TStudent;
 import com.dreamer.education.bean.po.TUser;
+import com.dreamer.education.bean.qo.LessionQuery;
 import com.dreamer.education.bean.ro.LoginRequest;
 import com.dreamer.education.controller.BaseController;
+import com.dreamer.education.service.TCourseFavoriteService;
+import com.dreamer.education.service.TLessionService;
 import com.dreamer.education.service.TStudentService;
 import com.dreamer.education.service.TUserService;
 import com.google.code.kaptcha.Constants;
@@ -35,7 +39,6 @@ import com.google.gson.Gson;
  * @author broken_xie
  */
 @Controller
-@RequestMapping("/web/student")
 public class StudentWebController extends BaseController {
     
     /** 用户业务访问接口 */
@@ -46,13 +49,21 @@ public class StudentWebController extends BaseController {
     @Autowired
     private TStudentService studentService;
     
+    /** 课程收藏业务访问接口 */
+    @Autowired
+    private TCourseFavoriteService courseFavoriteService;
+    
+    /** 选课业务访问接口 */
+    @Autowired
+    private TLessionService lessionService;
+    
     /**
      * 校验学生注册信息
      * @param clogin 登录名
      * @return
      * @author broken_xie
      */
-    @RequestMapping("/validate")
+    @RequestMapping("/student/validate")
     @ResponseBody
     public String validate(String clogin) {
         Object[][] result = new Object[1][3];
@@ -70,7 +81,7 @@ public class StudentWebController extends BaseController {
      * @return
      * @author broken_xie
      */
-    @RequestMapping("/register")
+    @RequestMapping("/student/register")
     public String register(TUser user) {
         userService.register(user, "student", getSessionContainer());
         return "/web/student/personal/index";
@@ -82,7 +93,7 @@ public class StudentWebController extends BaseController {
      * @return
      * @author broken_xie
      */
-    @RequestMapping("/login/validate")
+    @RequestMapping("/student/login/validate")
     @ResponseBody
     public String validate(LoginRequest loginReq, HttpSession session) {
         /* 验证码校验 */
@@ -129,7 +140,7 @@ public class StudentWebController extends BaseController {
      * @return
      * @author broken_xie
      */
-    @RequestMapping(value = "/login/getCookies")
+    @RequestMapping("/student/login/getCookies")
     @ResponseBody
     public Map<String, Object> getCookies(HttpServletRequest request) {
         Map<String, Object> map = new HashMap<String, Object>();
@@ -153,7 +164,7 @@ public class StudentWebController extends BaseController {
      * @return
      * @author broken_xie
      */
-    @RequestMapping("/login")
+    @RequestMapping("/student/login")
     @ResponseBody
     public Map<String, Object> login(LoginRequest loginReq, HttpSession session, Model model, HttpServletResponse response) {
         Map<String, Object> map = new HashMap<String, Object>();
@@ -198,7 +209,7 @@ public class StudentWebController extends BaseController {
      * @return
      * @author broken_xie
      */
-    @RequestMapping("/personal/view")
+    @RequestMapping("/web/student/personal/view")
     public String view(Model model) {
         getPersonalInfo(model);
         return requestPage();
@@ -210,7 +221,7 @@ public class StudentWebController extends BaseController {
      * @return
      * @author broken_xie
      */
-    @RequestMapping("/personal/perfect")
+    @RequestMapping("/web/student/personal/perfect")
     public String perfect(Model model) {
         getPersonalInfo(model);
         return requestPage();
@@ -232,13 +243,40 @@ public class StudentWebController extends BaseController {
      * @param model
      * @author broken_xie
      */
-    @RequestMapping("/personal/update")
+    @RequestMapping("/web/student/personal/update")
     public String update(TStudent student, Model model) {
         TStudent s = studentService.update(student, getSessionContainer());
         SessionContainer sessionContainer = getSessionContainer();
         sessionContainer.setStudent(s);
         getPersonalInfo(model);
         return "/web/student/personal/view";
+    }
+    
+    /**
+     * 查找课程收藏列表
+     * @param currentPage 当前页码
+     * @param model
+     * @return
+     * @author broken_xie
+     */
+    @RequestMapping("/web/student/course/favoriteList")
+    public String favoriteList(@RequestParam(defaultValue = "1") int currentPage, Model model) {
+        model.addAttribute("page", courseFavoriteService.findPageByQuery(currentPage, getSessionContainer()));
+        return "/web/student/course/favoriteList";
+    }
+    
+    /**
+     * 获取选课列表
+     * @param query 课程名称
+     * @param currentPage 当前页码
+     * @param model
+     * @return
+     * @author broken_xie
+     */
+    @RequestMapping("/web/student/course/lessionList")
+    public String list(LessionQuery query, @RequestParam(defaultValue = "1") int currentPage, Model model) {
+        model.addAttribute("page", lessionService.findPageByQuery(query, currentPage, getSessionContainer()));
+        return "/web/student/course/lessionList";
     }
     
 }

@@ -14,7 +14,7 @@
 </head>
 <body id="page">
 <div class="well">
-	<form action="${contextPath }/course/update" method="post" class="form-horizontal" id="editForm">
+	<form action="${contextPath }/manage/course/update" method="post" class="form-horizontal" id="editForm">
 		<input type="hidden" name="coperate" id="coperate" value="update" />
 		<input type="hidden" name="coldname" id="coldname" value="<c:out value="${courseResponse.cname }"/>" />
 		<input type="hidden" name="uuid" id="uuid" value="<c:out value="${courseResponse.uuid }"/>" />
@@ -75,7 +75,7 @@ $(function(){
 		promptPosition : 'bottomRight',
 		ajaxFormValidation : true,
 		ajaxFormMethod : 'POST',
-		ajaxFormValidationURL : contextPath + '/course/validate',
+		ajaxFormValidationURL : contextPath + '/manage/course/validate',
 		onBeforeAjaxFormValidation: function(form, options) {
 			$("#submitBtn").attr("disabled", "disabled").removeClass("btn-primary").addClass("btn-inverse"); // 禁用保存按钮，防止重复提交表单
 		},

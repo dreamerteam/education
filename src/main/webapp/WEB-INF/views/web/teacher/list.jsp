@@ -12,7 +12,9 @@
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/css/base.css" />
 </head>
 <body>
-<div id="page">
+<div class="container">
+	<!-- 导航条 -->
+	<jsp:include page="/WEB-INF/views/include/webtop.jsp"></jsp:include>
 	<div class="well">
 		<%-- <form action="${contextPath }/course/list" class="form-search" id="searchForm">
 			<label>课程名称：</label><input type="text" name="cname" id="cname" class="input-medium search-query">
@@ -43,4 +45,7 @@
 <script type="text/javascript" src="${contextPath }/common/jquery/jquery-1.8.3.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/bootstrap/js/bootstrap.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/bootstrap/js/html5shiv.js" ></script>
+<script type="text/javascript">
+$(".container").css("width",document.body.scrollWidth - 3 + "px");
+</script>
 </html>

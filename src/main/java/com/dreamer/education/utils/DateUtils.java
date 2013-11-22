@@ -1,6 +1,7 @@
 package com.dreamer.education.utils;
 
 import static com.dreamer.education.utils.ValidateUtils.isEmpty;
+import static com.dreamer.education.utils.StringUtils.defaultString;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,6 +39,9 @@ public class DateUtils {
      * @author broken_xie
      */
     public static Date toDate(String date) {
+        if ("".equals(defaultString(date))) {
+            return null;
+        }
         String separate = date.substring(4, 5);
         return toDate(date, "yyyy" + separate + "MM" + separate + "dd");
     }

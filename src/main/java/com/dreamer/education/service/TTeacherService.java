@@ -1,6 +1,7 @@
 package com.dreamer.education.service;
 
 import static com.dreamer.education.utils.StringUtils.getUUID;
+import static com.dreamer.education.utils.StringUtils.str2int;
 import static com.dreamer.education.utils.ValidateUtils.isEmpty;
 
 import java.util.Date;
@@ -73,7 +74,28 @@ public class TTeacherService {
         userDao.save(user);
         teacherDao.findMaxCno();
         String maxCno = teacherDao.findMaxCno();
-        teacher.setCno("wanhua" + (isEmpty(maxCno) ? "0000001" : maxCno));
+        if (isEmpty(maxCno)) {
+            teacher.setCno("wanhua0000001");
+        } else {
+            maxCno = maxCno.substring(6, maxCno.length());
+            int next = str2int(maxCno) + 1;
+            if (next >= 1000000) {
+                maxCno = "" + next;
+            } else if (next >= 100000) {
+                maxCno = "0" + next;
+            } else if (next >= 10000) {
+                maxCno = "00" + next;
+            } else if (next >= 1000) {
+                maxCno = "000" + next;
+            } else if (next >= 100) {
+                maxCno = "0000" + next;
+            } else if (next >= 10) {
+                maxCno = "00000" + next;
+            } else {
+                maxCno = "000000" + next;
+            }
+            teacher.setCno("wanhua" + maxCno);
+        }
         teacher.setDcreate(now);
         teacher.setDupdate(now);
         teacher.setUuid(getUUID());

@@ -16,7 +16,7 @@
 		<p>教师管理</p>
 		<div style="padding: 5px 3px; overflow: hidden;">
 			<ul class="nav nav-list">
-				<li class="pagination-centered"><a href="javascript:reloadMain('${contextPath}/teacher/list')">列表</a></li>
+				<li class="pagination-centered"><a href="javascript:reloadMain('${contextPath}/manage/teacher/list')">列表</a></li>
 				<li class="pagination-centered"><a href="javascript:reloadMain('${contextPath}/page/main/teacher/add')">新增</a></li>
 			</ul>
 		</div>

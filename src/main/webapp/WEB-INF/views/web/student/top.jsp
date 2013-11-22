@@ -21,7 +21,7 @@
 	</div>
 	<div class="navbar">
 		<div class="navbar-inner">
-			<a class="brand" href="javascript:void(0)">万花</a>
+			<a class="brand" href="${contextPath }/web/index">万花</a>
 			<ul class="nav">
 				<li class="active dropdown">
 					<a data-toggle="dropdown" class="dropdown-toggle" href="#">个人中心<strong class="caret"></strong></a>
@@ -34,14 +34,10 @@
 				<li class="dropdown">
 					<a data-toggle="dropdown" class="dropdown-toggle" href="#">课程<strong class="caret"></strong></a>
 					<ul class="dropdown-menu">
-						<li><a href="javascript:reloadMain('${contextPath }/web/student/personal/view')">课程收藏</a></li>
-						<li><a href="javascript:reloadMain('${contextPath }/web/student/personal/perfect')">选课</a></li>
+						<li><a href="javascript:reloadMain('${contextPath }/web/student/course/favoriteList')">课程收藏</a></li>
+						<li><a href="javascript:reloadMain('${contextPath }/web/student/course/lessionList')">上课列表</a></li>
 					</ul>
 				</li>
-				<li class="divider-vertical"></li>
-				<li><a href="javascript:reloadMain('${contextPath }/page/main/left_teacher')">教师管理</a></li>
-				<li class="divider-vertical"></li>
-				<li><a href="javascript:reloadMain('${contextPath }/page/main/left_student')">学生管理</a></li>
 			</ul>
 		</div>
 	</div>

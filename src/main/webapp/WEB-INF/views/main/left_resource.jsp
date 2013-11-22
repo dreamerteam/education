@@ -15,7 +15,7 @@
 		<p>资源管理</p>
 		<div style="padding: 5px 3px; overflow: hidden;">
 			<ul class="nav nav-list">
-				<li class="pagination-centered"><a href="javascript:reloadMain('${contextPath}/resource/list')">列表</a></li>
+				<li class="pagination-centered"><a href="javascript:reloadMain('${contextPath}/manage/resource/list')">列表</a></li>
 				<li class="pagination-centered"><a href="javascript:reloadMain('${contextPath}/page/main/resource/add')">资源上传</a></li>
 			</ul>
 		</div>

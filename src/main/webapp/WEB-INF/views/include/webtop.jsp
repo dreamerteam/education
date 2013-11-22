@@ -10,17 +10,19 @@
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/css/base.css" />
 </head>
 <body>
-<div class="navbar navbar-fixed-top">
+<div class="navbar navbar-fixed-top" style="margin-bottom: 50px;">
 	<div class="navbar-inner">
 		<a class="brand" href="javascript:void(0)">万花</a>
 		<ul class="nav">
-			<li class="active"><a href="javascript:reloadLeft('${contextPath }/page/main/left_home')">首页</a></li>
+			<li class="active"><a href="#')">首页</a></li>
 			<li class="divider-vertical"></li>
-			<li><a href="javascript:reloadLeft('${contextPath }/page/main/left_course')">课程管理</a></li>
+			<li><a href="#')">课程信息</a></li>
 			<li class="divider-vertical"></li>
-			<li><a href="javascript:reloadLeft('${contextPath }/page/main/left_teacher')">教师管理</a></li>
-			<li class="divider-vertical"></li>
-			<li><a href="javascript:reloadLeft('${contextPath }/page/main/left_student')">学生管理</a></li>
+			<li><a href="#')">教师信息</a></li>
+			<c:if test="${not empty sessionScope.SESSION_CONTAINER_KEY}">
+				<li class="divider-vertical"></li>
+				<li><a href="${contextPath }/page/web/student/index">个人中心</a></li>
+			</c:if>
 		</ul>
 	</div>
 </div>
@@ -32,5 +34,5 @@
 var contextPath = "${contextPath}";
 var li = $(".nav li");
 </script>
-<script type="text/javascript" src="${contextPath }/main/js/top.js" ></script>
+<%-- <script type="text/javascript" src="${contextPath }/main/js/top.js" ></script> --%>
 </html>

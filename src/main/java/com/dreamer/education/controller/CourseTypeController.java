@@ -3,6 +3,9 @@ package com.dreamer.education.controller;
 import static com.dreamer.education.utils.ValidateUtils.isEmpty;
 import static com.dreamer.education.utils.ValidateUtils.isUUID;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +24,7 @@ import com.google.gson.Gson;
  * @author broken_xie
  */
 @Controller
-@RequestMapping("/courseType")
+@RequestMapping("/manage/courseType")
 public class CourseTypeController extends BaseController {
     
     /** 课程类型业务访问接口 */
@@ -122,7 +125,7 @@ public class CourseTypeController extends BaseController {
     @RequestMapping("/edit")
     public String edit(String uuid, Model model) {
         model.addAttribute("courseTypeResponse", courseTypeService.findForView(uuid));
-        return mainPage();
+        return "main/courseType/edit";
     }
     
     /**
@@ -134,7 +137,8 @@ public class CourseTypeController extends BaseController {
      */
     @RequestMapping("/view")
     public String view(String uuid, Model model) {
-        return edit(uuid, model);
+        model.addAttribute("courseTypeResponse", courseTypeService.findForView(uuid));
+        return "main/courseType/view";
     }
     
     /**
@@ -145,9 +149,19 @@ public class CourseTypeController extends BaseController {
      * @author broken_xie
      */
     @RequestMapping("/del")
-    public String del(String ccode, Model model) {
-        courseTypeService.delete(ccode);
-        return list(null, 1, model);
+    @ResponseBody
+    public Map<String, String> del(String ccode, Model model) {
+        Map<String, String> map = new HashMap<String, String>();
+        try {
+            courseTypeService.delete(ccode);
+            map.put("result", "success");
+            return map;
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("result", "failure");
+            map.put("error", "操作失败，请稍后再试");
+            return map;
+        }
     }
     
     /**

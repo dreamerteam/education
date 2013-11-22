@@ -77,7 +77,7 @@
 						<h3 id="modalTitle">登录</h3>
 					</div>
 					<div class="modal-body" style="overflow: hidden;">
-						<form action="${contextPath }/web/student/login" method="post" class="form-horizontal" id="loginForm">
+						<form action="${contextPath }/student/login" method="post" class="form-horizontal" id="loginForm">
 							<div class="control-group" >
 								<label class="control-label">用户名：</label>
 								<div class="controls">
@@ -120,7 +120,7 @@
 						<h3 id="modalTitle">注册</h3>
 					</div>
 					<div class="modal-body" style="overflow: hidden;">
-						<form action="${contextPath }/web/student/register" method="post" class="form-horizontal" id="registerForm">
+						<form action="${contextPath }/student/register" method="post" class="form-horizontal" id="registerForm">
 							<div class="control-group">
 								<label class="control-label"><div class="inline" style="color: red;"> * </div>用户名：</label>
 								<div class="controls">
@@ -169,7 +169,7 @@ $(function(){
 		captchaImg.show();
 	}
 	/* 获取cookie */
-	$.post(contextPath + "/web/student/login/getCookies", function(map){
+	$.post(contextPath + "/student/login/getCookies", function(map){
 		if(null != map){
 			$("#clogin").val(map.clogin);
 			if("1" == map.remember){
@@ -184,20 +184,18 @@ $(function(){
 		promptPosition : 'bottomRight',
 		ajaxFormValidation : true,
 		ajaxFormMethod : 'POST',
-		ajaxFormValidationURL : contextPath + '/web/student/login/validate',
+		ajaxFormValidationURL : contextPath + '/student/login/validate',
 		onBeforeAjaxFormValidation: function(form, options) {
 			$("#loginBtn").attr("disabled", "disabled").removeClass("btn-primary").addClass("btn-inverse"); // 禁用保存按钮，防止重复提交表单
 		},
 		onAjaxFormComplete: function(status, form, json, options) {
 			if (status) {
-				/* $("#remember").val($("#remember").is(":checked") ? "1" : "0");
-				form.validationEngine('detach').submit(); */
 				var params = {};
 				params["clogin"] = $("#clogin").val();
 				params["cpassword"] = $("#cpassword").val();
 				params["captcha"] = $("#captcha").val();
 				params["remember"] = $("#remember").is(":checked") ? "1" : "0";
-				$.post(contextPath + "/web/student/login", params, function(data){
+				$.post(contextPath + "/student/login", params, function(data){
 					if("success" == data.result){
 						window.location.href = contextPath + "/page/web/student/index";
 					} else {
@@ -215,7 +213,7 @@ $(function(){
 		promptPosition : 'bottomRight',
 		ajaxFormValidation : true,
 		ajaxFormMethod : 'POST',
-		ajaxFormValidationURL : contextPath + '/web/student/validate',
+		ajaxFormValidationURL : contextPath + '/student/validate',
 		onBeforeAjaxFormValidation: function(form, options) {
 			$("#registerBtn").attr("disabled", "disabled").removeClass("btn-primary").addClass("btn-inverse"); // 禁用保存按钮，防止重复提交表单
 		},

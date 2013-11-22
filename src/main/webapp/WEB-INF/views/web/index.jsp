@@ -8,8 +8,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>万花网站首页</title>
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/bootstrap/css/bootstrap.css" />
-<link rel="stylesheet" type="text/css" href="${contextPath }/common/css/validationEngine.jquery.css" />
-<link rel="stylesheet" type="text/css" href="${contextPath }/common/jquery/jquery-ui/themes/jquery.ui.all.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/css/base.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath }/web/css/index.css" />
 </head>
@@ -17,22 +15,8 @@
 <div class="container">
 	<!-- 导航条 -->
 	<jsp:include page="/WEB-INF/views/include/webtop.jsp"></jsp:include>
-	<div class="navbar navbar-fixed-top">
-		<div class="navbar-inner">
-			<a class="brand" href="javascript:void(0)">万花</a>
-			<ul class="nav">
-				<li class="active"><a href="javascript:reloadLeft('${contextPath }/page/main/left_home')">首页</a></li>
-				<li class="divider-vertical"></li>
-				<li><a href="javascript:reloadLeft('${contextPath }/page/main/left_course')">课程管理</a></li>
-				<li class="divider-vertical"></li>
-				<li><a href="javascript:reloadLeft('${contextPath }/page/main/left_teacher')">教师管理</a></li>
-				<li class="divider-vertical"></li>
-				<li><a href="javascript:reloadLeft('${contextPath }/page/main/left_student')">学生管理</a></li>
-			</ul>
-		</div>
-	</div>
 	<!-- 轮播插件 -->
-	<div class="carousel slide" id="carousel" style="margin-top: 50px;">
+	<div class="carousel slide" id="carousel">
 		<ol class="carousel-indicators">
 			<li class="active" data-slide-to="0" data-target="#carousel"></li>
 			<li data-slide-to="1" data-target="#carousel"></li>
@@ -75,7 +59,7 @@
 				<c:forEach items="${courses }" var="course">
 					<li class="span2">
 						<div class="thumbnail">
-							<p align="center"><a href="#"><img src="${contextPath }/common/images/logo.png" class="img-rounded h100"></a></p>
+							<p align="center"><a href="${contextPath }/web/course/view/${course.uuid}"><img src="${contextPath }/common/images/logo.png" class="img-rounded h100"></a></p>
 							<p align="center"><c:out value="${course.cname }"/></p>
 							<p style="text-indent: 2em;"><c:out value="${e:cut(course.cdescription, 20) }"/></p>
 						</div>
@@ -95,7 +79,7 @@
 				<c:forEach items="${teachers }" var="teacher">
 					<li class="span2">
 						<div class="thumbnail">
-							<p align="center"><a href="#"><img src="${contextPath }/common/images/logo.png" class="img-rounded h100"></a></p>
+							<p align="center"><a href="${contextPath }/web/teacher/view/${teacher.uuid}"><img src="${contextPath }/common/images/logo.png" class="img-rounded h100"></a></p>
 							<p align="center"><c:out value="${teacher.cname }"/></p>
 							<p style="text-indent: 2em;"><%-- <c:out value="${e:cut(teacher.cdescription, 20) }"/> --%></p>
 						</div>
@@ -127,83 +111,8 @@
 </div>
 </body>
 <script type="text/javascript" src="${contextPath }/common/jquery/jquery-1.8.3.js" ></script>
-<script type="text/javascript" src="${contextPath }/common/jquery/jquery.validationEngine.js" ></script>
-<script type="text/javascript" src="${contextPath }/common/jquery/jquery.validationEngine-zh_CN.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/bootstrap/js/bootstrap.js" ></script>
 <script type="text/javascript">
 $(".container").css("width",document.body.scrollWidth - 3 + "px");
-var contextPath = "${contextPath}";
-var captchaImg = $("#captchaImg");
-$(function(){
-	/*验证码*/
-	if(captchaImg){
-		reloadCaptcha(); // 验证码初始化
-		captchaImg.click(function(){ // 验证码点击事件
-			reloadCaptcha();
-		});
-		captchaImg.show();
-	}
-	/* 获取cookie */
-	$.post(contextPath + "/web/student/login/getCookies", function(map){
-		if(null != map){
-			$("#clogin").val(map.clogin);
-			if("1" == map.remember){
-				$("#remember").attr("checked", "checked");
-			} else {
-				$("#remember").removeAttr("checked");
-			}
-		}
-	});
-	/*登录表单*/
-	$("#loginForm").validationEngine({
-		promptPosition : 'bottomRight',
-		ajaxFormValidation : true,
-		ajaxFormMethod : 'POST',
-		ajaxFormValidationURL : contextPath + '/web/student/login/validate',
-		onBeforeAjaxFormValidation: function(form, options) {
-			$("#loginBtn").attr("disabled", "disabled").removeClass("btn-primary").addClass("btn-inverse"); // 禁用保存按钮，防止重复提交表单
-		},
-		onAjaxFormComplete: function(status, form, json, options) {
-			if (status) {
-				/* $("#remember").val($("#remember").is(":checked") ? "1" : "0");
-				form.validationEngine('detach').submit(); */
-				var params = {};
-				params["clogin"] = $("#clogin").val();
-				params["cpassword"] = $("#cpassword").val();
-				params["captcha"] = $("#captcha").val();
-				params["remember"] = $("#remember").is(":checked") ? "1" : "0";
-				$.post(contextPath + "/web/student/login", params, function(data){
-					if("success" == data.result){
-						window.location.href = contextPath + "/page/web/student/index";
-					} else {
-						$("#loginBtn").removeAttr("disabled").removeClass("btn-inverse").addClass("btn-primary");
-						alert(data.error);
-					}
-				});
-			} else {
-				$("#loginBtn").removeAttr("disabled").removeClass("btn-inverse").addClass("btn-primary");
-			}
-		}
-	}); 
-	/* 注册 */
-	$("#registerForm").validationEngine({
-		promptPosition : 'bottomRight',
-		ajaxFormValidation : true,
-		ajaxFormMethod : 'POST',
-		ajaxFormValidationURL : contextPath + '/web/student/validate',
-		onBeforeAjaxFormValidation: function(form, options) {
-			$("#registerBtn").attr("disabled", "disabled").removeClass("btn-primary").addClass("btn-inverse"); // 禁用保存按钮，防止重复提交表单
-		},
-		onAjaxFormComplete: function(status, form, json, options) {
-			if (status) {
-				form.validationEngine('detach').submit();
-			} else {
-				$("#clogin").val("");
-				$("#registerBtn").removeAttr("disabled").removeClass("btn-inverse").addClass("btn-primary");
-			}
-		}
-	}); 
-});
 </script>
-<script type="text/javascript" src="${contextPath }/web/js/index.js" ></script>
 </html>

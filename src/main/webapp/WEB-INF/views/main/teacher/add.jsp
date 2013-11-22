@@ -15,7 +15,7 @@
 <body>
 <div class="container" style="height: 100%">
 	<div class="well">
-		<form action="${contextPath }/teacher/add" method="post" id="addForm" class="form-horizontal">
+		<form action="${contextPath }/manage/teacher/add" method="post" id="addForm" class="form-horizontal">
 			<div class="control-group">
 				<label class="control-label"><div class="inline" style="color: red;"> * </div>登录名：</label>
 				<div class="controls">
@@ -142,19 +142,7 @@ $(function(){
 	$("#dbirthday").datepicker({dateFormat : "yy-mm-dd"}).attr("readonly","readonly");
 	$("#addForm").validationEngine({
 		promptPosition : 'bottomRight',
-		ajaxFormValidation : false/* ,
-		ajaxFormMethod : 'POST',
-		ajaxFormValidationURL : contextPath + '/course/validate',
-		onBeforeAjaxFormValidation: function(form, options) {
-			$("#submitBtn").attr("disabled", "disabled").removeClass("btn-primary").addClass("btn-inverse"); // 禁用保存按钮，防止重复提交表单
-		},
-		onAjaxFormComplete: function(status, form, json, options) {
-			if (status) {
-				form.validationEngine('detach').submit();
-			} else {
-				$("#submitBtn").removeAttr("disabled").removeClass("btn-inverse").addClass("btn-primary");
-			}
-		} */
+		ajaxFormValidation : false
 	}); 
 });
 </script>

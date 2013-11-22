@@ -20,5 +20,28 @@
 		<function-class>com.dreamer.education.jsp.tags.FunctionTags</function-class>
 		<function-signature>java.lang.String cut(java.lang.String, int)</function-signature>
 	</function>
-
+	
+	<!-- 下拉框Option -->
+	<tag>
+		<name>option</name>
+		<tag-class>com.dreamer.education.jsp.tags.OptionTags</tag-class>
+		<description>下拉框Option</description>
+		<attribute>
+			<name>option</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[
+				<b>String</b>:下拉选项类别 *
+				<ul>
+					<li>period - 时间间隔
+				</ul>
+			]]></description>
+		</attribute>
+		<attribute>
+			<name>param</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<description><![CDATA[<b>String</b>:参数]]></description>
+		</attribute>
+	</tag>
 </taglib>

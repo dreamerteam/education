@@ -16,7 +16,7 @@
 		<p>学生管理</p>
 		<div style="padding: 5px 3px; overflow: hidden;">
 			<ul class="nav nav-list">
-				<li class="pagination-centered"><a href="javascript:reloadMain('${contextPath}/student/list')">列表</a></li>
+				<li class="pagination-centered"><a href="javascript:reloadMain('${contextPath}/manage/student/list')">列表</a></li>
 			</ul>
 		</div>
 	</div>
