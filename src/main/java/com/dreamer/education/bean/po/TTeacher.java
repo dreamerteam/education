@@ -76,6 +76,25 @@ public class TTeacher implements Serializable {
     /** 更新日期 */
     private Date dupdate;
     
+    /** 自我介绍 */
+    private String cdescription;
+    
+    /**
+     * 获取 自我介绍
+     * @return cdescription
+     */
+    public String getCdescription() {
+        return cdescription;
+    }
+    
+    /**
+     * 设置 自我介绍
+     * @param cdescription 自我介绍
+     */
+    public void setCdescription(String cdescription) {
+        this.cdescription = cdescription;
+    }
+    
     /**
      * 获取 主键ID
      * @return uuid

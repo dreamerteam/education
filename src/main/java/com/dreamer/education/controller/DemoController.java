@@ -1,5 +1,6 @@
 package com.dreamer.education.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.dreamer.education.bean.po.TCourseType;
 import com.dreamer.education.bean.po.TUser;
@@ -62,5 +65,20 @@ public class DemoController {
          * type1.setTCourses(set1); TUser user = new TUser(); user.setCname("s"); user.setUuid("s1"); Set<TUserAuthority> set = new HashSet<TUserAuthority>(); TUserAuthority userAuthority = new TUserAuthority(); userAuthority.setUuid("s3"); set.add(userAuthority); user.setTuserAuthorities(set);
          */
         return new Gson().toJson(list);
+    }
+    
+    /**
+     * 获取课程图片
+     * @param request
+     * @return
+     * @throws IOException
+     * @author broken_xie
+     */
+    @SuppressWarnings("restriction")
+    @RequestMapping("/getImg")
+    @ResponseBody
+    public String getImg(MultipartHttpServletRequest request) throws IOException {
+        MultipartFile multipartFile = request.getFile("f");
+        return new sun.misc.BASE64Encoder().encode(multipartFile.getBytes());
     }
 }

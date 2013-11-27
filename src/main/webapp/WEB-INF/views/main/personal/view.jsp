@@ -21,11 +21,11 @@
 <div class="container" style="height: 100%">
 	<div class="well">
 		<div class="btn-group mb10">
-			<button class="btn btn-primary" onclick="toggleEdit()">修改个人信息</button>
-			<button class="btn btn-primary" onclick="">修改密码</button>
+			<button class="btn btn-primary" onclick="toggleEdit(1)">修改个人信息</button>
+			<button class="btn btn-primary" onclick="$('#updatePsw').modal('show')">修改密码</button>
 		</div>
 		<hr>
-		<form action="${contextPath }/personal/update" method="post" id="updateForm" class="form-horizontal">
+		<form action="${contextPath }/manage/personal/update" method="post" id="updateForm" class="form-horizontal">
 			<input type="hidden" name="uuid" id="uuid" value="<c:out value="${personal.uuid }"/>" />
 			<div class="control-group">
 				<label class="control-label">姓名：</label>
@@ -135,10 +135,46 @@
 			</div>
 			<div class="control-group">
 				<div class="controls">
-					<button type="submit" id="submitBtn" class="btn btn-primary">保 存</button>
+					<button type="submit" id="submitBtn" class="forEdit btn btn-primary">保 存</button>
+					<button type="button" id="cancelBtn" class="forEdit btn btn-primary" onclick="toggleEdit(0)" style="margin-left: 20px;">取 消</button>
 				</div>
 			</div>
 		</form>
+	</div>
+</div>
+<div id="updatePsw" class="modal hide fade" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="modalTitle">修改密码</h3>
+	</div>
+	<div class="modal-body" style="overflow: hidden;">
+		<form action="" method="post" class="form-horizontal" id="updatePswForm">
+			<div class="control-group" >
+				<label class="control-label">原密码：</label>
+				<div class="controls">
+					<input type="password" name="oldPsw" id="oldPsw" placeholder="原密码" class="form-control validate[required,funcCall[validatePsw]]"/>
+				</div>
+			</div>
+			<div class="control-group" >
+				<label class="control-label">新密码：</label>
+				<div class="controls">
+					<input type="password" name="newPsw" id="newPsw" placeholder="新密码" class="form-control validate[required]"/>
+				</div>
+			</div>
+			<div class="control-group" >
+				<label class="control-label">确认密码：</label>
+				<div class="controls">
+					<input type="password" name="confirmPsw" id="confirmPsw" placeholder="确认密码" class="form-control validate[required,funcCall[confirmPassword]]"/>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<div align="center">
+			 <button class="btn" data-dismiss="modal" aria-hidden="true">关 闭</button> 
+			 <button id="updateBtn" class="btn btn-primary" onclick="updatePsw()">修 改</button>
+			</div>
+		</div>
 	</div>
 </div>
 </body>
@@ -154,21 +190,9 @@
 var contextPath = "${contextPath}";
 $(function(){
 	$("#dbirthday").datepicker({dateFormat : "yy-mm-dd"}).attr("readonly","readonly");
-	$("#updateForm").validationEngine({
+	$("#updatePswForm").validationEngine({
 		promptPosition : 'bottomRight',
-		ajaxFormValidation : false/* ,
-		ajaxFormMethod : 'POST',
-		ajaxFormValidationURL : contextPath + '/course/validate',
-		onBeforeAjaxFormValidation: function(form, options) {
-			$("#submitBtn").attr("disabled", "disabled").removeClass("btn-primary").addClass("btn-inverse"); // 禁用保存按钮，防止重复提交表单
-		},
-		onAjaxFormComplete: function(status, form, json, options) {
-			if (status) {
-				form.validationEngine('detach').submit();
-			} else {
-				$("#submitBtn").removeAttr("disabled").removeClass("btn-inverse").addClass("btn-primary");
-			}
-		} */
+		ajaxFormValidation : false
 	}); 
 });
 </script>

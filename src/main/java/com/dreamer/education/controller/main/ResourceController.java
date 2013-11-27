@@ -1,4 +1,4 @@
-package com.dreamer.education.controller;
+package com.dreamer.education.controller.main;
 
 import static com.dreamer.education.utils.StringUtils.getUUID;
 
@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.dreamer.education.bean.po.TResource;
 import com.dreamer.education.bean.qo.ResourceQuery;
+import com.dreamer.education.controller.BaseController;
 import com.dreamer.education.service.TResourceService;
 import com.google.gson.Gson;
 

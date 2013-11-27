@@ -15,7 +15,7 @@
 <div class="container">
 	<!-- 导航条 -->
 	<jsp:include page="/WEB-INF/views/include/webtop.jsp"></jsp:include>
-	<div class="well">
+	<div class="well" style="margin-top: 50px">
 		<%-- <form action="${contextPath }/course/list" class="form-search" id="searchForm">
 			<label>课程名称：</label><input type="text" name="cname" id="cname" class="input-medium search-query">
 			<button type="submit" class="btn btn-primary">查 找</button>

@@ -45,14 +45,13 @@
 		</div>
 		<div class="control-group" style="display: none;">
 			<div class="controls">
-				<img src="${contextPath }/common/images/logo.png" width="200px" height="200px" class="img-rounded">
+				<img src="" width="200px" height="200px" class="img-rounded">
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">搜索关键字：</label>
 			<div class="controls">
-				<input type="text" name="ckeyword" id="ckeyword" placeholder="搜索关键字" class="validate[maxSize3[255]]" />
-				<span style="color: red;">&nbsp;&nbsp;多个搜索关键字请用逗号（,）分隔</span>
+				<input type="text" name="ckeyword" id="ckeyword" placeholder="搜索关键字" class="validate[maxSize3[255]]" data-original-title="多个搜索关键字请用逗号（,）分隔"/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -78,6 +77,7 @@
 <script type="text/javascript">
 var contextPath = "${contextPath}";
 $(function(){
+	$('#ckeyword').tooltip({trigger : "hover"});
 	$("#addForm").validationEngine({
 		promptPosition : 'bottomRight',
 		ajaxFormValidation : true,

@@ -90,13 +90,20 @@
 					<select name="cperiod" id="cperiod">
 						<e:option option="period"/>
 					</select>
-					<input type="text" name="dbgnlession" id="dbgnlession" placeholder="开课起始时间" class="form-control validate[required]"/>
+					<input type="text" name="cbgntime" id="cbgntime" placeholder="开课起始时间" class="form-control validate[required,funcCall[checkTime]]"/>
+					<input type="text" name="cendtime" id="cendtime" placeholder="开课结束时间" class="form-control validate[required,funcCall[checkTime]]"/>
 				</div>
 			</div>
 			<div class="control-group" >
-				<label class="control-label">开课结束时间：</label>
+				<label class="control-label">开课起始日期：</label>
 				<div class="controls">
-					<input type="text" name="dendlession" id="dendlession" placeholder="开课结束时间" class="form-control validate[required]"/>
+					<input type="text" name="dbgnlession" id="dbgnlession" placeholder="开课起始日期" class="form-control validate[required]"/>
+				</div>
+			</div>
+			<div class="control-group" >
+				<label class="control-label">开课结束日期：</label>
+				<div class="controls">
+					<input type="text" name="dendlession" id="dendlession" placeholder="开课结束日期" class="form-control validate[required]"/>
 				</div>
 			</div>
 		</form>
@@ -124,13 +131,23 @@ var contextPath = "${contextPath}";
 var check;
 var dbgnlession = $("#dbgnlession");
 var dendlession = $("#dendlession");
+var cbgntime = $("#cbgntime");
+var cendtime = $("#cendtime");
 $(function(){
 	check = new InitCheck({lineSelected: false, multipleValue:["uuid", "cstatus", "open"]});
+	cbgntime.timepicker({
+		hourGrid: 4,
+		minuteGrid: 10,
+		timeFormat: 'HH:mm'
+	});
+	cendtime.timepicker({
+		hourGrid: 4,
+		minuteGrid: 10,
+		timeFormat: 'HH:mm'
+	});
 	dbgnlession.datetimepicker({
 		dateFormat: 'yy-mm-dd',
-	    timeFormat: 'HH:mm',
-	    addSliderAccess: true,
-		sliderAccessArgs: { touchonly: false },
+	    timeFormat: '',
 		onSelect: function (selectedDateTime){
 			dendlession.datetimepicker('option', 'minDate', dbgnlession.datetimepicker('getDate') );
 		}

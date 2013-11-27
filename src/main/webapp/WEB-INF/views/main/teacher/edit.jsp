@@ -103,6 +103,12 @@
 				</div>
 			</div>
 			<div class="control-group">
+				<label class="control-label">自我介绍：</label>
+				<div class="controls">
+					<textarea name="cdescription" id="cdescription" placeholder="自我介绍" class="validate[maxSize3[500]]"><c:out value="${teacher.cdescription }"/></textarea>
+				</div>
+			</div>
+			<div class="control-group">
 				<div class="controls">
 					<button type="submit" id="submitBtn" class="btn btn-primary">保 存</button>
 				</div>
@@ -125,19 +131,7 @@ $(function(){
 	$("#dbirthday").datepicker({dateFormat : "yy-mm-dd"}).attr("readonly","readonly");
 	$("#editForm").validationEngine({
 		promptPosition : 'bottomRight',
-		ajaxFormValidation : false/* ,
-		ajaxFormMethod : 'POST',
-		ajaxFormValidationURL : contextPath + '/course/validate',
-		onBeforeAjaxFormValidation: function(form, options) {
-			$("#submitBtn").attr("disabled", "disabled").removeClass("btn-primary").addClass("btn-inverse"); // 禁用保存按钮，防止重复提交表单
-		},
-		onAjaxFormComplete: function(status, form, json, options) {
-			if (status) {
-				form.validationEngine('detach').submit();
-			} else {
-				$("#submitBtn").removeAttr("disabled").removeClass("btn-inverse").addClass("btn-primary");
-			}
-		} */
+		ajaxFormValidation : false
 	}); 
 });
 </script>

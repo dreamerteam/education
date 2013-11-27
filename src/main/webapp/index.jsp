@@ -63,7 +63,7 @@
 				 </a>
 			</div>
 			<div class="span4" align="center">
-				 <a href="#">
+				 <a href="${contextPath }/web/index">
 				 	<img src="${contextPath }/web/images/home3.jpg"/>
 				 </a>
 			</div>

@@ -1,7 +1,6 @@
 package com.dreamer.education.service;
 
 import static com.dreamer.education.utils.DateUtils.toDate;
-import static com.dreamer.education.utils.DateUtils.toDateTime;
 import static com.dreamer.education.utils.StringUtils.getUUID;
 
 import java.util.Date;
@@ -157,9 +156,9 @@ public class TCourseService {
         TLession lession = new TLession();
         lession.setCobject("teacher");
         lession.setDcreate(new Date());
-        lession.setDbgnlession(toDateTime(openCourse.getDbgnlession() + ":00"));
+        lession.setDbgnlession(toDate(openCourse.getDbgnlession()));
         lession.setDendlession(toDate(openCourse.getDendlession()));
-        lession.setCperiod(openCourse.getCperiod());
+        lession.setCtime(openCourse.getCperiod() + " " + openCourse.getCbgntime() + "-" + openCourse.getCendtime());
         lession.setDupdate(lession.getDcreate());
         lession.setUcourseid(openCourse.getUuid());
         lession.setUteacherid(sessionContainer.getUser().getUuid());

@@ -15,14 +15,20 @@ public class OpenCourseRequest implements Serializable {
     /** 课程uuid */
     private String uuid;
     
-    /** 开课起始时间 */
+    /** 开课起始日期 */
     private String dbgnlession;
     
-    /** 开课结束时间 */
+    /** 开课结束日期 */
     private String dendlession;
     
     /** 开课间隔时间【每天、周末、周一....】 */
     private String cperiod;
+    
+    /** 开课起始时间 */
+    private String cbgntime;
+    
+    /** 开课结束时间 */
+    private String cendtime;
     
     /**
      * 获取 课程uuid
@@ -41,7 +47,7 @@ public class OpenCourseRequest implements Serializable {
     }
     
     /**
-     * 获取 开课起始时间
+     * 获取 开课起始日期
      * @return dbgnlession
      */
     public String getDbgnlession() {
@@ -49,15 +55,15 @@ public class OpenCourseRequest implements Serializable {
     }
     
     /**
-     * 设置 开课起始时间
-     * @param dbgnlession 开课起始时间
+     * 设置 开课起始日期
+     * @param dbgnlession 开课起始日期
      */
     public void setDbgnlession(String dbgnlession) {
         this.dbgnlession = dbgnlession;
     }
     
     /**
-     * 获取 开课结束时间
+     * 获取 开课结束日期
      * @return dendlession
      */
     public String getDendlession() {
@@ -65,8 +71,8 @@ public class OpenCourseRequest implements Serializable {
     }
     
     /**
-     * 设置 开课结束时间
-     * @param dendlession 开课结束时间
+     * 设置 开课结束日期
+     * @param dendlession 开课结束日期
      */
     public void setDendlession(String dendlession) {
         this.dendlession = dendlession;
@@ -86,6 +92,38 @@ public class OpenCourseRequest implements Serializable {
      */
     public void setCperiod(String cperiod) {
         this.cperiod = cperiod;
+    }
+    
+    /**
+     * 获取 开课起始时间
+     * @return cbgntime
+     */
+    public String getCbgntime() {
+        return cbgntime;
+    }
+    
+    /**
+     * 设置 开课起始时间
+     * @param cbgntime 开课起始时间
+     */
+    public void setCbgntime(String cbgntime) {
+        this.cbgntime = cbgntime;
+    }
+    
+    /**
+     * 获取 开课结束时间
+     * @return cendtime
+     */
+    public String getCendtime() {
+        return cendtime;
+    }
+    
+    /**
+     * 设置 开课结束时间
+     * @param cendtime 开课结束时间
+     */
+    public void setCendtime(String cendtime) {
+        this.cendtime = cendtime;
     }
     
 }

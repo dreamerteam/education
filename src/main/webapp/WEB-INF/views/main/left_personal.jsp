@@ -15,7 +15,7 @@
 		<p>个人信息管理</p>
 		<div style="padding: 5px 3px; overflow: hidden;">
 			<ul class="nav nav-list">
-				<li class="pagination-centered"><a href="javascript:reloadMain('${contextPath}/personal/view')">个人信息管理</a></li>
+				<li class="pagination-centered"><a href="javascript:reloadMain('${contextPath}/manage/personal/view')">个人信息管理</a></li>
 			</ul>
 		</div>
 	</div>

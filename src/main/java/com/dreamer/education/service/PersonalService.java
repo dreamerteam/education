@@ -1,5 +1,7 @@
 package com.dreamer.education.service;
 
+import static com.dreamer.education.utils.Encryption.MD5;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,9 +12,11 @@ import org.springframework.stereotype.Service;
 import com.dreamer.education.bean.co.SessionContainer;
 import com.dreamer.education.bean.po.TManager;
 import com.dreamer.education.bean.po.TTeacher;
+import com.dreamer.education.bean.po.TUser;
 import com.dreamer.education.bean.ro.PersonalRequest;
 import com.dreamer.education.dao.TManagerDao;
 import com.dreamer.education.dao.TTeacherDao;
+import com.dreamer.education.dao.TUserDao;
 
 /**
  * 个人中心业务访问接口
@@ -29,6 +33,10 @@ public class PersonalService {
     /** 教师数据访问接口 */
     @Autowired
     private TTeacherDao teacherDao;
+    
+    /** 用户数据访问接口 */
+    @Autowired
+    private TUserDao userDao;
     
     /**
      * 更新个人信息
@@ -80,5 +88,19 @@ public class PersonalService {
                 break;
         }
         return map;
+    }
+    
+    /**
+     * 更新密码
+     * @param psw 密码
+     * @param sessionContainer 会话容器
+     * @author broken_xie
+     */
+    public TUser updatePsw(String psw, SessionContainer sessionContainer) {
+        TUser user = userDao.findByUuid(sessionContainer.getUser().getUuid());
+        user.setCpassword(MD5(psw));
+        user.setDupdate(new Date());
+        userDao.update(user);
+        return user;
     }
 }

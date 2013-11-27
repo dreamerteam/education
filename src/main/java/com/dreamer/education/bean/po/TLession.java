@@ -31,8 +31,8 @@ public class TLession implements Serializable {
     /** 开课结束时间 */
     private Date dendlession;
     
-    /** 开课间隔时间【每天、周末、周一....】 */
-    private String cperiod;
+    /** 开课时间 */
+    private String ctime;
     
     /** 更新时间 */
     private Date dupdate;
@@ -130,19 +130,19 @@ public class TLession implements Serializable {
     }
     
     /**
-     * 获取 开课间隔时间【每天、周末、周一....】
-     * @return cperiod
+     * 获取 开课时间
+     * @return ctime
      */
-    public String getCperiod() {
-        return cperiod;
+    public String getCtime() {
+        return ctime;
     }
     
     /**
-     * 设置 开课间隔时间【每天、周末、周一....】
-     * @param cperiod 开课间隔时间【每天、周末、周一....】
+     * 设置 开课时间
+     * @param ctime 开课时间
      */
-    public void setCperiod(String cperiod) {
-        this.cperiod = cperiod;
+    public void setCtime(String ctime) {
+        this.ctime = ctime;
     }
     
     /**

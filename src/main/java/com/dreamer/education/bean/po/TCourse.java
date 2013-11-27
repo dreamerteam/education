@@ -55,6 +55,25 @@ public class TCourse implements Serializable {
     /** 是否开课【0：待开课；1：开课】 */
     private String copen;
     
+    /** 图片路径 */
+    private String cpath;
+    
+    /**
+     * 获取 图片路径
+     * @return cpath
+     */
+    public String getCpath() {
+        return cpath;
+    }
+    
+    /**
+     * 设置 图片路径
+     * @param cpath 图片路径
+     */
+    public void setCpath(String cpath) {
+        this.cpath = cpath;
+    }
+    
     /**
      * 获取 是否开课【0：待开课；1：开课】
      * @return copen

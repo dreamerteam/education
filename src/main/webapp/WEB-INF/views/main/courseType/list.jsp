@@ -14,8 +14,8 @@
 <body>
 <div id="page">
 	<div class="well">
-		<form action="${contextPath }/courseType/list" class="form-search" id="searchForm">
-			<label>课程类型名称：</label><input type="text" name="cname" id="cname" class="input-medium search-query">
+		<form action="${contextPath }/manage/courseType/list" class="form-search" id="searchForm">
+			<label>课程类型名称：</label><input type="text" name="cname" id="cname" class="input-medium search-query" value="${param.cname }">
 			<button type="submit" class="btn btn-primary">查 找</button>
 		</form>
 	</div>

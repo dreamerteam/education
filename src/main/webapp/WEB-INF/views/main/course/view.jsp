@@ -15,7 +15,7 @@
 }
 </style>
 </head>
-<body id="page">
+<body>
 <div class="well">
 	<table class="table table-bordered table-hover">
 		<tbody>
@@ -42,6 +42,11 @@
 			<tr>
 				<th>课程启用状态：</th>
 				<td><c:out value="${e:convert('course_status', courseResponse.cstatus) }"/></td>
+			</tr>
+			<tr>
+				<th>课程图片：</th>
+				<td>
+					<img src="${contextPath }/<c:out value="${courseResponse.cpath}"/>" class="img-rounded" width="100px" height="100px">
 			</tr>
 		</tbody>
 	</table>

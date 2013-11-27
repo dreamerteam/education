@@ -71,7 +71,7 @@ public class TCourseDao extends BaseDao<TCourse> {
      * @author broken_xie
      */
     public CourseResponse findForView(String uuid) {
-        StringBuilder sql = new StringBuilder("SELECT tc.uuid, tc.cname, tc.cstatus, ihot, ckeyword, tct.cname as ctypename ");
+        StringBuilder sql = new StringBuilder("SELECT tc.uuid, tc.cname, tc.cstatus, ihot, ckeyword, tct.cname as ctypename, tc.cpath ");
         sql.append(" , tc.cdescription, tc.utypeid, tc.caudit ");
         sql.append(" FROM t_course tc LEFT JOIN t_course_type tct ");
         sql.append(" ON tc.utypeid = tct.uuid ");

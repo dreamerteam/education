@@ -93,7 +93,7 @@
 		<div class="navbar">
 			<div class="navbar-inner">
 				<a class="brand" href="javascript:void(0)">免费资料</a>
-				<a href="${contextPath }/web/resource/listForFree" class="pull-right" style="padding-top: 10px;">更多</a>
+				<a href="${contextPath }/web/resource/list" class="pull-right" style="padding-top: 10px;">更多</a>
 			</div>
 			<ul class="thumbnails">
 				<c:forEach items="${resources }" var="resource">

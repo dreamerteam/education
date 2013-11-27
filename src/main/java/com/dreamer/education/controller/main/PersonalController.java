@@ -1,16 +1,22 @@
-package com.dreamer.education.controller;
+package com.dreamer.education.controller.main;
 
+import static com.dreamer.education.utils.Encryption.MD5;
+
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dreamer.education.bean.co.SessionContainer;
 import com.dreamer.education.bean.po.TManager;
 import com.dreamer.education.bean.po.TTeacher;
+import com.dreamer.education.bean.po.TUser;
 import com.dreamer.education.bean.ro.PersonalRequest;
+import com.dreamer.education.controller.BaseController;
 import com.dreamer.education.service.PersonalService;
 
 /**
@@ -19,7 +25,7 @@ import com.dreamer.education.service.PersonalService;
  * @author broken_xie
  */
 @Controller
-@RequestMapping("/personal")
+@RequestMapping("/manage/personal")
 public class PersonalController extends BaseController {
     
     /** 个人中心业务访问接口 */
@@ -48,7 +54,7 @@ public class PersonalController extends BaseController {
             default:
                 break;
         }
-        return mainPage();
+        return "/main/personal/view";
     }
     
     /**
@@ -73,6 +79,50 @@ public class PersonalController extends BaseController {
             default:
                 break;
         }
-        return redirect("/personal/view");
+        return redirect("/manage/personal/view");
     }
+    
+    /**
+     * 校验原密码
+     * @param psw 原密码
+     * @return
+     * @author broken_xie
+     */
+    @RequestMapping("/validatePsw")
+    @ResponseBody
+    public Map<String, String> validatePsw(String psw) {
+        Map<String, String> map = new HashMap<String, String>();
+        boolean isEqual = MD5(psw).equals(getSessionContainer().getUser().getCpassword());
+        if (isEqual) {
+            map.put("result", "success");
+            return map;
+        } else {
+            map.put("result", "failure");
+            return map;
+        }
+    }
+    
+    /**
+     * 更新密码
+     * @param psw 密码
+     * @return
+     * @author broken_xie
+     */
+    @RequestMapping("/updatePsw")
+    @ResponseBody
+    public Map<String, String> updatePsw(String psw) {
+        Map<String, String> map = new HashMap<String, String>();
+        try {
+            TUser user = personalService.updatePsw(psw, getSessionContainer());
+            getSessionContainer().setUser(user);
+            map.put("result", "success");
+            return map;
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("result", "failure");
+            map.put("error", "操作失败，请稍后再试");
+            return map;
+        }
+    }
+    
 }

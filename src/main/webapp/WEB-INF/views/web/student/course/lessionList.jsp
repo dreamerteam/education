@@ -25,8 +25,9 @@
 				<tr>
 				 	<th>序号</th>
 				 	<th>名称</th>
-				 	<th>开课起始时间</th>
-				 	<th>开课结束时间</th>
+				 	<th>开课时间</th>
+				 	<th>开课起始日期</th>
+				 	<th>开课结束日期</th>
 				 	<th>类型</th>
 				 	<th>热门度</th>
 				 </tr>
@@ -36,7 +37,8 @@
 				 	<tr>
 				 		<td>${st.index + 1 }</td>
 				 		<td><c:out value="${lession.ccoursename }"/></td>
-				 		<td><c:out value="${lession.cperiod }"/>&nbsp;&nbsp;<fmt:formatDate value="${lession.dbgnlession }" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+				 		<td><c:out value="${lession.ctime }"/></td>
+				 		<td><fmt:formatDate value="${lession.dbgnlession }" pattern="yyyy-MM-dd" /></td>
 				 		<td><fmt:formatDate value="${lession.dendlession }" pattern="yyyy-MM-dd" /></td>
 				 		<td><c:out value="${lession.ctypename }"/></td>
 				 		<td><c:out value="${lession.ihot }"/></td>

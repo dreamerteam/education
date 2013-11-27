@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>万花登录</title>
+<title>万花</title>
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/bootstrap/css/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/css/validationEngine.jquery.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/css/base.css" />
@@ -96,6 +96,7 @@ $(function(){
 					}
 				});
 			} else {
+				reloadCaptcha();
 				$("#submitBtn").removeAttr("disabled").removeClass("btn-inverse").addClass("btn-primary");
 			}
 		}

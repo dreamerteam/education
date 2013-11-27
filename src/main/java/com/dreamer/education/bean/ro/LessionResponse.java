@@ -16,14 +16,14 @@ public class LessionResponse implements Serializable {
     /** 主键ID */
     private String uuid;
     
-    /** 开课起始时间 */
+    /** 开课起始日期 */
     private Date dbgnlession;
     
-    /** 开课结束时间 */
+    /** 开课结束日期 */
     private Date dendlession;
     
-    /** 开课间隔时间【每天、周末、周一....】 */
-    private String cperiod;
+    /** 开课时间 */
+    private String ctime;
     
     /** 课程名称 */
     private String ccoursename;
@@ -51,7 +51,7 @@ public class LessionResponse implements Serializable {
     }
     
     /**
-     * 获取 开课起始时间
+     * 获取 开课起始日期
      * @return dbgnlession
      */
     public Date getDbgnlession() {
@@ -59,15 +59,15 @@ public class LessionResponse implements Serializable {
     }
     
     /**
-     * 设置 开课起始时间
-     * @param dbgnlession 开课起始时间
+     * 设置 开课起始日期
+     * @param dbgnlession 开课起始日期
      */
     public void setDbgnlession(Date dbgnlession) {
         this.dbgnlession = dbgnlession;
     }
     
     /**
-     * 获取 开课结束时间
+     * 获取 开课结束日期
      * @return dendlession
      */
     public Date getDendlession() {
@@ -75,27 +75,27 @@ public class LessionResponse implements Serializable {
     }
     
     /**
-     * 设置 开课结束时间
-     * @param dendlession 开课结束时间
+     * 设置 开课结束日期
+     * @param dendlession 开课结束日期
      */
     public void setDendlession(Date dendlession) {
         this.dendlession = dendlession;
     }
     
     /**
-     * 获取 开课间隔时间【每天、周末、周一....】
-     * @return cperiod
+     * 获取 开课时间
+     * @return ctime
      */
-    public String getCperiod() {
-        return cperiod;
+    public String getCtime() {
+        return ctime;
     }
     
     /**
-     * 设置 开课间隔时间【每天、周末、周一....】
-     * @param cperiod 开课间隔时间【每天、周末、周一....】
+     * 设置 开课时间
+     * @param ctime 开课时间
      */
-    public void setCperiod(String cperiod) {
-        this.cperiod = cperiod;
+    public void setCtime(String ctime) {
+        this.ctime = ctime;
     }
     
     /**
@@ -140,6 +140,7 @@ public class LessionResponse implements Serializable {
     
     /**
      * 设置 课程类型名称
+     * @param ctypename 课程类型名称
      */
     public void setCtypename(String ctypename) {
         this.ctypename = ctypename;

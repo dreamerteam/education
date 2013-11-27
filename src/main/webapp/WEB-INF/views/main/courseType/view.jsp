@@ -12,26 +12,22 @@
 </head>
 <body id="page">
 <div class="well">
-	<form class="form-horizontal">
-		<div class="control-group">
-			<label class="control-label">课程类型名称：</label>
-			<div class="controls">
-				<label style="padding-top: 5px;"><c:out value="${courseTypeResponse.cname }"/></label>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">课程类型代码：</label>
-			<div class="controls">
-				<label style="padding-top: 5px;"><c:out value="${courseTypeResponse.ccode }"/></label>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">上级课程类型名称：</label>
-			<div class="controls">
-				<label style="padding-top: 5px;"><c:out value="${courseTypeResponse.cparentname }"/></label>
-			</div>
-		</div>
-	</form>
+	<table class="table table-bordered .table-hover">
+		<tbody>
+			<tr>
+				<td width="200px">课程类型名称：</td>
+				<td><c:out value="${courseTypeResponse.cname }"/></td>
+			</tr>
+			<tr>
+				<td>课程类型代码：</td>
+				<td><c:out value="${courseTypeResponse.ccode }"/></td>
+			</tr>
+			<tr>
+				<td>上级课程类型名称：</td>
+				<td><c:out value="${courseTypeResponse.cparentname }"/></td>
+			</tr>
+		</tbody>
+	</table>
 </div>
 </body>
 <script type="text/javascript" src="${contextPath }/common/jquery/jquery.js" ></script>

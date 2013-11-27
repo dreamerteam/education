@@ -45,7 +45,7 @@
 var contextPath = "${contextPath}";
 var li = $(".nav li");
 function logout(){
-	$.post(contextPath + "/manage/logout",function(){
+	$.post(contextPath + "/logout",function(){
 		parent.document.location.href=contextPath+"/manage";
 	});
 }

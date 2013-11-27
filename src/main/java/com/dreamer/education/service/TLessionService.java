@@ -50,7 +50,7 @@ public class TLessionService {
         TLession lession = lessionDao.findByUcourseidAndCobject(ucourseid, "teacher");
         TLession l = new TLession();
         l.setCobject("student");
-        l.setCperiod(lession.getCperiod());
+        l.setCtime(lession.getCtime());
         l.setDbgnlession(lession.getDbgnlession());
         l.setDcreate(new Date());
         l.setDendlession(lession.getDendlession());

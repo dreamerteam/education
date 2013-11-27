@@ -13,98 +13,70 @@
 <body>
 <div class="container" style="height: 100%">
 	<div class="well">
-		<form class="form-horizontal">
-			<div class="control-group">
-				<label class="control-label">姓名：</label>
-				<div class="controls">
-					<label style="padding-top: 5px;"><c:out value="${student.cname }"/></label>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">性别：</label>
-				<div class="controls">
-					<label style="padding-top: 5px;"><c:out value="${student.csex }"/></label>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">教师编号：</label>
-				<div class="controls">
-					<label style="padding-top: 5px;"><c:out value="${student.cno }"/></label>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">昵称：</label>
-				<div class="controls">
-					<label style="padding-top: 5px;"><c:out value="${student.cnickname }"/></label>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">身份证：</label>
-				<div class="controls">
-					<label style="padding-top: 5px;"><c:out value="${student.cidcard }"/></label>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">国籍：</label>
-				<div class="controls">
-					<label style="padding-top: 5px;"><c:out value="${student.ccountry }"/></label>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">籍贯：</label>
-				<div class="controls">
-					<label style="padding-top: 5px;"><c:out value="${student.cnativeplace }"/></label>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">学历：</label>
-				<div class="controls">
-					<label style="padding-top: 5px;"><c:out value="${student.ceducation }"/></label>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">生日：</label>
-				<div class="controls">
-					<label style="padding-top: 5px;"><fmt:formatDate  value="${student.dbirthday }" pattern="yyyy-MM-dd"/></label>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">手机号：</label>
-				<div class="controls">
-					<label style="padding-top: 5px;"><c:out value="${student.cmobile }"/></label>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">固定电话：</label>
-				<div class="controls">
-					<label style="padding-top: 5px;"><c:out value="${student.cfixedline }"/></label>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">住址：</label>
-				<div class="controls">
-					<label style="padding-top: 5px;"><c:out value="${student.caddress }"/></label>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">QQ号：</label>
-				<div class="controls">
-					<label style="padding-top: 5px;"><c:out value="${student.cqq }"/></label>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">MSN号：</label>
-				<div class="controls">
-					<label style="padding-top: 5px;"><c:out value="${student.cmsn }"/></label>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">邮箱：</label>
-				<div class="controls">
-					<label style="padding-top: 5px;"><c:out value="${student.cemail }"/></label>
-				</div>
-			</div>
-		</form>
+		<table class="table table-bordered table-hover">
+			<tbody>
+				<tr>
+					<td>姓名：</td>
+					<td><c:out value="${student.cname }"/></td>
+				</tr>
+				<tr>
+					<td>性别：</td>
+					<td><c:out value="${student.csex }"/></td>
+				</tr>
+				<tr>
+					<td>学生编号：</td>
+					<td><c:out value="${student.cno }"/></td>
+				</tr>
+				<tr>
+					<td>昵称：</td>
+					<td><c:out value="${student.cnickname }"/></td>
+				</tr>
+				<tr>
+					<td>身份证：</td>
+					<td><c:out value="${student.cidcard }"/></td>
+				</tr>
+				<tr>
+					<td>国籍：</td>
+					<td><c:out value="${student.ccountry }"/></td>
+				</tr>
+				<tr>
+					<td>籍贯：</td>
+					<td><c:out value="${student.cnativeplace }"/></td>
+				</tr>
+				<tr>
+					<td>学历：</td>
+					<td><c:out value="${student.ceducation }"/></td>
+				</tr>
+				<tr>
+					<td>生日：</td>
+					<td><fmt:formatDate  value="${student.dbirthday }" pattern="yyyy-MM-dd"/></td>
+				</tr>
+				<tr>
+					<td>手机号：</td>
+					<td><c:out value="${student.cmobile }"/></td>
+				</tr>
+				<tr>
+					<td>固定电话：</td>
+					<td><c:out value="${student.cfixedline }"/></td>
+				</tr>
+				<tr>
+					<td>住址：</td>
+					<td><c:out value="${student.caddress }"/></td>
+				</tr>
+				<tr>
+					<td>QQ号：</td>
+					<td><c:out value="${student.cqq }"/></td>
+				</tr>
+				<tr>
+					<td>MSN号：</td>
+					<td><c:out value="${student.cmsn }"/></td>
+				</tr>
+				<tr>
+					<td>邮箱：</td>
+					<td><c:out value="${student.cemail }"/></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </div>
 </body>

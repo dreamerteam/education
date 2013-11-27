@@ -25,3 +25,10 @@ ALTER TABLE t_lession ADD cperiod VARCHAR(100) NOT NULL; -- 开课间隔时间�
 
 -- 2013-11-21
 ALTER TABLE t_lession_select RENAME TO t_course_favorite;
+
+-- 2013-11-25
+ALTER TABLE t_course add cpath VARCHAR(500) NULL; -- 课程图片路径
+ALTER TABLE t_teacher ADD cdescription VARCHAR(500) NULL; -- 教师自我介绍
+
+-- 2013-11-26
+ALTER TABLE t_lession CHANGE cperiod ctime VARCHAR(100) NULL; -- 上课时间

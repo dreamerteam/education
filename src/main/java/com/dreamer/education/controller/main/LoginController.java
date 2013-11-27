@@ -1,4 +1,4 @@
-package com.dreamer.education.controller;
+package com.dreamer.education.controller.main;
 
 import static com.dreamer.education.utils.Encryption.MD5;
 
@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.dreamer.education.bean.co.SessionContainer;
 import com.dreamer.education.bean.po.TUser;
 import com.dreamer.education.bean.ro.LoginRequest;
+import com.dreamer.education.controller.BaseController;
 import com.dreamer.education.service.TManagerService;
 import com.dreamer.education.service.TStudentService;
 import com.dreamer.education.service.TTeacherService;
@@ -189,4 +190,5 @@ public class LoginController extends BaseController {
         result[0][1] = true;
         return new Gson().toJson(result);
     }
+    
 }

@@ -45,6 +45,25 @@ public class CourseResponse implements Serializable {
     /** 上课时间表uuid */
     private String ulessionid;
     
+    /** 图片路径 */
+    private String cpath;
+    
+    /**
+     * 获取 图片路径
+     * @return cpath
+     */
+    public String getCpath() {
+        return cpath;
+    }
+    
+    /**
+     * 设置 图片路径
+     * @param cpath 图片路径
+     */
+    public void setCpath(String cpath) {
+        this.cpath = cpath;
+    }
+    
     /**
      * 获取 上课时间表uuid
      * @return ulessionid

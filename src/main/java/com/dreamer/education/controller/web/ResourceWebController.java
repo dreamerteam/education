@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.dreamer.education.bean.co.SessionContainer;
 import com.dreamer.education.bean.qo.ResourceQuery;
 import com.dreamer.education.controller.BaseController;
 import com.dreamer.education.service.TResourceService;
@@ -45,9 +46,14 @@ public class ResourceWebController extends BaseController {
      * @return
      * @author broken_xie
      */
-    @RequestMapping("/listForFree")
+    @RequestMapping("/list")
     public String listForFree(ResourceQuery query, @RequestParam(defaultValue = "1") int currentPage, Model model) {
-        query.setCfree("1");
+        SessionContainer sessionContainer = getSessionContainer();
+        if(null == sessionContainer){
+            query.setCfree("1");
+        } else if(!"student".equals(sessionContainer.getAuthority())){
+            query.setCfree("1");
+        }
         model.addAttribute("page", resourceService.findPageByQuery(query, currentPage));
         return "web/resource/list";
     }

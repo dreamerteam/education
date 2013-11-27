@@ -1,4 +1,4 @@
-package com.dreamer.education.controller;
+package com.dreamer.education.controller.main;
 
 import static com.dreamer.education.utils.ValidateUtils.isEmpty;
 import static com.dreamer.education.utils.ValidateUtils.isUUID;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dreamer.education.bean.po.TCourseType;
 import com.dreamer.education.bean.qo.CourseTypeVlidate;
+import com.dreamer.education.controller.BaseController;
 import com.dreamer.education.service.TCourseTypeService;
 import com.google.gson.Gson;
 

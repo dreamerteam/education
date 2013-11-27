@@ -1,7 +1,9 @@
-package com.dreamer.education.controller;
+package com.dreamer.education.controller.main;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.dreamer.education.controller.BaseController;
 
 /**
  * 后台管理控制器

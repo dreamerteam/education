@@ -99,7 +99,8 @@ function openCourse(){
 	params["dbgnlession"] = $("#dbgnlession").val();
 	params["dendlession"] = $("#dendlession").val();
 	params["cperiod"] = $("#cperiod").val();
-	console.log(params);
+	params["cbgntime"] = $("#cbgntime").val();
+	params["cendtime"] = $("#cendtime").val();
 	$.post(contextPath + "/manage/course/open", params, function(data){
 		if("success" == data.result){
 			window.location.reload();
@@ -107,4 +108,23 @@ function openCourse(){
 			alert("操作失败，请稍后再试");
 		}
 	});
+}
+
+/**
+ * 开课时间校验
+ * @auth broken_xie
+ * @returns {String}
+ */
+function checkTime(field, rules, i, options){
+	if($("#cbgntime") == field){
+		if($("#cendtime").val() < field.val()){
+			field.val("");
+			return options.allrules.alertText = "* 开课结束时间不能小于开课起始时间！";
+		}
+	} else {
+		if($("#cbgntime").val() > field.val()){
+			field.val("");
+			return options.allrules.alertText = "* 开课结束时间不能小于开课起始时间！";
+		}
+	}
 }

@@ -31,4 +31,18 @@ public class TUserDao extends BaseDao<TUser> {
         List<TUser> users = getJdbcTemplate().query(sql, map, new BeanPropertyRowMapper<TUser>(TUser.class));
         return users.isEmpty() ? null : users.get(0);
     }
+    
+    /**
+     * 根据用户id查找用户信息
+     * @param uuid 用户id
+     * @return
+     * @author broken_xie
+     */
+    public TUser findByUuid(String uuid) {
+        String sql = "select * from t_user where uuid = :uuid";
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("uuid", uuid);
+        List<TUser> users = getJdbcTemplate().query(sql, map, new BeanPropertyRowMapper<TUser>(TUser.class));
+        return users.isEmpty() ? null : users.get(0);
+    }
 }

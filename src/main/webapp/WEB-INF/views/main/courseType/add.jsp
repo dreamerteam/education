@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/jquery/validationEngine.jquery.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/css/base.css" />
 </head>
-<body id="page">
+<body>
 <div class="well">
 	<form action="${contextPath }/manage/courseType/add" method="post" class="form-horizontal" id="addForm">
 		<input type="hidden" name="coperate" id="coperate" value="add" />
@@ -28,15 +28,13 @@
 		<div class="control-group">
 			<label class="control-label"><div class="inline" style="color: red;"> * </div>课程类型代码：</label>
 			<div class="controls">
-				<input type="text" name="ccode" id="ccode" placeholder="课程类型代码" class="validate[required,maxSize3[20]]" />
-				<span style="color: red;">&nbsp;&nbsp;建议使用课程类型名称拼音首字母</span>
+				<input type="text" name="ccode" id="ccode" placeholder="课程类型代码" class="validate[required,maxSize3[20]]" data-original-title="建议使用课程类型名称拼音首字母"/>
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">上级课程类型：</label>
 			<div class="controls">
-				<input type="text" name="parenttype" id="parenttype" placeholder="上级课程类型"/>
-				<span style="color: red;">&nbsp;&nbsp;顶级课程类型不需要选课程类型</span>
+				<input type="text" name="parenttype" id="parenttype" placeholder="上级课程类型" data-original-title="顶级课程类型不需要选课程类型"/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -64,6 +62,7 @@
 var contextPath = "${contextPath}";
 var page = $("#page");
 $(function(){
+	$('#ccode,#parenttype').tooltip({trigger : "hover"});
 	autoComplete(true, $("#parenttype"), courseType, $("#uparentid"), $("#ilevel"), $("#cparentcode"));
 	
 	$("#addForm").validationEngine({

@@ -1,5 +1,10 @@
-package com.dreamer.education.controller;
+package com.dreamer.education.controller.main;
 
+import static com.dreamer.education.utils.StringUtils.getUUID;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,12 +14,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.dreamer.education.bean.po.TCourse;
 import com.dreamer.education.bean.qo.CourseQuery;
 import com.dreamer.education.bean.qo.CourseValidate;
 import com.dreamer.education.bean.qo.LessionQuery;
 import com.dreamer.education.bean.ro.OpenCourseRequest;
+import com.dreamer.education.controller.BaseController;
 import com.dreamer.education.service.TCourseService;
 import com.dreamer.education.service.TLessionService;
 import com.google.gson.Gson;
@@ -41,9 +50,24 @@ public class CourseController extends BaseController {
      * @param courseType 课程
      * @return
      * @author broken_xie
+     * @throws IOException
      */
     @RequestMapping("/add")
-    public String add(TCourse course) {
+    public String add(TCourse course, MultipartHttpServletRequest request) throws IOException {
+        MultipartFile multipartFile = request.getFile("courseImg");
+        String realPath = ContextLoader.getCurrentWebApplicationContext().getServletContext().getRealPath("/");
+        String filename = getUUID() + String.valueOf(System.currentTimeMillis());
+        File dir = new File(realPath + File.separator + "file/courseImg/");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        File file = new File(dir + File.separator + filename + ".png");
+        file.createNewFile();
+        FileOutputStream fos = new FileOutputStream(file);
+        fos.write(multipartFile.getBytes());
+        fos.flush();
+        fos.close();
+        course.setCpath("/file/courseImg/" + filename + ".png");
         courseService.add(course, getSessionContainer());
         return SUCCESS;
     }
@@ -208,6 +232,20 @@ public class CourseController extends BaseController {
             map.put("result", "failure");
             return map;
         }
-        
+    }
+    
+    /**
+     * 获取课程图片
+     * @param request
+     * @return
+     * @throws IOException
+     * @author broken_xie
+     */
+    @SuppressWarnings("restriction")
+    @RequestMapping("/getImg")
+    @ResponseBody
+    public String getImg(MultipartHttpServletRequest request) throws IOException {
+        MultipartFile multipartFile = request.getFile("courseImg");
+        return new sun.misc.BASE64Encoder().encode(multipartFile.getBytes());
     }
 }

@@ -120,6 +120,12 @@
 				</div>
 			</div>
 			<div class="control-group">
+				<label class="control-label">自我介绍：</label>
+				<div class="controls">
+					<textarea name="cdescription" id="cdescription" placeholder="自我介绍" class="validate[maxSize3[500]]"></textarea>
+				</div>
+			</div>
+			<div class="control-group">
 				<div class="controls">
 					<button type="submit" id="submitBtn" class="btn btn-primary">保 存</button>
 				</div>

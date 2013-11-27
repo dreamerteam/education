@@ -31,7 +31,7 @@ public class TLessionDao extends BaseDao<TLession> {
      * @author broken_xie
      */
     public Page<LessionResponse> findPageByQuery(LessionQuery query, Page<LessionResponse> page, SessionContainer sessionContainer) {
-        StringBuilder sql = new StringBuilder("SELECT tl.uuid, tl.dbgnlession, tl.dendlession, tl.cperiod, tc.cname as ccoursename, tc.ihot, tc.ckeyword, tct.cname as ctypename ");
+        StringBuilder sql = new StringBuilder("SELECT tl.uuid, tl.dbgnlession, tl.dendlession, tl.ctime, tc.cname as ccoursename, tc.ihot, tc.ckeyword, tct.cname as ctypename ");
         sql.append(" FROM t_course tc, t_lession tl, t_course_type tct");
         sql.append(" WHERE tc.uuid = tl.ucourseid ");
         sql.append(" AND tc.utypeid = tct.uuid ");

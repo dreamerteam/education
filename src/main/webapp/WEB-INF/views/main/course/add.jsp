@@ -11,10 +11,11 @@
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/jquery/jquery-ui/themes/jquery.ui.all.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/jquery/validationEngine.jquery.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/css/base.css" />
+<link rel="stylesheet" type="text/css" href="${contextPath }/common/jquery/jquery-file-upload/css/jquery.fileupload.css" />
 </head>
 <body id="page">
 <div class="well">
-	<form action="${contextPath }/manage/course/add" method="post" class="form-horizontal" id="addForm">
+	<form action="${contextPath }/manage/course/add" method="post" class="form-horizontal" id="addForm" enctype="multipart/form-data">
 		<input type="hidden" name="coperate" id="coperate" value="add" />
 		<input type="hidden" name="utypeid" id="utypeid"/>
 		<div class="control-group">
@@ -30,10 +31,20 @@
 			</div>
 		</div>
 		<div class="control-group">
+			<label class="control-label"><div class="inline" style="color: red;"> * </div>课程图片：</label>
+			<div class="controls">
+				<input type="file" name="courseImg" id="courseImg" placeholder="课程图片" class="validate[required]"/>
+			</div>
+		</div>
+		<div class="control-group" style="display: none;" id="courseImgShow">
+			<div class="controls">
+				<img src="" width="200px" height="200px" class="img-rounded">
+			</div>
+		</div>
+		<div class="control-group">
 			<label class="control-label">搜索关键字：</label>
 			<div class="controls">
-				<input type="text" name="ckeyword" id="ckeyword" placeholder="搜索关键字" class="validate[maxSize3[255]]" />
-				<span style="color: red;">&nbsp;&nbsp;多个搜索关键字请用逗号（,）分隔</span>
+				<input type="text" name="ckeyword" id="ckeyword" placeholder="搜索关键字" class="validate[maxSize3[255]]" data-original-title="多个搜索关键字请用逗号（,）分隔"/>
 			</div>
 		</div>
 		<div class="control-group">
@@ -63,10 +74,11 @@
 <script type="text/javascript" src="${contextPath }/common/bootstrap/js/html5shiv.js" ></script>
 <script type="text/javascript" src="${contextPath }/common/js/function.js" ></script>
 <script type="text/javascript" src="${contextPath}/autoComplete/courseType" ></script>
+<script type="text/javascript" src="${contextPath }/common/jquery/jquery.form.js" ></script>
 <script type="text/javascript">
 var contextPath = "${contextPath}";
-var page = $("#page");
 $(function(){
+	$("#ckeyword").tooltip({trigger : "hover"});
 	autoComplete(true, $("#courseType"), courseType, $("#utypeid"));
 	
 	$("#addForm").validationEngine({

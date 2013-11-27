@@ -14,7 +14,7 @@
 <div class="container">
 	<!-- 导航条 -->
 	<jsp:include page="/WEB-INF/views/include/webtop.jsp"></jsp:include>
-	<div class="thumbnails">
+	<div class="thumbnails" style="margin-top: 50px">
 		<div class="thumbnail">
 			<h3 align="center"><c:out value="${resource.cname }"/></h3>
 			<p style="text-indent: 2em;"><c:out value="${resource.cdescription}"/></p>

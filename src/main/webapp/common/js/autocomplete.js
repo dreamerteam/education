@@ -77,7 +77,6 @@ $.widget("dreamer.autocomplete", $.ui.autocomplete, {
 	},
 	
 	_change: function( event ) {
-		console.log(this._value());
 		if("" == this._value()){
 			this._trigger( "clear", event);
 		}
