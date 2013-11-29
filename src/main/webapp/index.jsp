@@ -124,13 +124,13 @@
 							<div class="control-group">
 								<label class="control-label"><div class="inline" style="color: red;"> * </div>用户名：</label>
 								<div class="controls">
-									<input type="text" name="clogin" id="clogin" placeholder="用户名" class="validate[required,minSize[6],maxSize3[36]]" />
+									<input type="text" name="regClogin" id="regClogin" placeholder="用户名" class="validate[required,minSize[6],maxSize3[36]]" />
 								</div>
 							</div>
 							<div class="control-group">
 								<label class="control-label"><div class="inline" style="color: red;"> * </div>密码：</label>
 								<div class="controls">
-									<input type="password" name="cpassword" id="cpassword" placeholder="密码" class="validate[required,maxSize3[36]]" />
+									<input type="password" name="cpassword" id="regPsw" placeholder="密码" class="validate[required,maxSize3[36]]" />
 								</div>
 							</div>
 							<div class="control-group">
@@ -219,7 +219,18 @@ $(function(){
 		},
 		onAjaxFormComplete: function(status, form, json, options) {
 			if (status) {
-				form.validationEngine('detach').submit();
+				var params = {};
+				params["clogin"] = $("#regClogin").val();
+				params["cpassword"] = $("#regPsw").val();
+				$.post(contextPath + "/student/register", params, function(data){
+					if("success" == data.result){
+						alert("注册成功！请登录！");
+						window.location.href = contextPath + "/page/web/student/index";
+					} else {
+						$("#registerBtn").removeAttr("disabled").removeClass("btn-inverse").addClass("btn-primary");
+						alert(data.error);
+					}
+				});
 			} else {
 				$("#clogin").val("");
 				$("#registerBtn").removeAttr("disabled").removeClass("btn-inverse").addClass("btn-primary");

@@ -7,7 +7,7 @@ contextPath = typeof (contextPath) == "undefined" ? "" : contextPath;
  * @returns {String}
  */
 function confirmPassword(field, rules, i, options){
-	if($("#cpassword").val() != field.val()){
+	if($("#regPsw").val() != field.val()){
 		field.val("");
 		return options.allrules.alertText = "* 两次输入的密码不一致！";
 	}

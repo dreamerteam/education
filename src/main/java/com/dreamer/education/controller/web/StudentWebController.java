@@ -65,10 +65,10 @@ public class StudentWebController extends BaseController {
      */
     @RequestMapping("/student/validate")
     @ResponseBody
-    public String validate(String clogin) {
+    public String validate(String regClogin) {
         Object[][] result = new Object[1][3];
-        result[0][0] = "clogin";
-        boolean isCloginExist = userService.isCloginExist(clogin);
+        result[0][0] = "regClogin";
+        boolean isCloginExist = userService.isCloginExist(regClogin);
         result[0][1] = !isCloginExist;
         if (isCloginExist) {
             result[0][2] = "* 登录名已存在，请重新填写！";
@@ -82,9 +82,20 @@ public class StudentWebController extends BaseController {
      * @author broken_xie
      */
     @RequestMapping("/student/register")
-    public String register(TUser user) {
-        userService.register(user, "student", getSessionContainer());
-        return "/web/student/personal/index";
+    @ResponseBody
+    public Map<String, Object> register(TUser user) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        try {
+            userService.register(user, "student", getSessionContainer());
+            map.put("result", "success");
+            return map;
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e);
+            map.put("result", "failure");
+            map.put("error", "登录失败，请稍后再试！");
+            return map;
+        }
     }
     
     /**
@@ -212,7 +223,7 @@ public class StudentWebController extends BaseController {
     @RequestMapping("/web/student/personal/view")
     public String view(Model model) {
         getPersonalInfo(model);
-        return requestPage();
+        return "/web/student/personal/view";
     }
     
     /**
