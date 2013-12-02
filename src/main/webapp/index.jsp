@@ -12,7 +12,16 @@
 <link rel="stylesheet" type="text/css" href="${contextPath }/common/css/base.css" />
 <link rel="stylesheet" type="text/css" href="${contextPath }/web/css/index.css" />
 </head>
-<body>
+<body style="padding-top: 40px;">
+	<div class="navbar navbar-fixed-top" style="background-color:#1B1B1B;">
+	    <ul class="nav">
+	    <li class="active">
+	    <a href="${contextPath }/web/index">首页</a>
+	    </li>
+	    <li class="divider-vertical"><a href="#modal-container" data-toggle="modal">注册</a></li>
+	    <li class="divider-vertical"><a href="#login" data-toggle="modal">登录</a></li>
+	    </ul>
+    </div>
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<div class="span12">
@@ -56,16 +65,19 @@
 				 <a id="modal" href="#modal-container" role="button" data-toggle="modal">
 				 	<img src="${contextPath }/web/images/home1.jpg"/>
 				 </a>
+				 <h5>注册</h5>
 			</div>
 			<div class="span4" align="center">
 				 <a href="#login" data-toggle="modal">
 				 	<img src="${contextPath }/web/images/home2.jpg"/>
 				 </a>
+				 <h5>登录</h5>
 			</div>
 			<div class="span4" align="center">
 				 <a href="${contextPath }/web/index">
 				 	<img src="${contextPath }/web/images/home3.jpg"/>
 				 </a>
+				 <h5>进入首页</h5>
 			</div>
 		</div>
 		<!-- 登录 -->
