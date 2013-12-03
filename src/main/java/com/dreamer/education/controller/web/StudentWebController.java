@@ -93,7 +93,7 @@ public class StudentWebController extends BaseController {
             e.printStackTrace();
             logger.error(e);
             map.put("result", "failure");
-            map.put("error", "登录失败，请稍后再试！");
+            map.put("error", "注册失败，请稍后再试！");
             return map;
         }
     }

@@ -13,15 +13,6 @@
 <link rel="stylesheet" type="text/css" href="${contextPath }/web/css/index.css" />
 </head>
 <body style="padding-top: 40px;">
-	<div class="navbar navbar-fixed-top" style="background-color:#1B1B1B;">
-	    <ul class="nav">
-	    <li class="active">
-	    <a href="${contextPath }/web/index">首页</a>
-	    </li>
-	    <li class="divider-vertical"><a href="#modal-container" data-toggle="modal">注册</a></li>
-	    <li class="divider-vertical"><a href="#login" data-toggle="modal">登录</a></li>
-	    </ul>
-    </div>
 	<div class="container-fluid">
 		<div class="row-fluid">
 			<div class="span12">
