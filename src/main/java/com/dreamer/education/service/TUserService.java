@@ -63,6 +63,7 @@ public class TUserService {
         if ("student".equals(ctype)) {
             TStudent student = new TStudent();
             student.setUuid(upersionid);
+            student.setCname(user.getClogin());
             student.setDcreate(now);
             student.setDupdate(now);
             studentDao.save(student);
