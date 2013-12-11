@@ -30,7 +30,7 @@
 
 		<ul class="nav">
 
-			<li class="active"><a href="${contextPath }/web/index">首页</a></li>
+			<li class=""><a href="${contextPath }/web/index">首页</a></li>
 
 			<li class="divider-vertical"></li>
 
@@ -162,7 +162,14 @@ var contextPath = "${contextPath}";
 var li = $(".nav li");
 
 </script>
+<script type="text/javascript">
+$(".nav li").mouseover(function(){
+	$(this).addClass("active");
+}).mouseout(function(){
+	$(this).removeClass("active");
+});
 
+</script>
 <%-- <script type="text/javascript" src="${contextPath }/main/js/top.js" ></script> --%>
 
 </html>
