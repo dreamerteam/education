@@ -171,5 +171,172 @@ $(".nav li").mouseover(function(){
 
 </script>
 <%-- <script type="text/javascript" src="${contextPath }/main/js/top.js" ></script> --%>
+<script type="text/javascript">
+
+var contextPath = "${contextPath}";
+
+var captchaImg = $("#captchaImg");
+
+$(function(){
+
+	/*验证码*/
+
+	if(captchaImg){
+
+		reloadCaptcha(); // 验证码初始化
+
+		captchaImg.click(function(){ // 验证码点击事件
+
+			reloadCaptcha();
+
+		});
+
+		captchaImg.show();
+
+	}
+
+	/* 获取cookie */
+
+	$.post(contextPath + "/student/login/getCookies", function(map){
+
+		if(null != map){
+
+			$("#clogin").val(map.clogin);
+
+			if("1" == map.remember){
+
+				$("#remember").attr("checked", "checked");
+
+			} else {
+
+				$("#remember").removeAttr("checked");
+
+			}
+
+		}
+
+	});
+
+	/*登录表单*/
+
+	$("#loginForm").validationEngine({
+
+		promptPosition : 'bottomRight',
+
+		ajaxFormValidation : true,
+
+		ajaxFormMethod : 'POST',
+
+		ajaxFormValidationURL : contextPath + '/student/login/validate',
+
+		onBeforeAjaxFormValidation: function(form, options) {
+
+			$("#loginBtn").attr("disabled", "disabled").removeClass("btn-primary").addClass("btn-inverse"); // 禁用保存按钮，防止重复提交表单
+
+		},
+
+		onAjaxFormComplete: function(status, form, json, options) {
+
+			if (status) {
+
+				var params = {};
+
+				params["clogin"] = $("#clogin").val();
+
+				params["cpassword"] = $("#cpassword").val();
+
+				params["captcha"] = $("#captcha").val();
+
+				params["remember"] = $("#remember").is(":checked") ? "1" : "0";
+
+				$.post(contextPath + "/student/login", params, function(data){
+
+					if("success" == data.result){
+
+						window.location.href = contextPath + "/page/web/student/index";
+
+					} else {
+
+						$("#loginBtn").removeAttr("disabled").removeClass("btn-inverse").addClass("btn-primary");
+
+						alert(data.error);
+
+					}
+
+				});
+
+			} else {
+
+				$("#loginBtn").removeAttr("disabled").removeClass("btn-inverse").addClass("btn-primary");
+
+			}
+
+		}
+
+	}); 
+
+	/* 注册 */
+
+	$("#registerForm").validationEngine({
+
+		promptPosition : 'bottomRight',
+
+		ajaxFormValidation : true,
+
+		ajaxFormMethod : 'POST',
+
+		ajaxFormValidationURL : contextPath + '/student/validate',
+
+		onBeforeAjaxFormValidation: function(form, options) {
+
+			$("#registerBtn").attr("disabled", "disabled").removeClass("btn-primary").addClass("btn-inverse"); // 禁用保存按钮，防止重复提交表单
+
+		},
+
+		onAjaxFormComplete: function(status, form, json, options) {
+
+			if (status) {
+
+				var params = {};
+
+				params["clogin"] = $("#regClogin").val();
+
+				params["cpassword"] = $("#regPsw").val();
+
+				$.post(contextPath + "/student/register", params, function(data){
+
+					if("success" == data.result){
+
+						alert("注册成功！请登录！");
+
+						window.location.href = contextPath + "/page/web/student/index";
+
+					} else {
+
+						$("#registerBtn").removeAttr("disabled").removeClass("btn-inverse").addClass("btn-primary");
+
+						alert(data.error);
+
+					}
+
+				});
+
+			} else {
+
+				$("#clogin").val("");
+
+				$("#registerBtn").removeAttr("disabled").removeClass("btn-inverse").addClass("btn-primary");
+
+			}
+
+		}
+
+	}); 
+
+});
+
+</script>
+
+<script type="text/javascript" src="${contextPath }/web/js/index.js" ></script>
 
 </html>
