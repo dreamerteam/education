@@ -51,7 +51,9 @@ public class TTeacherDao extends BaseDao<TTeacher> {
      */
     public String findMaxCno() {
         String sql = "SELECT cno FROM t_teacher ORDER BY cno DESC LIMIT 1";
-        return getJdbcTemplate().queryForObject(sql, (Map<String, Object>) new HashMap<String, Object>(), String.class);
+//        return getJdbcTemplate().queryForObject(sql, (Map<String, Object>) new HashMap<String, Object>(), String.class);
+        List<String> list = getJdbcTemplate().queryForList(sql, (Map<String, Object>)new HashMap<String, Object>(), String.class);
+        return list.isEmpty() ?null:list.get(0);
     }
     
     /**
